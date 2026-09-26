@@ -7,20 +7,6 @@ Usage:
     python weather_detector.py
     python weather_detector.py --config rain_prediction.yml
     python weather_detector.py --lat 23.5204 --lon 87.3119 --name "Test Town"
-
-Reads settings from rain_prediction.yml -- including a list of any number of
-cities/townships -- fetches the hourly forecast for all of them (batched),
-and for each one prints:
-    - Rain windows: exact predicted start time, end time, and duration
-    - Sunny windows: exact predicted start time, end time, and duration
-    - A confidence score per window (see prediction_weather.py for how this
-      is calculated -- it is NOT a fixed accuracy claim)
-
-If output.save_results_json is enabled, also writes a combined machine-
-readable summary to output.results_path (default: results/latest.json),
-so other automation steps (a notification script, a dashboard, a GitHub
-Action that commits history) can consume the results without re-parsing
-console output.
 """
 
 import argparse
@@ -55,8 +41,6 @@ def load_config(path: str) -> Dict[str, Any]:
 
 
 def apply_overrides(config: Dict[str, Any], args: argparse.Namespace) -> None:
-    """If --lat/--lon are passed, run for just that one ad-hoc location
-    instead of the full list in the config file (handy for quick tests)."""
     if args.lat is not None and args.lon is not None:
         config["locations"] = [{
             "name": args.name or "Custom Location",
@@ -108,11 +92,6 @@ def print_disclaimer() -> None:
 
 
 def build_alert_message(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> str:
-    """
-    Build a single Telegram message covering every city that has a
-    qualifying alert (matching telegram.alert_on kinds, at or above
-    telegram.min_confidence_percent). Returns "" if nothing qualifies.
-    """
     tg_cfg = config.get("telegram", {})
     alert_kinds = set(tg_cfg.get("alert_on", ["rain"]))
     min_confidence = tg_cfg.get("min_confidence_percent", 60)
@@ -129,9 +108,8 @@ def build_alert_message(all_results: List[Dict[str, Any]], config: Dict[str, Any
             for w in city[kind_key]:
                 if w["confidence_percent"] < min_confidence:
                     continue
-                from datetime import datetime as _dt
-                start = _dt.fromisoformat(w["start"])
-                end = _dt.fromisoformat(w["end"])
+                start = datetime.fromisoformat(w["start"])
+                end = datetime.fromisoformat(w["end"])
                 city_lines.append(
                     f"  {label}: {start.strftime(time_fmt)} -> {end.strftime(time_fmt)} "
                     f"({w['confidence_percent']}% {w['confidence_label']})"
@@ -158,15 +136,7 @@ def save_results_json(all_results: List[Dict[str, Any]], config: Dict[str, Any])
     print(f"\nSaved machine-readable results to: {path}")
 
 
-# --------------------------------------------------------------------------
-# On-demand "which city am I in" replies
-# --------------------------------------------------------------------------
-
 def match_cities(query: str, all_results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Match a user's texted city/township name against the configured list.
-    Tries an exact (case-insensitive) match first, then falls back to a
-    substring match so "durgapur" matches "Durgapur" and typos/partials
-    still have a chance."""
     q = query.strip().lower()
     exact = [c for c in all_results if c["name"].strip().lower() == q]
     if exact:
@@ -175,7 +145,6 @@ def match_cities(query: str, all_results: List[Dict[str, Any]]) -> List[Dict[str
 
 
 def build_city_reply(city: Dict[str, Any], config: Dict[str, Any]) -> str:
-    """Build the on-demand forecast reply text for a single city."""
     time_fmt = config["output"].get("time_format", "%I:%M %p")
     lines = [f"<b>{city['name']}</b>"]
 
@@ -197,12 +166,6 @@ def build_city_reply(city: Dict[str, Any], config: Dict[str, Any]) -> str:
 
 
 def handle_city_requests(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> None:
-    """
-    Check for any new Telegram messages since the last run, and reply to
-    whoever sent one with the forecast for the city/township they named.
-    Each processed message is confirmed with Telegram immediately so it's
-    never answered twice, even though nothing is persisted between runs.
-    """
     updates = get_and_confirm_telegram_updates(config)
     if not updates:
         return
