@@ -39,22 +39,25 @@ api:
   batch_size: 50              # max locations per API request (keeps URLs safe)
 
 thresholds:
+  # An hour counts as "rain" if its precipitation probability (%) is >= this
   rain_probability_percent: 40
+  # An hour counts as "sunny" if its cloud cover (%) is <= this
   sunny_cloud_cover_percent: 30
+  # Ignore rain/sunny stretches shorter than this many minutes (removes noise)
   min_window_minutes: 60
 
 output:
-  time_format: "%I:%M %p"
-  verbose: false
+  time_format: "%I:%M %p"      # e.g. 03:00 PM
+  verbose: false                # print hour-by-hour detail per city (noisy with many cities)
   show_disclaimer: true
-  save_results_json: true
+  save_results_json: true       # write a machine-readable summary for automation
   results_path: "results/latest.json"
 
 telegram:
   enabled: true
   bot_token_env: "TELEGRAM_BOT_TOKEN"   # name of the GitHub Secret holding your bot token
   chat_id_env: "TELEGRAM_CHAT_ID"       # name of the GitHub Secret holding your chat ID
-  alert_on: ["rain"]
-  min_confidence_percent: 60
-  always_send_summary: false
-  respond_to_city_requests: true
+  alert_on: ["rain"]                     # also add "sunny" if you want sunny alerts too
+  min_confidence_percent: 60             # only alert when confidence is at least this high
+  always_send_summary: true              # true = full weather digest every run, not just alerts
+  respond_to_city_requests: true         # let users text a city/township name to get its forecast on demand
