@@ -242,7 +242,7 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
         Prediction  : RAIN PREDICTED / CLEAR SKIES
         Tip
         ----------------------------
-        Sent by GitHub Actions
+        
 
     Uses the "current" snapshot (nearest upcoming hour) attached to each
     city's entry in all_results.
