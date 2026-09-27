@@ -2,6 +2,29 @@
 prediction_weather.py
 
 Core forecasting logic for the Weather Detector project.
+
+This module talks to the free Open-Meteo API (no API key required) and turns
+raw hourly forecast data into human-readable "rain windows" and "sunny
+windows" for one or many cities/townships at once -- i.e. answers to:
+
+    - If it's going to rain, exactly when does it start, and how long
+      will it last?
+    - If it's sunny, how long will the sunny stretch last?
+
+MULTI-CITY DESIGN:
+Open-Meteo supports requesting many locations in a single call by passing
+comma-separated latitude/longitude lists -- it returns one forecast object
+per location, in the same order. This module uses that to fetch dozens or
+hundreds of cities/townships efficiently, splitting into batches
+(api.batch_size in the config) so URLs stay a safe length.
+
+IMPORTANT HONESTY NOTE:
+No weather model can promise a fixed "90% accuracy" on exact rain timing --
+that number depends on the day, the season, and how far out you're
+forecasting. Instead of faking a constant accuracy figure, this module
+computes a real confidence score for every window, based on how strong and
+how consistent the underlying hourly data is. Treat "confidence" as
+"how much the model agrees with itself", not a guarantee.
 """
 
 from __future__ import annotations
@@ -16,22 +39,29 @@ import requests
 from dateutil import parser as dateparser
 
 
+# --------------------------------------------------------------------------
+# Data structures
+# --------------------------------------------------------------------------
+
 @dataclass
 class HourlyPoint:
     time: datetime
     temperature_c: float
-    precipitation_probability: float
+    precipitation_probability: float   # 0-100
     precipitation_mm: float
-    cloud_cover: float
+    cloud_cover: float                 # 0-100
     weather_code: int
+    humidity: float = 0.0              # relative humidity, 0-100
+    wind_speed: float = 0.0            # km/h
+    pressure: float = 0.0              # hPa
 
 
 @dataclass
 class Window:
     start: datetime
     end: datetime
-    kind: str
-    avg_value: float
+    kind: str                # "rain" or "sunny"
+    avg_value: float         # avg precip probability (rain) or avg (100-cloud) (sunny)
     confidence_percent: float
     confidence_label: str
 
@@ -66,8 +96,15 @@ HOURLY_VARS = [
     "precipitation",
     "cloud_cover",
     "weather_code",
+    "relative_humidity_2m",
+    "wind_speed_10m",
+    "surface_pressure",
 ]
 
+
+# --------------------------------------------------------------------------
+# Fetching
+# --------------------------------------------------------------------------
 
 def _parse_hourly_block(hourly: Dict[str, Any]) -> List[HourlyPoint]:
     times = hourly["time"]
@@ -76,6 +113,9 @@ def _parse_hourly_block(hourly: Dict[str, Any]) -> List[HourlyPoint]:
     precip_mm = hourly["precipitation"]
     cloud_cover = hourly["cloud_cover"]
     weather_code = hourly["weather_code"]
+    humidity = hourly.get("relative_humidity_2m", [0.0] * len(times))
+    wind_speed = hourly.get("wind_speed_10m", [0.0] * len(times))
+    pressure = hourly.get("surface_pressure", [0.0] * len(times))
 
     points: List[HourlyPoint] = []
     for i, t in enumerate(times):
@@ -86,12 +126,17 @@ def _parse_hourly_block(hourly: Dict[str, Any]) -> List[HourlyPoint]:
             precipitation_mm=precip_mm[i],
             cloud_cover=cloud_cover[i],
             weather_code=weather_code[i],
+            humidity=humidity[i],
+            wind_speed=wind_speed[i],
+            pressure=pressure[i],
         ))
     return points
 
 
 def _fetch_batch(batch: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[str, List[HourlyPoint]]:
+    """Fetch one batch of locations in a single Open-Meteo request."""
     api_cfg = config["api"]
+
     lats = ",".join(str(loc["latitude"]) for loc in batch)
     lons = ",".join(str(loc["longitude"]) for loc in batch)
 
@@ -110,6 +155,9 @@ def _fetch_batch(batch: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[st
         raise RuntimeError(f"Failed to fetch forecast data: {exc}") from exc
 
     data = resp.json()
+
+    # Open-Meteo returns a single object when only one location is requested,
+    # but a LIST of objects (same order as input) when multiple are requested.
     if isinstance(data, dict):
         data = [data]
 
@@ -117,10 +165,18 @@ def _fetch_batch(batch: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[st
     for loc, entry in zip(batch, data):
         hourly = entry.get("hourly")
         results[loc["name"]] = _parse_hourly_block(hourly) if hourly else []
+
     return results
 
 
 def fetch_forecast_multi(config: Dict[str, Any]) -> Dict[str, List[HourlyPoint]]:
+    """
+    Fetch hourly forecast data for every location listed in config['locations'].
+    Automatically splits into batches (config['api']['batch_size']) so this
+    scales to a long list of cities/townships without hitting URL limits.
+
+    Returns: dict mapping location name -> list of HourlyPoint.
+    """
     locations = config["locations"]
     if not locations:
         raise ValueError("Config 'locations' list is empty -- add at least one city.")
@@ -135,7 +191,18 @@ def fetch_forecast_multi(config: Dict[str, Any]) -> Dict[str, List[HourlyPoint]]
     return results
 
 
+# --------------------------------------------------------------------------
+# Confidence scoring
+# --------------------------------------------------------------------------
+
 def _confidence_from_values(values: List[float]):
+    """
+    Turn a list of 0-100 'signal strength' values (e.g. rain probabilities
+    for the hours in a window) into a confidence score.
+
+    Rewards a strong average signal and penalizes inconsistency (variance)
+    across the window. Capped at 95% -- forecasts are never a sure thing.
+    """
     if not values:
         return 0.0, "no data"
 
@@ -158,6 +225,10 @@ def _confidence_from_values(values: List[float]):
     return round(confidence, 1), label
 
 
+# --------------------------------------------------------------------------
+# Window detection
+# --------------------------------------------------------------------------
+
 def _merge_into_windows(points, is_match_fn, value_fn, kind: str, min_window_minutes: int) -> List[Window]:
     windows: List[Window] = []
     current_group: List[HourlyPoint] = []
@@ -175,7 +246,9 @@ def _merge_into_windows(points, is_match_fn, value_fn, kind: str, min_window_min
         values = [value_fn(p) for p in current_group]
         confidence, label = _confidence_from_values(values)
         windows.append(Window(
-            start=start, end=end, kind=kind,
+            start=start,
+            end=end,
+            kind=kind,
             avg_value=sum(values) / len(values),
             confidence_percent=confidence,
             confidence_label=label,
@@ -195,11 +268,13 @@ def _merge_into_windows(points, is_match_fn, value_fn, kind: str, min_window_min
 def find_rain_windows(points: List[HourlyPoint], config: Dict[str, Any]) -> List[Window]:
     threshold = config["thresholds"]["rain_probability_percent"]
     min_minutes = config["thresholds"]["min_window_minutes"]
+
     return _merge_into_windows(
         points,
         is_match_fn=lambda p: p.precipitation_probability >= threshold,
         value_fn=lambda p: p.precipitation_probability,
-        kind="rain", min_window_minutes=min_minutes,
+        kind="rain",
+        min_window_minutes=min_minutes,
     )
 
 
@@ -208,19 +283,36 @@ def find_sunny_windows(points: List[HourlyPoint], config: Dict[str, Any]) -> Lis
     min_minutes = config["thresholds"]["min_window_minutes"]
 
     def is_sunny(p: HourlyPoint) -> bool:
+        # weather_code 0/1 = clear/mainly clear (Open-Meteo WMO codes)
         return p.cloud_cover <= threshold and p.weather_code in (0, 1)
 
     return _merge_into_windows(
         points,
         is_match_fn=is_sunny,
         value_fn=lambda p: 100 - p.cloud_cover,
-        kind="sunny", min_window_minutes=min_minutes,
+        kind="sunny",
+        min_window_minutes=min_minutes,
     )
 
 
-# --- Telegram alerts: token/chat ID come ONLY from environment variables ---
+# --------------------------------------------------------------------------
+# Telegram alerts
+# --------------------------------------------------------------------------
 
 def send_telegram_message(text: str, config: Dict[str, Any], chat_id: str = None) -> bool:
+    """
+    Send a message via the Telegram Bot API.
+
+    The bot token (and the default chat ID, when `chat_id` isn't given) are
+    read from environment variables -- in GitHub Actions these come from
+    repository Secrets, so nothing sensitive is ever committed to the repo.
+    Pass `chat_id` explicitly to reply to whoever texted the bot, instead of
+    the configured default chat/group.
+
+    Returns True if the message was sent successfully, False otherwise
+    (missing credentials or a failed request are logged, not raised, so
+    a Telegram outage never breaks the rest of the run).
+    """
     tg_cfg = config.get("telegram", {})
     if not tg_cfg.get("enabled", False):
         return False
@@ -250,6 +342,12 @@ def send_telegram_message(text: str, config: Dict[str, Any], chat_id: str = None
 
 
 def get_and_confirm_telegram_updates(config: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """
+    Fetch any new incoming Telegram messages (e.g. a user texting a city
+    name) since the last time this was called, then immediately confirm
+    them with Telegram so the same message is never processed twice --
+    even though nothing needs to be persisted between separate runs.
+    """
     tg_cfg = config.get("telegram", {})
     if not tg_cfg.get("enabled", False):
         return []
@@ -272,8 +370,10 @@ def get_and_confirm_telegram_updates(config: Dict[str, Any]) -> List[Dict[str, A
     if updates:
         max_update_id = max(u["update_id"] for u in updates)
         try:
+            # Confirming with offset = last_id + 1 tells Telegram these are
+            # handled, so they won't be returned again on the next run.
             requests.get(url, params={"offset": max_update_id + 1, "timeout": 0}, timeout=15)
         except requests.RequestException:
-            pass
+            pass  # not fatal -- worst case, these get processed again next run
 
     return updates
