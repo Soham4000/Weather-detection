@@ -2,7 +2,7 @@ name: Weather Detector
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/2 * * * *"
   push:
     branches: [ "main" ]
   workflow_dispatch: {}
