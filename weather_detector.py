@@ -271,6 +271,22 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
         tip = "Good conditions for outdoor plans."
 
     divider = "\u2500" * 28
+    time_fmt = config["output"].get("time_format", "%I:%M %p")
+
+    def format_window_lines(windows: List[Dict[str, Any]]) -> List[str]:
+        if not windows:
+            return ["  None predicted in the forecast period."]
+        out = []
+        for w in windows:
+            start = datetime.fromisoformat(w["start"])
+            end = datetime.fromisoformat(w["end"])
+            hours, minutes = divmod(w["duration_minutes"], 60)
+            dur = f"{hours}h" + (f" {minutes}m" if minutes else "")
+            out.append(
+                f"  {start.strftime(time_fmt)} -> {end.strftime(time_fmt)} "
+                f"({dur}) -- {w['confidence_percent']}%"
+            )
+        return out
 
     lines = [
         "\U0001F326\uFE0F DAILY WEATHER REPORT",
@@ -289,8 +305,15 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
         "",
         f"\U0001F4AC {tip}",
         divider,
-        "\U0001F916 Sent by GitHub Actions",
+        "\u23F1\uFE0F Rain Windows:",
     ]
+    lines.extend(format_window_lines(city.get("rain_windows", [])))
+    lines.append("")
+    lines.append("\u2600\uFE0F Sunny Windows:")
+    lines.extend(format_window_lines(city.get("sunny_windows", [])))
+    lines.append(divider)
+    lines.append("\U0001F916 Sent by GitHub Actions")
+
     return "\n".join(lines)
 
 
