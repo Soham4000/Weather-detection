@@ -1,32 +1,7 @@
-[
-  {
-    "name": "Durgapur",
-    "country": "IN",
-    "latitude": 23.5204,
-    "longitude": 87.3119
-  },
-  {
-    "name": "Asansol",
-    "country": "IN",
-    "latitude": 23.6739,
-    "longitude": 86.9524
-  },
-  {
-    "name": "Kolkata",
-    "country": "IN",
-    "latitude": 22.5726,
-    "longitude": 88.3639
-  },
-  {
-    "name": "Bardhaman",
-    "country": "IN",
-    "latitude": 23.2324,
-    "longitude": 87.8615
-  },
-  {
-    "name": "Kharagpur",
-    "country": "IN",
-    "latitude": 22.3460,
-    "longitude": 87.2320
-  }
-]
+{
+  "8730263528":"Durgapur"
+  "8730263528":"Asansol"
+  "8730263528":"Kolkata"
+  "8730263528":"Bardhaman"
+  "8730263528":"Kharagpur"
+}
