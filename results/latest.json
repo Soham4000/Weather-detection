@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T15:05:30.880316",
+  "generated_at": "2026-09-27T15:10:40.919582",
   "cities": [
     {
       "name": "Durgapur",
@@ -12,7 +12,15 @@
           "start": "2026-09-27T06:00:00",
           "end": "2026-09-27T13:00:00",
           "duration_minutes": 420,
-          "confidence_percent": 49.7,
+          "confidence_percent": 50.1,
+          "confidence_label": "low confidence"
+        },
+        {
+          "kind": "rain",
+          "start": "2026-09-27T16:00:00",
+          "end": "2026-09-27T19:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 41.2,
           "confidence_label": "low confidence"
         }
       ],
@@ -84,9 +92,17 @@
         {
           "kind": "rain",
           "start": "2026-09-27T01:00:00",
-          "end": "2026-09-27T13:00:00",
-          "duration_minutes": 720,
-          "confidence_percent": 58.6,
+          "end": "2026-09-27T14:00:00",
+          "duration_minutes": 780,
+          "confidence_percent": 55.5,
+          "confidence_label": "low confidence"
+        },
+        {
+          "kind": "rain",
+          "start": "2026-09-27T15:00:00",
+          "end": "2026-09-27T18:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 43.4,
           "confidence_label": "low confidence"
         }
       ],
@@ -126,9 +142,9 @@
         {
           "kind": "rain",
           "start": "2026-09-27T11:00:00",
-          "end": "2026-09-27T17:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 51.2,
+          "end": "2026-09-27T18:00:00",
+          "duration_minutes": 420,
+          "confidence_percent": 54.6,
           "confidence_label": "low confidence"
         }
       ],
@@ -226,7 +242,7 @@
           "start": "2026-09-27T09:00:00",
           "end": "2026-09-27T14:00:00",
           "duration_minutes": 300,
-          "confidence_percent": 51.0,
+          "confidence_percent": 50.0,
           "confidence_label": "low confidence"
         }
       ],
@@ -274,9 +290,9 @@
         {
           "kind": "rain",
           "start": "2026-09-27T11:00:00",
-          "end": "2026-09-27T14:00:00",
-          "duration_minutes": 180,
-          "confidence_percent": 41.4,
+          "end": "2026-09-27T12:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 43.0,
           "confidence_label": "low confidence"
         }
       ],
