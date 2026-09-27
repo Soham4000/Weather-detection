@@ -56,8 +56,9 @@ output:
 telegram:
   enabled: true
   bot_token_env: "TELEGRAM_BOT_TOKEN"   # name of the GitHub Secret holding your bot token
-  chat_id_env: "TELEGRAM_CHAT_ID"       # name of the GitHub Secret holding your chat ID
-  alert_on: ["rain"]                     # also add "sunny" if you want sunny alerts too
-  min_confidence_percent: 60             # only alert when confidence is at least this high
-  always_send_summary: true              # true = full weather digest every run, not just alerts
-  respond_to_city_requests: true         # let users text a city/township name to get its forecast on demand
+  chat_id_env: "TELEGRAM_CHAT_ID"       # name of the GitHub Secret for the default broadcast chat (optional -- only used for alert_on below)
+  alert_on: ["rain"]                     # optional broadcast to the default chat above -- also add "sunny" if wanted
+  min_confidence_percent: 60             # only broadcast when confidence is at least this high
+  always_send_summary: false             # true = broadcast a digest to the default chat every run too
+  respond_to_city_requests: true         # let users text a city/township name to SUBSCRIBE to that city's updates
+  subscriptions_path: "data/subscriptions.json"   # where per-user city subscriptions are stored between runs
