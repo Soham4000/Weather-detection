@@ -29,6 +29,7 @@ import os
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+from zoneinfo import ZoneInfo
 
 import yaml
 
@@ -45,6 +46,18 @@ from prediction_weather import (
 def load_config(path: str) -> Dict[str, Any]:
     with open(path, "r") as f:
         config = yaml.safe_load(f)
+
+    # The city list can either be inline under "locations" (legacy), or
+    # loaded from a separate JSON file via "locations_file" -- the latter
+    # is the recommended setup so the city list can grow freely without
+    # touching this YAML file.
+    if "locations_file" in config:
+        locations_path = config["locations_file"]
+        try:
+            with open(locations_path, "r") as f:
+                config["locations"] = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError) as exc:
+            raise ValueError(f"Could not load locations_file '{locations_path}': {exc}") from exc
 
     required_top_level = ["locations", "api", "thresholds", "output"]
     for key in required_top_level:
@@ -212,6 +225,75 @@ def match_cities(query: str, all_results: List[Dict[str, Any]]) -> List[Dict[str
     return [c for c in all_results if q in c["name"].lower() or c["name"].lower() in q]
 
 
+def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
+    """
+    Build a formatted daily weather report for one city, matching this style:
+
+        WEATHER REPORT
+        CITY NAME
+        Date, Time
+        ----------------------------
+        Temperature : ..C
+        Humidity    : ..%
+        Wind Speed  : .. km/h
+        Pressure    : .. hPa
+        ----------------------------
+        Rain Chance : ..%
+        Prediction  : RAIN PREDICTED / CLEAR SKIES
+        Tip
+        ----------------------------
+        Sent by GitHub Actions
+
+    Uses the "current" snapshot (nearest upcoming hour) attached to each
+    city's entry in all_results.
+    """
+    tz_name = config.get("timezone", "UTC")
+    try:
+        tz = ZoneInfo(tz_name)
+    except Exception:
+        tz = ZoneInfo("UTC")
+    now_local = datetime.now(tz)
+    date_str = now_local.strftime("%d %B %Y, %I:%M %p")
+
+    current = city.get("current", {})
+    temp = current.get("temperature_c", 0.0)
+    humidity = current.get("humidity", 0.0)
+    wind = current.get("wind_speed", 0.0)
+    pressure = current.get("pressure", 0.0)
+    rain_chance = current.get("precipitation_probability", 0.0)
+
+    threshold = config["thresholds"]["rain_probability_percent"]
+    if rain_chance >= threshold:
+        prediction = "\U0001F327\uFE0F RAIN PREDICTED"
+        tip = "Carry an umbrella. Avoid outdoor plans if possible."
+    else:
+        prediction = "\u2600\uFE0F CLEAR SKIES"
+        tip = "Good conditions for outdoor plans."
+
+    divider = "\u2500" * 28
+
+    lines = [
+        "\U0001F326\uFE0F DAILY WEATHER REPORT",
+        f"\U0001F4CD {city['name'].upper()}",
+        f"\U0001F4C5 {date_str}",
+        divider,
+        "",
+        f"\U0001F321\uFE0F Temperature : {temp:.1f}\u00B0C",
+        f"\U0001F4A7 Humidity    : {humidity:.0f}%",
+        f"\U0001F32C\uFE0F Wind Speed  : {wind:.1f} km/h",
+        f"\U0001F535 Pressure    : {pressure:.1f} hPa",
+        divider,
+        "",
+        f"\U0001F4CA Rain Chance : {rain_chance:.1f}%",
+        f"\U0001F52E Prediction  : {prediction}",
+        "",
+        f"\U0001F4AC {tip}",
+        divider,
+        "\U0001F916 Sent by GitHub Actions",
+    ]
+    return "\n".join(lines)
+
+
 def build_city_reply(city: Dict[str, Any], config: Dict[str, Any]) -> str:
     """Build the on-demand forecast reply text for a single city."""
     time_fmt = config["output"].get("time_format", "%I:%M %p")
@@ -287,7 +369,7 @@ def handle_subscriptions(all_results: List[Dict[str, Any]], config: Dict[str, An
             reply = (
                 f"Subscribed! You'll get {city['name']} weather updates every "
                 f"~5 minutes. Text another city name anytime to switch.\n\n"
-                + build_city_reply(city, config)
+                + build_daily_report(city, config)
             )
             send_telegram_message(reply, config, chat_id=chat_id)
             just_replied_to.add(chat_id)
@@ -315,7 +397,7 @@ def handle_subscriptions(all_results: List[Dict[str, Any]], config: Dict[str, An
         city = results_by_name.get(city_name)
         if not city:
             continue  # subscribed city no longer in rain_prediction.yml -- skip quietly
-        sent = send_telegram_message(build_city_reply(city, config), config, chat_id=chat_id)
+        sent = send_telegram_message(build_daily_report(city, config), config, chat_id=chat_id)
         print(f"Recurring update sent to chat {chat_id} ({city_name}): {sent}")
 
     save_subscriptions(sub_path, subscriptions)
@@ -368,6 +450,8 @@ def main() -> int:
         if config["output"].get("verbose", False):
             print_hourly_detail(points, config)
 
+        current = points[0]  # nearest upcoming hour -- used as "right now" conditions
+
         all_results.append({
             "name": name,
             "country": loc.get("country", ""),
@@ -375,6 +459,14 @@ def main() -> int:
             "longitude": loc["longitude"],
             "rain_windows": [w.to_dict() for w in rain_windows],
             "sunny_windows": [w.to_dict() for w in sunny_windows],
+            "current": {
+                "time": current.time.isoformat(),
+                "temperature_c": current.temperature_c,
+                "humidity": current.humidity,
+                "wind_speed": current.wind_speed,
+                "pressure": current.pressure,
+                "precipitation_probability": current.precipitation_probability,
+            },
         })
 
     if config["output"].get("save_results_json", True):
