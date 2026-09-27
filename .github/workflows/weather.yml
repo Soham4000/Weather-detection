@@ -1,17 +1,14 @@
 name: Weather Detector
 
-# Runs the weather detector for every city/township in rain_prediction.yml.
-# Triggered externally (via cron-job.org calling workflow_dispatch every
-# 5 minutes) since GitHub's own `schedule` event is best-effort and not
-# reliable enough on its own -- see project notes for details.
-# Also runs on every push to main, or manually from the Actions tab.
 on:
+  schedule:
+    - cron: "*/5 * * * *"
   push:
     branches: [ "main" ]
   workflow_dispatch: {}
 
 permissions:
-  contents: write   # required: the commit step below saves subscriptions between runs
+  contents: write
 
 jobs:
   run-weather-detector:
@@ -21,9 +18,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.14"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -33,12 +30,3 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python weather_detector.py --config rain_prediction.yml
-
-      # Required: saves who's subscribed to which city so subscriptions
-      # survive between separate workflow runs (each run starts with a
-      # fresh checkout, so nothing persists unless it's committed back).
-      - name: Commit results and subscriptions
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Update weather results and subscriptions"
-          file_pattern: "results/latest.json data/subscriptions.json"
