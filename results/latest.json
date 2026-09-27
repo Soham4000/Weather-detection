@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-27T13:38:27.325245",
+  "generated_at": "2026-09-27T13:44:47.664407",
   "cities": [
     {
       "name": "Durgapur",
@@ -65,7 +65,15 @@
           "confidence_percent": 90.9,
           "confidence_label": "high confidence"
         }
-      ]
+      ],
+      "current": {
+        "time": "2026-09-27T00:00:00",
+        "temperature_c": 26.0,
+        "humidity": 95,
+        "wind_speed": 7.4,
+        "pressure": 995.1,
+        "precipitation_probability": 6
+      }
     },
     {
       "name": "Asansol",
@@ -99,7 +107,15 @@
           "confidence_percent": 87.3,
           "confidence_label": "high confidence"
         }
-      ]
+      ],
+      "current": {
+        "time": "2026-09-27T00:00:00",
+        "temperature_c": 25.7,
+        "humidity": 94,
+        "wind_speed": 8.4,
+        "pressure": 993.6,
+        "precipitation_probability": 21
+      }
     },
     {
       "name": "Kolkata",
@@ -189,7 +205,15 @@
           "confidence_percent": 86.0,
           "confidence_label": "high confidence"
         }
-      ]
+      ],
+      "current": {
+        "time": "2026-09-27T00:00:00",
+        "temperature_c": 26.6,
+        "humidity": 92,
+        "wind_speed": 5.5,
+        "pressure": 1005.9,
+        "precipitation_probability": 17
+      }
     },
     {
       "name": "Bardhaman",
@@ -231,7 +255,15 @@
           "confidence_percent": 88.2,
           "confidence_label": "high confidence"
         }
-      ]
+      ],
+      "current": {
+        "time": "2026-09-27T00:00:00",
+        "temperature_c": 25.9,
+        "humidity": 92,
+        "wind_speed": 11.1,
+        "pressure": 1003.3,
+        "precipitation_probability": 9
+      }
     },
     {
       "name": "Kharagpur",
@@ -289,7 +321,15 @@
           "confidence_percent": 87.9,
           "confidence_label": "high confidence"
         }
-      ]
+      ],
+      "current": {
+        "time": "2026-09-27T00:00:00",
+        "temperature_c": 26.0,
+        "humidity": 97,
+        "wind_speed": 10.1,
+        "pressure": 1001.1,
+        "precipitation_probability": 21
+      }
     }
   ]
 }
