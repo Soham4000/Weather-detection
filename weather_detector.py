@@ -234,41 +234,91 @@ def build_city_reply(city: Dict[str, Any], config: Dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def handle_city_requests(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> None:
+def load_subscriptions(path: str) -> Dict[str, str]:
+    """Load the chat_id -> city_name subscription map from disk.
+    Returns an empty dict if the file doesn't exist yet (first run ever)."""
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, "r") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def save_subscriptions(path: str, subscriptions: Dict[str, str]) -> None:
+    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    with open(path, "w") as f:
+        json.dump(subscriptions, f, indent=2)
+
+
+def handle_subscriptions(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> None:
     """
-    Check for any new Telegram messages since the last run, and reply to
-    whoever sent one with the forecast for the city/township they named.
-    Each processed message is confirmed with Telegram immediately so it's
-    never answered twice, even though nothing is persisted between runs.
+    Per-user city subscriptions:
+      - Texting a city name subscribes that chat to updates for that city,
+        replacing any previous subscription (one active city per chat).
+      - Every run, every currently subscribed chat gets that city's forecast.
+      - This keeps happening automatically, run after run, until the user
+        texts a different (valid) city name to switch.
+
+    The subscription map persists in a JSON file that gets committed back
+    to the repo after each run (see the workflow's git-auto-commit step),
+    since GitHub Actions runs don't share memory between invocations.
     """
+    sub_path = config["telegram"].get("subscriptions_path", "data/subscriptions.json")
+    subscriptions = load_subscriptions(sub_path)
+    results_by_name = {c["name"]: c for c in all_results}
+
     updates = get_and_confirm_telegram_updates(config)
-    if not updates:
-        return
+    just_replied_to: set = set()
 
     for update in updates:
         message = update.get("message") or update.get("edited_message")
         if not message or "text" not in message:
             continue
 
-        chat_id = message["chat"]["id"]
+        chat_id = str(message["chat"]["id"])
         text = message["text"]
         matches = match_cities(text, all_results)
 
         if len(matches) == 1:
-            reply = build_city_reply(matches[0], config)
+            city = matches[0]
+            subscriptions[chat_id] = city["name"]
+            reply = (
+                f"Subscribed! You'll get {city['name']} weather updates every "
+                f"~5 minutes. Text another city name anytime to switch.\n\n"
+                + build_city_reply(city, config)
+            )
+            send_telegram_message(reply, config, chat_id=chat_id)
+            just_replied_to.add(chat_id)
         elif len(matches) > 1:
             names = ", ".join(m["name"] for m in matches)
-            reply = f"That matches more than one place: {names}. Please send the exact name."
+            send_telegram_message(
+                f"That matches more than one place: {names}. Please send the exact name.",
+                config, chat_id=chat_id,
+            )
         else:
             shown = [c["name"] for c in all_results[:20]]
             extra = f" (+{len(all_results) - 20} more)" if len(all_results) > 20 else ""
-            reply = (
-                "I don't recognize that place. Just text the name of your city "
-                f"or township. Available: {', '.join(shown)}{extra}"
+            send_telegram_message(
+                "I don't recognize that place. Text the exact name of your city "
+                f"or township to subscribe. Available: {', '.join(shown)}{extra}",
+                config, chat_id=chat_id,
             )
 
-        sent = send_telegram_message(reply, config, chat_id=chat_id)
-        print(f"Replied to chat {chat_id}: {sent}")
+    # Recurring update for everyone already subscribed (skip anyone we just
+    # replied to above, since their subscribe-confirmation already included
+    # the current forecast -- no need to send it twice in the same run).
+    for chat_id, city_name in list(subscriptions.items()):
+        if chat_id in just_replied_to:
+            continue
+        city = results_by_name.get(city_name)
+        if not city:
+            continue  # subscribed city no longer in rain_prediction.yml -- skip quietly
+        sent = send_telegram_message(build_city_reply(city, config), config, chat_id=chat_id)
+        print(f"Recurring update sent to chat {chat_id} ({city_name}): {sent}")
+
+    save_subscriptions(sub_path, subscriptions)
 
 
 def main() -> int:
@@ -347,7 +397,7 @@ def main() -> int:
             print("\nNo qualifying alerts -- Telegram message not sent.")
 
         if tg_cfg.get("respond_to_city_requests", False):
-            handle_city_requests(all_results, config)
+            handle_subscriptions(all_results, config)
 
     if config["output"].get("show_disclaimer", True):
         print_disclaimer()
