@@ -39,7 +39,6 @@ from prediction_weather import (
     find_sunny_windows,
     send_telegram_message,
     get_and_confirm_telegram_updates,
-    generate_ai_tip,
     Window,
 )
 
@@ -224,6 +223,42 @@ def match_cities(query: str, all_results: List[Dict[str, Any]]) -> List[Dict[str
     if exact:
         return exact
     return [c for c in all_results if q in c["name"].lower() or c["name"].lower() in q]
+
+
+def generate_ai_tip(city_name: str, current: Dict[str, Any], config: Dict[str, Any]) -> str:
+    """
+    Local weather tip fallback.
+
+    This keeps weather_detector.py independent of a missing
+    generate_ai_tip() function in prediction_weather.py.
+    If prediction_weather.py later provides an AI tip function,
+    this function can be replaced with that implementation.
+    """
+    try:
+        rain_chance = float(current.get("precipitation_probability", 0.0))
+        temp = float(current.get("temperature_c", 0.0))
+        wind = float(current.get("wind_speed", 0.0))
+    except (TypeError, ValueError):
+        return ""
+
+    tips = []
+
+    if rain_chance >= 70:
+        tips.append("High rain chance. Carry an umbrella and plan outdoor activities carefully.")
+    elif rain_chance >= 40:
+        tips.append("Moderate rain chance. Carry an umbrella if you are going outdoors.")
+    else:
+        tips.append("Low rain chance. Conditions are generally suitable for outdoor activities.")
+
+    if temp >= 35:
+        tips.append("It is hot, so stay hydrated and avoid prolonged direct sunlight.")
+    elif temp <= 15:
+        tips.append("It is relatively cool, so consider carrying an extra layer.")
+
+    if wind >= 35:
+        tips.append("Strong winds are possible; use extra caution outdoors.")
+
+    return " ".join(tips)
 
 
 def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
