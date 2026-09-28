@@ -1,12 +1,21 @@
 {
-  "generated_at": "2026-09-28T12:05:41.484319",
+  "generated_at": "2026-09-28T12:11:17.409719",
   "cities": [
     {
       "name": "Durgapur",
       "country": "IN",
       "latitude": 23.5204,
       "longitude": 87.3119,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-09-28T11:00:00",
+          "end": "2026-09-28T13:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 41.0,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -245,10 +254,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-09-28T11:00:00",
-          "end": "2026-09-28T14:00:00",
-          "duration_minutes": 180,
-          "confidence_percent": 48.2,
+          "start": "2026-09-28T10:00:00",
+          "end": "2026-09-28T16:00:00",
+          "duration_minutes": 360,
+          "confidence_percent": 48.0,
           "confidence_label": "low confidence"
         }
       ],
