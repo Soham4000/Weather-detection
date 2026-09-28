@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T19:10:45.982461",
+  "generated_at": "2026-09-28T19:15:56.621246",
   "cities": [
     {
       "name": "Durgapur",
@@ -101,18 +101,10 @@
         {
           "kind": "sunny",
           "start": "2026-09-29T00:00:00",
-          "end": "2026-09-29T12:00:00",
-          "duration_minutes": 720,
-          "confidence_percent": 94.3,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-09-29T13:00:00",
           "end": "2026-09-29T15:00:00",
-          "duration_minutes": 120,
-          "confidence_percent": 71.0,
-          "confidence_label": "moderate confidence"
+          "duration_minutes": 900,
+          "confidence_percent": 88.3,
+          "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
