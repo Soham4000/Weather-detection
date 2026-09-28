@@ -27,7 +27,7 @@ import argparse
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
 from zoneinfo import ZoneInfo
 
@@ -39,6 +39,7 @@ from prediction_weather import (
     find_sunny_windows,
     send_telegram_message,
     get_and_confirm_telegram_updates,
+    generate_ai_tip,
     Window,
 )
 
@@ -242,7 +243,7 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
         Prediction  : RAIN PREDICTED / CLEAR SKIES
         Tip
         ----------------------------
-        
+        Sent by GitHub Actions
 
     Uses the "current" snapshot (nearest upcoming hour) attached to each
     city's entry in all_results.
@@ -265,10 +266,15 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
     threshold = config["thresholds"]["rain_probability_percent"]
     if rain_chance >= threshold:
         prediction = "\U0001F327\uFE0F RAIN PREDICTED"
-        tip = "Carry an umbrella. Avoid outdoor plans if possible."
+        static_tip = "Carry an umbrella. Avoid outdoor plans if possible."
     else:
         prediction = "\u2600\uFE0F CLEAR SKIES"
-        tip = "Good conditions for outdoor plans."
+        static_tip = "Good conditions for outdoor plans."
+
+    # If Gemini is configured and enabled, use its generated tip instead --
+    # falls back to the static tip automatically on any failure.
+    ai_tip = generate_ai_tip(city["name"], current, config)
+    tip = ai_tip if ai_tip else static_tip
 
     divider = "\u2500" * 28
     time_fmt = config["output"].get("time_format", "%I:%M %p")
@@ -276,15 +282,41 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
     def format_window_lines(windows: List[Dict[str, Any]]) -> List[str]:
         if not windows:
             return ["  None predicted in the forecast period."]
+        today = now_local.date()
+        tomorrow = today + timedelta(days=1)
+        now_naive = now_local.replace(tzinfo=None)
         out = []
         for w in windows:
             start = datetime.fromisoformat(w["start"])
             end = datetime.fromisoformat(w["end"])
             hours, minutes = divmod(w["duration_minutes"], 60)
             dur = f"{hours}h" + (f" {minutes}m" if minutes else "")
+
+            if start.date() == today:
+                day_label = "Today"
+            elif start.date() == tomorrow:
+                day_label = "Tomorrow"
+            else:
+                day_label = start.strftime("%A, %d %b")
+
+            same_day_end = " (into next day)" if end.date() != start.date() else ""
+
+            if start <= now_naive <= end:
+                remaining = int((end - now_naive).total_seconds() // 60)
+                rh, rm = divmod(remaining, 60)
+                countdown = f"\U0001F534 Happening now -- ends in {rh}h {rm}m"
+            elif start > now_naive:
+                until = int((start - now_naive).total_seconds() // 60)
+                uh, um = divmod(until, 60)
+                countdown = f"\u23F3 Starts in {uh}h {um}m"
+            else:
+                countdown = "Already passed"
+
             out.append(
-                f"  {start.strftime(time_fmt)} -> {end.strftime(time_fmt)} "
-                f"({dur}) -- {w['confidence_percent']}%"
+                f"  {day_label}\n"
+                f"    {start.strftime(time_fmt)} \u2192 {end.strftime(time_fmt)}{same_day_end}\n"
+                f"    Duration: {dur} | Confidence: {w['confidence_percent']}% ({w['confidence_label']})\n"
+                f"    {countdown}"
             )
         return out
 
