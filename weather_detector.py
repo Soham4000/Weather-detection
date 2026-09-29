@@ -588,4 +588,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())    make it more and more accurate
+    sys.exit(main())
