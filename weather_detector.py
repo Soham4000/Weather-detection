@@ -1,588 +1,427 @@
 """
-weather_detector.py
+prediction_weather.py
 
-Command-line entry point for the Weather Detector project.
+Core forecasting logic for the Weather Detector project.
 
-Usage:
-    python weather_detector.py
-    python weather_detector.py --config rain_prediction.yml
-    python weather_detector.py --lat 23.5204 --lon 87.3119 --name "Test Town"
+This module talks to the free Open-Meteo API (no API key required) and turns
+raw hourly forecast data into human-readable "rain windows" and "sunny
+windows" for one or many cities/townships at once -- i.e. answers to:
 
-Reads settings from rain_prediction.yml -- including a list of any number of
-cities/townships -- fetches the hourly forecast for all of them (batched),
-and for each one prints:
-    - Rain windows: exact predicted start time, end time, and duration
-    - Sunny windows: exact predicted start time, end time, and duration
-    - A confidence score per window (see prediction_weather.py for how this
-      is calculated -- it is NOT a fixed accuracy claim)
+    - If it's going to rain, exactly when does it start, and how long
+      will it last?
+    - If it's sunny, how long will the sunny stretch last?
 
-If output.save_results_json is enabled, also writes a combined machine-
-readable summary to output.results_path (default: results/latest.json),
-so other automation steps (a notification script, a dashboard, a GitHub
-Action that commits history) can consume the results without re-parsing
-console output.
+MULTI-CITY DESIGN:
+Open-Meteo supports requesting many locations in a single call by passing
+comma-separated latitude/longitude lists -- it returns one forecast object
+per location, in the same order. This module uses that to fetch dozens or
+hundreds of cities/townships efficiently, splitting into batches
+(api.batch_size in the config) so URLs stay a safe length.
+
+IMPORTANT HONESTY NOTE:
+No weather model can promise a fixed "90% accuracy" on exact rain timing --
+that number depends on the day, the season, and how far out you're
+forecasting. Instead of faking a constant accuracy figure, this module
+computes a real confidence score for every window, based on how strong and
+how consistent the underlying hourly data is. Treat "confidence" as
+"how much the model agrees with itself", not a guarantee.
 """
 
-import argparse
-import json
-import os
-import sys
+from __future__ import annotations
+
+from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional
-from zoneinfo import ZoneInfo
+from typing import List, Dict, Any
 
-import yaml
+import os
 
-from prediction_weather import (
-    fetch_forecast_multi,
-    find_rain_windows,
-    find_sunny_windows,
-    send_telegram_message,
-    get_and_confirm_telegram_updates,
-    generate_ai_tip,
-    Window,
-)
+import requests
+from dateutil import parser as dateparser
 
 
-def load_config(path: str) -> Dict[str, Any]:
-    with open(path, "r") as f:
-        config = yaml.safe_load(f)
+# --------------------------------------------------------------------------
+# Data structures
+# --------------------------------------------------------------------------
 
-    # The city list can either be inline under "locations" (legacy), or
-    # loaded from a separate JSON file via "locations_file" -- the latter
-    # is the recommended setup so the city list can grow freely without
-    # touching this YAML file.
-    if "locations_file" in config:
-        locations_path = config["locations_file"]
-        try:
-            with open(locations_path, "r") as f:
-                config["locations"] = json.load(f)
-        except (FileNotFoundError, json.JSONDecodeError) as exc:
-            raise ValueError(f"Could not load locations_file '{locations_path}': {exc}") from exc
-
-    required_top_level = ["locations", "api", "thresholds", "output"]
-    for key in required_top_level:
-        if key not in config:
-            raise ValueError(f"Config file is missing required section: '{key}'")
-
-    return config
+@dataclass
+class HourlyPoint:
+    time: datetime
+    temperature_c: float
+    precipitation_probability: float   # 0-100
+    precipitation_mm: float
+    cloud_cover: float                 # 0-100
+    weather_code: int
+    humidity: float = 0.0              # relative humidity, 0-100
+    wind_speed: float = 0.0            # km/h
+    pressure: float = 0.0              # hPa
 
 
-def apply_overrides(config: Dict[str, Any], args: argparse.Namespace) -> None:
-    """If --lat/--lon are passed, run for just that one ad-hoc location
-    instead of the full list in the config file (handy for quick tests)."""
-    if args.lat is not None and args.lon is not None:
-        config["locations"] = [{
-            "name": args.name or "Custom Location",
-            "country": "",
-            "latitude": args.lat,
-            "longitude": args.lon,
-        }]
+@dataclass
+class Window:
+    start: datetime
+    end: datetime
+    kind: str                # "rain" or "sunny"
+    avg_value: float         # avg precip probability (rain) or avg (100-cloud) (sunny)
+    confidence_percent: float
+    confidence_label: str
+
+    @property
+    def duration_minutes(self) -> int:
+        return int((self.end - self.start).total_seconds() // 60)
+
+    def duration_str(self) -> str:
+        mins = self.duration_minutes
+        hours, minutes = divmod(mins, 60)
+        parts = []
+        if hours:
+            parts.append(f"{hours}h")
+        if minutes or not parts:
+            parts.append(f"{minutes}m")
+        return " ".join(parts)
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "kind": self.kind,
+            "start": self.start.isoformat(),
+            "end": self.end.isoformat(),
+            "duration_minutes": self.duration_minutes,
+            "confidence_percent": self.confidence_percent,
+            "confidence_label": self.confidence_label,
+        }
 
 
-def print_windows(title: str, windows: List[Window], config: Dict[str, Any]) -> None:
-    time_fmt = config["output"].get("time_format", "%I:%M %p")
-    print(f"  {title}:")
-    if not windows:
-        print("    None predicted in the forecast period.")
-        return
-    for w in windows:
-        start_str = w.start.strftime(time_fmt)
-        end_str = w.end.strftime(time_fmt)
-        date_str = w.start.strftime("%a %d %b")
-        print(
-            f"    {date_str}: {start_str} -> {end_str} "
-            f"(duration: {w.duration_str()}) "
-            f"-- {w.confidence_label} ({w.confidence_percent}%)"
-        )
+HOURLY_VARS = [
+    "temperature_2m",
+    "precipitation_probability",
+    "precipitation",
+    "cloud_cover",
+    "weather_code",
+    "relative_humidity_2m",
+    "wind_speed_10m",
+    "surface_pressure",
+]
 
 
-def print_hourly_detail(points, config: Dict[str, Any]) -> None:
-    time_fmt = config["output"].get("time_format", "%I:%M %p")
+# --------------------------------------------------------------------------
+# Fetching
+# --------------------------------------------------------------------------
+
+def _parse_hourly_block(hourly: Dict[str, Any]) -> List[HourlyPoint]:
+    times = hourly["time"]
+    temps = hourly["temperature_2m"]
+    precip_prob = hourly["precipitation_probability"]
+    precip_mm = hourly["precipitation"]
+    cloud_cover = hourly["cloud_cover"]
+    weather_code = hourly["weather_code"]
+    humidity = hourly.get("relative_humidity_2m", [0.0] * len(times))
+    wind_speed = hourly.get("wind_speed_10m", [0.0] * len(times))
+    pressure = hourly.get("surface_pressure", [0.0] * len(times))
+
+    points: List[HourlyPoint] = []
+    for i, t in enumerate(times):
+        points.append(HourlyPoint(
+            time=dateparser.parse(t),
+            temperature_c=temps[i],
+            precipitation_probability=precip_prob[i],
+            precipitation_mm=precip_mm[i],
+            cloud_cover=cloud_cover[i],
+            weather_code=weather_code[i],
+            humidity=humidity[i],
+            wind_speed=wind_speed[i],
+            pressure=pressure[i],
+        ))
+    return points
+
+
+def _fetch_batch(batch: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[str, List[HourlyPoint]]:
+    """Fetch one batch of locations in a single Open-Meteo request."""
+    api_cfg = config["api"]
+
+    lats = ",".join(str(loc["latitude"]) for loc in batch)
+    lons = ",".join(str(loc["longitude"]) for loc in batch)
+
+    params = {
+        "latitude": lats,
+        "longitude": lons,
+        "timezone": config.get("timezone", "auto"),
+        "forecast_days": api_cfg.get("forecast_days", 2),
+        "hourly": ",".join(HOURLY_VARS),
+    }
+
+    try:
+        resp = requests.get(api_cfg["base_url"], params=params, timeout=20)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        raise RuntimeError(f"Failed to fetch forecast data: {exc}") from exc
+
+    data = resp.json()
+
+    # Open-Meteo returns a single object when only one location is requested,
+    # but a LIST of objects (same order as input) when multiple are requested.
+    if isinstance(data, dict):
+        data = [data]
+
+    results: Dict[str, List[HourlyPoint]] = {}
+    for loc, entry in zip(batch, data):
+        hourly = entry.get("hourly")
+        results[loc["name"]] = _parse_hourly_block(hourly) if hourly else []
+
+    return results
+
+
+def fetch_forecast_multi(config: Dict[str, Any]) -> Dict[str, List[HourlyPoint]]:
+    """
+    Fetch hourly forecast data for every location listed in config['locations'].
+    Automatically splits into batches (config['api']['batch_size']) so this
+    scales to a long list of cities/townships without hitting URL limits.
+
+    Returns: dict mapping location name -> list of HourlyPoint.
+    """
+    locations = config["locations"]
+    if not locations:
+        raise ValueError("Config 'locations' list is empty -- add at least one city.")
+
+    batch_size = config["api"].get("batch_size", 50)
+    results: Dict[str, List[HourlyPoint]] = {}
+
+    for i in range(0, len(locations), batch_size):
+        batch = locations[i:i + batch_size]
+        results.update(_fetch_batch(batch, config))
+
+    return results
+
+
+# --------------------------------------------------------------------------
+# Confidence scoring
+# --------------------------------------------------------------------------
+
+def _confidence_from_values(values: List[float]):
+    """
+    Turn a list of 0-100 'signal strength' values (e.g. rain probabilities
+    for the hours in a window) into a confidence score.
+
+    Rewards a strong average signal and penalizes inconsistency (variance)
+    across the window. Capped at 95% -- forecasts are never a sure thing.
+    """
+    if not values:
+        return 0.0, "no data"
+
+    avg = sum(values) / len(values)
+    variance = sum((v - avg) ** 2 for v in values) / len(values)
+    consistency_penalty = min(variance ** 0.5, 30)
+
+    raw_confidence = avg - consistency_penalty
+    confidence = max(5.0, min(95.0, raw_confidence))
+
+    if confidence >= 80:
+        label = "high confidence"
+    elif confidence >= 60:
+        label = "moderate confidence"
+    elif confidence >= 40:
+        label = "low confidence"
+    else:
+        label = "very low confidence"
+
+    return round(confidence, 1), label
+
+
+# --------------------------------------------------------------------------
+# Window detection
+# --------------------------------------------------------------------------
+
+def _merge_into_windows(points, is_match_fn, value_fn, kind: str, min_window_minutes: int) -> List[Window]:
+    windows: List[Window] = []
+    current_group: List[HourlyPoint] = []
+
+    def flush():
+        if not current_group:
+            return
+        start = current_group[0].time
+        end = current_group[-1].time + timedelta(hours=1)
+
+        duration_minutes = int((end - start).total_seconds() // 60)
+        if duration_minutes < min_window_minutes:
+            return
+
+        values = [value_fn(p) for p in current_group]
+        confidence, label = _confidence_from_values(values)
+        windows.append(Window(
+            start=start,
+            end=end,
+            kind=kind,
+            avg_value=sum(values) / len(values),
+            confidence_percent=confidence,
+            confidence_label=label,
+        ))
+
     for p in points:
-        print(
-            f"    {p.time.strftime('%a %d %b ' + time_fmt)} | "
-            f"temp: {p.temperature_c:>5.1f}C | "
-            f"rain chance: {p.precipitation_probability:>3.0f}% | "
-            f"precip: {p.precipitation_mm:>4.1f}mm | "
-            f"cloud cover: {p.cloud_cover:>3.0f}%"
-        )
+        if is_match_fn(p):
+            current_group.append(p)
+        else:
+            flush()
+            current_group = []
+    flush()
+
+    return windows
 
 
-def print_disclaimer() -> None:
-    print("\nNote on accuracy")
-    print("-" * 17)
-    print(
-        "  Forecast confidence naturally drops the further out a window is.\n"
-        "  Treat 'confidence' above as how strong and consistent the signal\n"
-        "  is in the forecast data, not a guaranteed accuracy rate. No\n"
-        "  weather tool -- this one included -- can promise a fixed 90%\n"
-        "  accuracy on exact rain timing."
+def find_rain_windows(points: List[HourlyPoint], config: Dict[str, Any]) -> List[Window]:
+    threshold = config["thresholds"]["rain_probability_percent"]
+    min_minutes = config["thresholds"]["min_window_minutes"]
+
+    return _merge_into_windows(
+        points,
+        is_match_fn=lambda p: p.precipitation_probability >= threshold,
+        value_fn=lambda p: p.precipitation_probability,
+        kind="rain",
+        min_window_minutes=min_minutes,
     )
 
 
-def build_alert_message(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> str:
+def find_sunny_windows(points: List[HourlyPoint], config: Dict[str, Any]) -> List[Window]:
+    threshold = config["thresholds"]["sunny_cloud_cover_percent"]
+    min_minutes = config["thresholds"]["min_window_minutes"]
+
+    def is_sunny(p: HourlyPoint) -> bool:
+        # weather_code 0/1 = clear/mainly clear (Open-Meteo WMO codes)
+        return p.cloud_cover <= threshold and p.weather_code in (0, 1)
+
+    return _merge_into_windows(
+        points,
+        is_match_fn=is_sunny,
+        value_fn=lambda p: 100 - p.cloud_cover,
+        kind="sunny",
+        min_window_minutes=min_minutes,
+    )
+
+
+# --------------------------------------------------------------------------
+# Telegram alerts
+# --------------------------------------------------------------------------
+
+def send_telegram_message(text: str, config: Dict[str, Any], chat_id: str = None) -> bool:
     """
-    Build a single Telegram message covering every city that has a
-    qualifying alert (matching telegram.alert_on kinds, at or above
-    telegram.min_confidence_percent). Returns "" if nothing qualifies.
+    Send a message via the Telegram Bot API.
+
+    The bot token (and the default chat ID, when `chat_id` isn't given) are
+    read from environment variables -- in GitHub Actions these come from
+    repository Secrets, so nothing sensitive is ever committed to the repo.
+    Pass `chat_id` explicitly to reply to whoever texted the bot, instead of
+    the configured default chat/group.
+
+    Returns True if the message was sent successfully, False otherwise
+    (missing credentials or a failed request are logged, not raised, so
+    a Telegram outage never breaks the rest of the run).
     """
     tg_cfg = config.get("telegram", {})
-    alert_kinds = set(tg_cfg.get("alert_on", ["rain"]))
-    min_confidence = tg_cfg.get("min_confidence_percent", 60)
-    time_fmt = config["output"].get("time_format", "%I:%M %p")
+    if not tg_cfg.get("enabled", False):
+        return False
 
-    lines: List[str] = []
+    token = os.environ.get(tg_cfg.get("bot_token_env", "TELEGRAM_BOT_TOKEN"))
+    target_chat_id = chat_id or os.environ.get(tg_cfg.get("chat_id_env", "TELEGRAM_CHAT_ID"))
 
-    for city in all_results:
-        city_lines = []
-        for kind_key, label in (("rain_windows", "Rain"), ("sunny_windows", "Sunny")):
-            kind_name = "rain" if label == "Rain" else "sunny"
-            if kind_name not in alert_kinds:
-                continue
-            for w in city[kind_key]:
-                if w["confidence_percent"] < min_confidence:
-                    continue
-                from datetime import datetime as _dt
-                start = _dt.fromisoformat(w["start"])
-                end = _dt.fromisoformat(w["end"])
-                city_lines.append(
-                    f"  {label}: {start.strftime(time_fmt)} -> {end.strftime(time_fmt)} "
-                    f"({w['confidence_percent']}% {w['confidence_label']})"
-                )
-        if city_lines:
-            lines.append(f"<b>{city['name']}</b>")
-            lines.extend(city_lines)
+    if not token or not target_chat_id:
+        print("Telegram alert skipped: bot token or chat ID not set in environment.")
+        return False
 
-    if not lines:
-        return ""
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {
+        "chat_id": target_chat_id,
+        "text": text,
+        "parse_mode": "HTML",
+        "disable_web_page_preview": True,
+    }
 
-    header = "\u26c5 Weather Alert\n"
-    return header + "\n".join(lines)
+    try:
+        resp = requests.post(url, data=payload, timeout=15)
+        resp.raise_for_status()
+        return True
+    except requests.RequestException as exc:
+        print(f"Telegram alert failed to send: {exc}")
+        return False
 
 
-def build_summary_message(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> str:
+def get_and_confirm_telegram_updates(config: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
-    Build a Telegram message covering EVERY run, regardless of confidence
-    threshold -- the nearest upcoming rain window and sunny window for each
-    city, so you get a real weather digest every time the workflow runs,
-    not just when something crosses the alert threshold.
+    Fetch any new incoming Telegram messages (e.g. a user texting a city
+    name) since the last time this was called, then immediately confirm
+    them with Telegram so the same message is never processed twice --
+    even though nothing needs to be persisted between separate runs.
     """
-    time_fmt = config["output"].get("time_format", "%I:%M %p")
-    lines: List[str] = ["\U0001F324 Weather Update"]
+    tg_cfg = config.get("telegram", {})
+    if not tg_cfg.get("enabled", False):
+        return []
 
-    for city in all_results:
-        lines.append(f"\n<b>{city['name']}</b>")
+    token = os.environ.get(tg_cfg.get("bot_token_env", "TELEGRAM_BOT_TOKEN"))
+    if not token:
+        print("Telegram updates skipped: bot token not set in environment.")
+        return []
 
-        if city["rain_windows"]:
-            w = city["rain_windows"][0]
-            start = datetime.fromisoformat(w["start"])
-            end = datetime.fromisoformat(w["end"])
-            lines.append(
-                f"  Rain: {start.strftime(time_fmt)} -> {end.strftime(time_fmt)} "
-                f"({w['confidence_percent']}% {w['confidence_label']})"
-            )
-        else:
-            lines.append("  Rain: none predicted in the forecast period.")
+    url = f"https://api.telegram.org/bot{token}/getUpdates"
 
-        if city["sunny_windows"]:
-            w = city["sunny_windows"][0]
-            start = datetime.fromisoformat(w["start"])
-            end = datetime.fromisoformat(w["end"])
-            lines.append(
-                f"  Sunny: {start.strftime(time_fmt)} -> {end.strftime(time_fmt)} "
-                f"({w['confidence_percent']}% {w['confidence_label']})"
-            )
-        else:
-            lines.append("  Sunny: none predicted in the forecast period.")
+    try:
+        resp = requests.get(url, params={"timeout": 0}, timeout=15)
+        resp.raise_for_status()
+        updates = resp.json().get("result", [])
+    except requests.RequestException as exc:
+        print(f"Failed to fetch Telegram updates: {exc}")
+        return []
 
-    return "\n".join(lines)
+    if updates:
+        max_update_id = max(u["update_id"] for u in updates)
+        try:
+            # Confirming with offset = last_id + 1 tells Telegram these are
+            # handled, so they won't be returned again on the next run.
+            requests.get(url, params={"offset": max_update_id + 1, "timeout": 0}, timeout=15)
+        except requests.RequestException:
+            pass  # not fatal -- worst case, these get processed again next run
 
-
-def save_results_json(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> None:
-    path = config["output"].get("results_path", "results/latest.json")
-    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-    with open(path, "w") as f:
-        json.dump({
-            "generated_at": datetime.now().isoformat(),
-            "cities": all_results,
-        }, f, indent=2)
-    print(f"\nSaved machine-readable results to: {path}")
+    return updates
 
 
 # --------------------------------------------------------------------------
-# On-demand "which city am I in" replies
+# Optional: Gemini-generated weather tips
 # --------------------------------------------------------------------------
 
-def match_cities(query: str, all_results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Match a user's texted city/township name against the configured list.
-    Tries an exact (case-insensitive) match first, then falls back to a
-    substring match so "durgapur" matches "Durgapur" and typos/partials
-    still have a chance."""
-    q = query.strip().lower()
-    exact = [c for c in all_results if c["name"].strip().lower() == q]
-    if exact:
-        return exact
-    return [c for c in all_results if q in c["name"].lower() or c["name"].lower() in q]
-
-
-def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
+def generate_ai_tip(city_name: str, current: Dict[str, Any], config: Dict[str, Any]) -> str:
     """
-    Build a formatted daily weather report for one city, matching this style:
-
-        WEATHER REPORT
-        CITY NAME
-        Date, Time
-        ----------------------------
-        Temperature : ..C
-        Humidity    : ..%
-        Wind Speed  : .. km/h
-        Pressure    : .. hPa
-        ----------------------------
-        Rain Chance : ..%
-        Prediction  : RAIN PREDICTED / CLEAR SKIES
-        Tip
-        ----------------------------
-        Sent by GitHub Actions
-
-    Uses the "current" snapshot (nearest upcoming hour) attached to each
-    city's entry in all_results.
+    Ask Gemini for a short, natural-language weather tip based on current
+    conditions. Returns None (never raises) if the feature is disabled, the
+    API key is missing, or the request fails for any reason -- callers
+    should fall back to a static tip in that case, since this is a purely
+    cosmetic enhancement and must never break the actual weather report.
     """
-    tz_name = config.get("timezone", "UTC")
-    try:
-        tz = ZoneInfo(tz_name)
-    except Exception:
-        tz = ZoneInfo("UTC")
-    now_local = datetime.now(tz)
-    date_str = now_local.strftime("%d %B %Y, %I:%M %p")
-
-    current = city.get("current", {})
-    temp = current.get("temperature_c", 0.0)
-    humidity = current.get("humidity", 0.0)
-    wind = current.get("wind_speed", 0.0)
-    pressure = current.get("pressure", 0.0)
-    rain_chance = current.get("precipitation_probability", 0.0)
-
-    threshold = config["thresholds"]["rain_probability_percent"]
-    if rain_chance >= threshold:
-        prediction = "\U0001F327\uFE0F RAIN PREDICTED"
-        static_tip = "Carry an umbrella. Avoid outdoor plans if possible."
-    else:
-        prediction = "\u2600\uFE0F CLEAR SKIES"
-        static_tip = "Good conditions for outdoor plans."
-
-    # If Gemini is configured and enabled, use its generated tip instead --
-    # falls back to the static tip automatically on any failure.
-    ai_tip = generate_ai_tip(city["name"], current, config)
-    tip = ai_tip if ai_tip else static_tip
-
-    divider = "\u2500" * 28
-    time_fmt = config["output"].get("time_format", "%I:%M %p")
-
-    def format_window_lines(windows: List[Dict[str, Any]]) -> List[str]:
-        if not windows:
-            return ["  None predicted in the forecast period."]
-        today = now_local.date()
-        tomorrow = today + timedelta(days=1)
-        now_naive = now_local.replace(tzinfo=None)
-        out = []
-        for w in windows:
-            start = datetime.fromisoformat(w["start"])
-            end = datetime.fromisoformat(w["end"])
-            hours, minutes = divmod(w["duration_minutes"], 60)
-            dur = f"{hours}h" + (f" {minutes}m" if minutes else "")
-
-            if start.date() == today:
-                day_label = "Today"
-            elif start.date() == tomorrow:
-                day_label = "Tomorrow"
-            else:
-                day_label = start.strftime("%A, %d %b")
-
-            same_day_end = " (into next day)" if end.date() != start.date() else ""
-
-            if start <= now_naive <= end:
-                remaining = int((end - now_naive).total_seconds() // 60)
-                rh, rm = divmod(remaining, 60)
-                countdown = f"\U0001F534 Happening now -- ends in {rh}h {rm}m"
-            elif start > now_naive:
-                until = int((start - now_naive).total_seconds() // 60)
-                uh, um = divmod(until, 60)
-                countdown = f"\u23F3 Starts in {uh}h {um}m"
-            else:
-                countdown = "Already passed"
-
-            out.append(
-                f"  {day_label}\n"
-                f"    {start.strftime(time_fmt)} \u2192 {end.strftime(time_fmt)}{same_day_end}\n"
-                f"    Duration: {dur} | Confidence: {w['confidence_percent']}% ({w['confidence_label']})\n"
-                f"    {countdown}"
-            )
-        return out
-
-    lines = [
-        "\U0001F326\uFE0F DAILY WEATHER REPORT",
-        f"\U0001F4CD {city['name'].upper()}",
-        f"\U0001F4C5 {date_str}",
-        divider,
-        "",
-        f"\U0001F321\uFE0F Temperature : {temp:.1f}\u00B0C",
-        f"\U0001F4A7 Humidity    : {humidity:.0f}%",
-        f"\U0001F32C\uFE0F Wind Speed  : {wind:.1f} km/h",
-        f"\U0001F535 Pressure    : {pressure:.1f} hPa",
-        divider,
-        "",
-        f"\U0001F4CA Rain Chance : {rain_chance:.1f}%",
-        f"\U0001F52E Prediction  : {prediction}",
-        "",
-        f"\U0001F4AC {tip}",
-        divider,
-        "\u23F1\uFE0F Rain Windows:",
-    ]
-    lines.extend(format_window_lines(city.get("rain_windows", [])))
-    lines.append("")
-    lines.append("\u2600\uFE0F Sunny Windows:")
-    lines.extend(format_window_lines(city.get("sunny_windows", [])))
-    lines.append(divider)
-    lines.append("\U0001F916 Sent by GitHub Actions")
-
-    return "\n".join(lines)
-
-
-def build_city_reply(city: Dict[str, Any], config: Dict[str, Any]) -> str:
-    """Build the on-demand forecast reply text for a single city."""
-    time_fmt = config["output"].get("time_format", "%I:%M %p")
-    lines = [f"<b>{city['name']}</b>"]
-
-    for key, label in (("rain_windows", "Rain"), ("sunny_windows", "Sunny")):
-        windows = city[key]
-        if not windows:
-            lines.append(f"{label}: none predicted in the forecast period.")
-            continue
-        lines.append(f"{label}:")
-        for w in windows:
-            start = datetime.fromisoformat(w["start"])
-            end = datetime.fromisoformat(w["end"])
-            lines.append(
-                f"  {start.strftime(time_fmt)} -> {end.strftime(time_fmt)} "
-                f"({w['confidence_percent']}% {w['confidence_label']})"
-            )
-
-    return "\n".join(lines)
-
-
-def load_subscriptions(path: str) -> Dict[str, str]:
-    """Load the chat_id -> city_name subscription map from disk.
-    Returns an empty dict if the file doesn't exist yet (first run ever)."""
-    if not os.path.exists(path):
-        return {}
-    try:
-        with open(path, "r") as f:
-            return json.load(f)
-    except (json.JSONDecodeError, OSError):
-        return {}
-
-
-def save_subscriptions(path: str, subscriptions: Dict[str, str]) -> None:
-    os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-    with open(path, "w") as f:
-        json.dump(subscriptions, f, indent=2)
-
-
-def handle_subscriptions(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> None:
-    """
-    Per-user city subscriptions:
-      - Texting a city name subscribes that chat to updates for that city,
-        replacing any previous subscription (one active city per chat).
-      - Every run, every currently subscribed chat gets that city's forecast.
-      - This keeps happening automatically, run after run, until the user
-        texts a different (valid) city name to switch.
-
-    The subscription map persists in a JSON file that gets committed back
-    to the repo after each run (see the workflow's git-auto-commit step),
-    since GitHub Actions runs don't share memory between invocations.
-    """
-    sub_path = config["telegram"].get("subscriptions_path", "data/subscriptions.json")
-    subscriptions = load_subscriptions(sub_path)
-    results_by_name = {c["name"]: c for c in all_results}
-
-    updates = get_and_confirm_telegram_updates(config)
-    just_replied_to: set = set()
-
-    for update in updates:
-        message = update.get("message") or update.get("edited_message")
-        if not message or "text" not in message:
-            continue
-
-        chat_id = str(message["chat"]["id"])
-        text = message["text"]
-        matches = match_cities(text, all_results)
-
-        if len(matches) == 1:
-            city = matches[0]
-            subscriptions[chat_id] = city["name"]
-            reply = (
-                f"Subscribed! You'll get {city['name']} weather updates every "
-                f"~5 minutes. Text another city name anytime to switch.\n\n"
-                + build_daily_report(city, config)
-            )
-            send_telegram_message(reply, config, chat_id=chat_id)
-            just_replied_to.add(chat_id)
-        elif len(matches) > 1:
-            names = ", ".join(m["name"] for m in matches)
-            send_telegram_message(
-                f"That matches more than one place: {names}. Please send the exact name.",
-                config, chat_id=chat_id,
-            )
-        else:
-            shown = [c["name"] for c in all_results[:20]]
-            extra = f" (+{len(all_results) - 20} more)" if len(all_results) > 20 else ""
-            send_telegram_message(
-                "I don't recognize that place. Text the exact name of your city "
-                f"or township to subscribe. Available: {', '.join(shown)}{extra}",
-                config, chat_id=chat_id,
-            )
-
-    # Recurring update for everyone already subscribed (skip anyone we just
-    # replied to above, since their subscribe-confirmation already included
-    # the current forecast -- no need to send it twice in the same run).
-    for chat_id, city_name in list(subscriptions.items()):
-        if chat_id in just_replied_to:
-            continue
-        city = results_by_name.get(city_name)
-        if not city:
-            continue  # subscribed city no longer in rain_prediction.yml -- skip quietly
-        sent = send_telegram_message(build_daily_report(city, config), config, chat_id=chat_id)
-        print(f"Recurring update sent to chat {chat_id} ({city_name}): {sent}")
-
-    save_subscriptions(sub_path, subscriptions)
-
-
-def find_current_point(points: List, config: Dict[str, Any]):
-    """
-    Open-Meteo's hourly array starts at midnight of the current day, not
-    from the current moment -- so points[0] is midnight's data, which
-    stays constant (and wrong) for the whole day if used as "right now".
-    This finds the entry whose hour actually matches (or is nearest to)
-    the real current time, in the configured timezone.
-    """
-    if not points:
+    gem_cfg = config.get("gemini", {})
+    if not gem_cfg.get("enabled", False):
         return None
 
-    tz_name = config.get("timezone", "UTC")
-    try:
-        tz = ZoneInfo(tz_name)
-    except Exception:
-        tz = ZoneInfo("UTC")
+    api_key = os.environ.get(gem_cfg.get("api_key_env", "GEMINI_API_KEY"))
+    if not api_key:
+        print("Gemini tip skipped: API key not set in environment.")
+        return None
 
-    now_hour = datetime.now(tz).replace(tzinfo=None, minute=0, second=0, microsecond=0)
+    model = gem_cfg.get("model", "gemini-2.0-flash")
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
-    for p in points:
-        if p.time.replace(minute=0, second=0, microsecond=0) == now_hour:
-            return p
+    prompt = (
+        f"Write ONE short, friendly, practical weather tip (max 20 words, "
+        f"no greeting, no city name) for someone in {city_name} right now. "
+        f"Conditions: {current.get('temperature_c', 0):.1f}C, "
+        f"{current.get('humidity', 0):.0f}% humidity, "
+        f"{current.get('wind_speed', 0):.1f} km/h wind, "
+        f"{current.get('precipitation_probability', 0):.0f}% chance of rain. "
+        f"Just the tip, nothing else."
+    )
 
-    # Fallback: nearest point at or after now (covers edge cases like DST
-    # shifts or a forecast that doesn't include the exact current hour).
-    upcoming = [p for p in points if p.time >= now_hour]
-    if upcoming:
-        return min(upcoming, key=lambda p: p.time)
-
-    return points[-1]  # last resort: most recent available point
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Weather Detector: rain & sunny window predictor for many cities")
-    parser.add_argument("--config", default="rain_prediction.yml", help="Path to config YAML file")
-    parser.add_argument("--lat", type=float, default=None, help="Override: run for a single ad-hoc latitude")
-    parser.add_argument("--lon", type=float, default=None, help="Override: run for a single ad-hoc longitude")
-    parser.add_argument("--name", type=str, default=None, help="Override: display name for the ad-hoc location")
-    args = parser.parse_args()
+    headers = {"x-goog-api-key": api_key, "Content-Type": "application/json"}
+    payload = {"contents": [{"parts": [{"text": prompt}]}]}
 
     try:
-        config = load_config(args.config)
-    except (FileNotFoundError, ValueError, yaml.YAMLError) as exc:
-        print(f"Error loading config: {exc}", file=sys.stderr)
-        return 1
-
-    apply_overrides(config, args)
-    locations = config["locations"]
-
-    print(f"Weather Detector -- {len(locations)} location(s)")
-    print("=" * 60)
-
-    try:
-        forecasts = fetch_forecast_multi(config)
-    except (RuntimeError, ValueError) as exc:
-        print(f"Error: {exc}", file=sys.stderr)
-        return 1
-
-    all_results: List[Dict[str, Any]] = []
-
-    for loc in locations:
-        name = loc["name"]
-        points = forecasts.get(name, [])
-        print(f"\n{name}")
-        print("-" * len(name))
-
-        if not points:
-            print("  No data returned for this location.")
-            continue
-
-        rain_windows = find_rain_windows(points, config)
-        sunny_windows = find_sunny_windows(points, config)
-
-        print_windows("Rain windows", rain_windows, config)
-        print_windows("Sunny windows", sunny_windows, config)
-
-        if config["output"].get("verbose", False):
-            print_hourly_detail(points, config)
-
-        current = find_current_point(points, config)  # the actual current hour's data, not midnight's
-
-        all_results.append({
-            "name": name,
-            "country": loc.get("country", ""),
-            "latitude": loc["latitude"],
-            "longitude": loc["longitude"],
-            "rain_windows": [w.to_dict() for w in rain_windows],
-            "sunny_windows": [w.to_dict() for w in sunny_windows],
-            "current": {
-                "time": current.time.isoformat(),
-                "temperature_c": current.temperature_c,
-                "humidity": current.humidity,
-                "wind_speed": current.wind_speed,
-                "pressure": current.pressure,
-                "precipitation_probability": current.precipitation_probability,
-            },
-        })
-
-    if config["output"].get("save_results_json", True):
-        save_results_json(all_results, config)
-
-    if config.get("telegram", {}).get("enabled", False):
-        tg_cfg = config["telegram"]
-
-        if tg_cfg.get("always_send_summary", False):
-            # Full digest every run, regardless of confidence threshold.
-            message = build_summary_message(all_results, config)
-        else:
-            # Only message when something crosses the confidence threshold.
-            message = build_alert_message(all_results, config)
-
-        if message:
-            sent = send_telegram_message(message, config)
-            print(f"\nTelegram message sent: {sent}")
-        else:
-            print("\nNo qualifying alerts -- Telegram message not sent.")
-
-        if tg_cfg.get("respond_to_city_requests", False):
-            handle_subscriptions(all_results, config)
-
-    if config["output"].get("show_disclaimer", True):
-        print_disclaimer()
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        resp = requests.post(url, headers=headers, json=payload, timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+        text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+        return text if text else None
+    except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
+        print(f"Gemini tip failed, falling back to static tip: {exc}")
+        return None
