@@ -377,3 +377,51 @@ def get_and_confirm_telegram_updates(config: Dict[str, Any]) -> List[Dict[str, A
             pass  # not fatal -- worst case, these get processed again next run
 
     return updates
+
+
+# --------------------------------------------------------------------------
+# Optional: Gemini-generated weather tips
+# --------------------------------------------------------------------------
+
+def generate_ai_tip(city_name: str, current: Dict[str, Any], config: Dict[str, Any]) -> str:
+    """
+    Ask Gemini for a short, natural-language weather tip based on current
+    conditions. Returns None (never raises) if the feature is disabled, the
+    API key is missing, or the request fails for any reason -- callers
+    should fall back to a static tip in that case, since this is a purely
+    cosmetic enhancement and must never break the actual weather report.
+    """
+    gem_cfg = config.get("gemini", {})
+    if not gem_cfg.get("enabled", False):
+        return None
+
+    api_key = os.environ.get(gem_cfg.get("api_key_env", "GEMINI_API_KEY"))
+    if not api_key:
+        print("Gemini tip skipped: API key not set in environment.")
+        return None
+
+    model = gem_cfg.get("model", "gemini-2.0-flash")
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+
+    prompt = (
+        f"Write ONE short, friendly, practical weather tip (max 20 words, "
+        f"no greeting, no city name) for someone in {city_name} right now. "
+        f"Conditions: {current.get('temperature_c', 0):.1f}C, "
+        f"{current.get('humidity', 0):.0f}% humidity, "
+        f"{current.get('wind_speed', 0):.1f} km/h wind, "
+        f"{current.get('precipitation_probability', 0):.0f}% chance of rain. "
+        f"Just the tip, nothing else."
+    )
+
+    headers = {"x-goog-api-key": api_key, "Content-Type": "application/json"}
+    payload = {"contents": [{"parts": [{"text": prompt}]}]}
+
+    try:
+        resp = requests.post(url, headers=headers, json=payload, timeout=15)
+        resp.raise_for_status()
+        data = resp.json()
+        text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+        return text if text else None
+    except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
+        print(f"Gemini tip failed, falling back to static tip: {exc}")
+        return None
