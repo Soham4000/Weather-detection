@@ -1,35 +1,10 @@
 # rain_prediction.yml
 # Configuration for the Weather Detector project.
-# Add as many cities/townships as you want under "locations" -- there's no
-# hard limit; the fetcher automatically splits large lists into safe
-# request batches (see api.batch_size below).
+# The city/township list now lives in its own file: cities.json -- add as
+# many entries as you want there; no hard limit, and no need to touch this
+# file when you just want to add or remove a city.
 
-locations:
-  - name: "Durgapur"
-    country: "IN"
-    latitude: 23.5204
-    longitude: 87.3119
-  - name: "Asansol"
-    country: "IN"
-    latitude: 23.6739
-    longitude: 86.9524
-  - name: "Kolkata"
-    country: "IN"
-    latitude: 22.5726
-    longitude: 88.3639
-  - name: "Bardhaman"
-    country: "IN"
-    latitude: 23.2324
-    longitude: 87.8615
-  - name: "Kharagpur"
-    country: "IN"
-    latitude: 22.3460
-    longitude: 87.2320
-  # Add more entries here, e.g.:
-  # - name: "Your Town"
-  #   country: "IN"
-  #   latitude: 0.0000
-  #   longitude: 0.0000
+locations_file: "cities.json"
 
 timezone: "Asia/Kolkata"     # applied to all locations in this run
 
@@ -62,3 +37,13 @@ telegram:
   always_send_summary: false             # true = broadcast a digest to the default chat every run too
   respond_to_city_requests: true         # let users text a city/township name to SUBSCRIBE to that city's updates
   subscriptions_path: "data/subscriptions.json"   # where per-user city subscriptions are stored between runs
+
+gemini:
+  enabled: false                          # true = let Gemini write the report's tip line dynamically
+  api_key_env: "GEMINI_API_KEY"           # name of the GitHub Secret holding your Gemini API key
+  model: "gemini-2.0-flash"               # fast, cheap model -- fine for a one-line tip
+
+ensemble:
+  enabled: true                           # true = use multi-model consensus for rain confidence (more accurate)
+  models: ["ecmwf_ifs025", "gfs_seamless", "icon_seamless", "gem_seamless"]
+  rain_threshold_mm: 0.1                  # precipitation amount (mm) above which a model "votes" for rain that hour
