@@ -39,6 +39,7 @@ from prediction_weather import (
     find_sunny_windows,
     send_telegram_message,
     get_and_confirm_telegram_updates,
+    generate_ai_tip,
     Window,
 )
 
@@ -142,9 +143,8 @@ def build_alert_message(all_results: List[Dict[str, Any]], config: Dict[str, Any
             for w in city[kind_key]:
                 if w["confidence_percent"] < min_confidence:
                     continue
-                from datetime import datetime as _dt
-                start = _dt.fromisoformat(w["start"])
-                end = _dt.fromisoformat(w["end"])
+                start = datetime.fromisoformat(w["start"])
+                end = datetime.fromisoformat(w["end"])
                 city_lines.append(
                     f"  {label}: {start.strftime(time_fmt)} -> {end.strftime(time_fmt)} "
                     f"({w['confidence_percent']}% {w['confidence_label']})"
@@ -225,42 +225,6 @@ def match_cities(query: str, all_results: List[Dict[str, Any]]) -> List[Dict[str
     return [c for c in all_results if q in c["name"].lower() or c["name"].lower() in q]
 
 
-def generate_ai_tip(city_name: str, current: Dict[str, Any], config: Dict[str, Any]) -> str:
-    """
-    Local weather tip fallback.
-
-    This keeps weather_detector.py independent of a missing
-    generate_ai_tip() function in prediction_weather.py.
-    If prediction_weather.py later provides an AI tip function,
-    this function can be replaced with that implementation.
-    """
-    try:
-        rain_chance = float(current.get("precipitation_probability", 0.0))
-        temp = float(current.get("temperature_c", 0.0))
-        wind = float(current.get("wind_speed", 0.0))
-    except (TypeError, ValueError):
-        return ""
-
-    tips = []
-
-    if rain_chance >= 70:
-        tips.append("High rain chance. Carry an umbrella and plan outdoor activities carefully.")
-    elif rain_chance >= 40:
-        tips.append("Moderate rain chance. Carry an umbrella if you are going outdoors.")
-    else:
-        tips.append("Low rain chance. Conditions are generally suitable for outdoor activities.")
-
-    if temp >= 35:
-        tips.append("It is hot, so stay hydrated and avoid prolonged direct sunlight.")
-    elif temp <= 15:
-        tips.append("It is relatively cool, so consider carrying an extra layer.")
-
-    if wind >= 35:
-        tips.append("Strong winds are possible; use extra caution outdoors.")
-
-    return " ".join(tips)
-
-
 def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
     """
     Build a formatted daily weather report for one city, matching this style:
@@ -278,10 +242,12 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
         Prediction  : RAIN PREDICTED / CLEAR SKIES
         Tip
         ----------------------------
+        Rain/Sunny windows with exact times
+        ----------------------------
         Sent by GitHub Actions
 
-    Uses the "current" snapshot (nearest upcoming hour) attached to each
-    city's entry in all_results.
+    Uses the "current" snapshot (actual current hour, not midnight's data --
+    see find_current_point()) attached to each city's entry in all_results.
     """
     tz_name = config.get("timezone", "UTC")
     try:
@@ -306,8 +272,10 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
         prediction = "\u2600\uFE0F CLEAR SKIES"
         static_tip = "Good conditions for outdoor plans."
 
-    # If Gemini is configured and enabled, use its generated tip instead --
-    # falls back to the static tip automatically on any failure.
+    # If Gemini is configured and enabled (see prediction_weather.py), this
+    # returns an AI-written tip; otherwise it returns None and we fall back
+    # to the static tip above. Never raises -- a Gemini outage never breaks
+    # the report itself.
     ai_tip = generate_ai_tip(city["name"], current, config)
     tip = ai_tip if ai_tip else static_tip
 
@@ -493,6 +461,38 @@ def handle_subscriptions(all_results: List[Dict[str, Any]], config: Dict[str, An
     save_subscriptions(sub_path, subscriptions)
 
 
+def find_current_point(points: List, config: Dict[str, Any]):
+    """
+    Open-Meteo's hourly array starts at midnight of the current day, not
+    from the current moment -- so points[0] is midnight's data, which
+    stays constant (and wrong) for the whole day if used as "right now".
+    This finds the entry whose hour actually matches (or is nearest to)
+    the real current time, in the configured timezone.
+    """
+    if not points:
+        return None
+
+    tz_name = config.get("timezone", "UTC")
+    try:
+        tz = ZoneInfo(tz_name)
+    except Exception:
+        tz = ZoneInfo("UTC")
+
+    now_hour = datetime.now(tz).replace(tzinfo=None, minute=0, second=0, microsecond=0)
+
+    for p in points:
+        if p.time.replace(minute=0, second=0, microsecond=0) == now_hour:
+            return p
+
+    # Fallback: nearest point at or after now (covers edge cases like DST
+    # shifts or a forecast that doesn't include the exact current hour).
+    upcoming = [p for p in points if p.time >= now_hour]
+    if upcoming:
+        return min(upcoming, key=lambda p: p.time)
+
+    return points[-1]  # last resort: most recent available point
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Weather Detector: rain & sunny window predictor for many cities")
     parser.add_argument("--config", default="rain_prediction.yml", help="Path to config YAML file")
@@ -540,7 +540,7 @@ def main() -> int:
         if config["output"].get("verbose", False):
             print_hourly_detail(points, config)
 
-        current = points[0]  # nearest upcoming hour -- used as "right now" conditions
+        current = find_current_point(points, config)  # actual current hour, not midnight's
 
         all_results.append({
             "name": name,
