@@ -54,7 +54,6 @@ class HourlyPoint:
     humidity: float = 0.0              # relative humidity, 0-100
     wind_speed: float = 0.0            # km/h
     pressure: float = 0.0              # hPa
-    model_agreement: float = 50.0      # 0-100: how much independent models agree (see ensemble fetch). 50 = unknown/neutral.
 
 
 @dataclass
@@ -134,83 +133,6 @@ def _parse_hourly_block(hourly: Dict[str, Any]) -> List[HourlyPoint]:
     return points
 
 
-def _fetch_model_agreement_batch(batch: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[str, List[float]]:
-    """
-    Fetch precipitation from several independent weather models (ECMWF, GFS,
-    ICON, GEM by default) for this batch of locations, and compute how much
-    those models AGREE, hour by hour -- this is a genuine confidence signal
-    (multi-model consensus is a standard meteorological technique), unlike
-    a single model's own internal variance.
-
-    Returns {} entirely (never raises) on any failure -- this is a pure
-    enhancement layer; if it's unavailable, callers fall back to the
-    original single-model confidence calculation instead of crashing.
-    """
-    ens_cfg = config.get("ensemble", {})
-    if not ens_cfg.get("enabled", False):
-        return {}
-
-    models = ens_cfg.get("models", ["ecmwf_ifs025", "gfs_seamless", "icon_seamless", "gem_seamless"])
-    threshold_mm = ens_cfg.get("rain_threshold_mm", 0.1)
-    api_cfg = config["api"]
-
-    lats = ",".join(str(loc["latitude"]) for loc in batch)
-    lons = ",".join(str(loc["longitude"]) for loc in batch)
-
-    params = {
-        "latitude": lats,
-        "longitude": lons,
-        "timezone": config.get("timezone", "auto"),
-        "forecast_days": api_cfg.get("forecast_days", 2),
-        "hourly": "precipitation",
-        "models": ",".join(models),
-    }
-
-    try:
-        resp = requests.get(api_cfg["base_url"], params=params, timeout=20)
-        resp.raise_for_status()
-        data = resp.json()
-    except requests.RequestException:
-        return {}
-
-    if isinstance(data, dict):
-        data = [data]
-
-    results: Dict[str, List[float]] = {}
-    for loc, entry in zip(batch, data):
-        hourly = entry.get("hourly")
-        if not hourly:
-            continue
-
-        model_arrays = []
-        for m in models:
-            key = f"precipitation_{m}"
-            arr = hourly.get(key)
-            if arr is not None:
-                model_arrays.append(arr)
-
-        if not model_arrays:
-            continue
-
-        n = len(hourly.get("time", []))
-        agreement: List[float] = []
-        for i in range(n):
-            votes = []
-            for arr in model_arrays:
-                if i < len(arr) and arr[i] is not None:
-                    votes.append(arr[i] >= threshold_mm)
-            if votes:
-                yes = sum(1 for v in votes if v)
-                no = len(votes) - yes
-                agreement.append(max(yes, no) / len(votes) * 100)
-            else:
-                agreement.append(50.0)  # no data for this hour -- neutral
-
-        results[loc["name"]] = agreement
-
-    return results
-
-
 def _fetch_batch(batch: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[str, List[HourlyPoint]]:
     """Fetch one batch of locations in a single Open-Meteo request."""
     api_cfg = config["api"]
@@ -244,18 +166,6 @@ def _fetch_batch(batch: List[Dict[str, Any]], config: Dict[str, Any]) -> Dict[st
         hourly = entry.get("hourly")
         results[loc["name"]] = _parse_hourly_block(hourly) if hourly else []
 
-    # Layer in multi-model agreement, if enabled. Matched by hour INDEX --
-    # both calls use identical timezone/forecast_days, so the hourly time
-    # grids line up.
-    agreement_by_name = _fetch_model_agreement_batch(batch, config)
-    for name, points in results.items():
-        agreement = agreement_by_name.get(name)
-        if not agreement:
-            continue
-        for i, p in enumerate(points):
-            if i < len(agreement):
-                p.model_agreement = agreement[i]
-
     return results
 
 
@@ -285,18 +195,13 @@ def fetch_forecast_multi(config: Dict[str, Any]) -> Dict[str, List[HourlyPoint]]
 # Confidence scoring
 # --------------------------------------------------------------------------
 
-def _confidence_from_values(values: List[float], model_agreement_values: List[float] = None):
+def _confidence_from_values(values: List[float]):
     """
     Turn a list of 0-100 'signal strength' values (e.g. rain probabilities
     for the hours in a window) into a confidence score.
 
     Rewards a strong average signal and penalizes inconsistency (variance)
-    across the window. If model_agreement_values is provided (how much
-    independent weather models -- ECMWF, GFS, ICON, GEM -- agree hour by
-    hour), it's blended in as a second, genuinely independent confidence
-    signal: multi-model consensus is a standard meteorological technique,
-    distinct from a single model's own internal hour-to-hour variance.
-    Capped at 95% -- forecasts are never a sure thing.
+    across the window. Capped at 95% -- forecasts are never a sure thing.
     """
     if not values:
         return 0.0, "no data"
@@ -306,13 +211,6 @@ def _confidence_from_values(values: List[float], model_agreement_values: List[fl
     consistency_penalty = min(variance ** 0.5, 30)
 
     raw_confidence = avg - consistency_penalty
-
-    if model_agreement_values:
-        avg_agreement = sum(model_agreement_values) / len(model_agreement_values)
-        # Equal-weight blend: our own signal-strength estimate, and how much
-        # independent models agree with each other.
-        raw_confidence = (raw_confidence + avg_agreement) / 2
-
     confidence = max(5.0, min(95.0, raw_confidence))
 
     if confidence >= 80:
@@ -346,11 +244,7 @@ def _merge_into_windows(points, is_match_fn, value_fn, kind: str, min_window_min
             return
 
         values = [value_fn(p) for p in current_group]
-        # Only rain windows get the model-agreement blend -- it's computed
-        # from precipitation consensus, so it's meaningful for rain but not
-        # a meaningful signal for "is it sunny".
-        agreement_values = [p.model_agreement for p in current_group] if kind == "rain" else None
-        confidence, label = _confidence_from_values(values, agreement_values)
+        confidence, label = _confidence_from_values(values)
         windows.append(Window(
             start=start,
             end=end,
