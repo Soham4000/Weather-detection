@@ -40,6 +40,7 @@ from prediction_weather import (
     send_telegram_message,
     get_and_confirm_telegram_updates,
     generate_ai_tip,
+    generate_ai_reply,
     Window,
 )
 
@@ -225,7 +226,7 @@ def match_cities(query: str, all_results: List[Dict[str, Any]]) -> List[Dict[str
     return [c for c in all_results if q in c["name"].lower() or c["name"].lower() in q]
 
 
-def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
+def build_daily_report(city: Dict[str, Any], config: Dict[str, Any], activity: str = None) -> str:
     """
     Build a formatted daily weather report for one city, matching this style:
 
@@ -276,7 +277,7 @@ def build_daily_report(city: Dict[str, Any], config: Dict[str, Any]) -> str:
     # returns an AI-written tip; otherwise it returns None and we fall back
     # to the static tip above. Never raises -- a Gemini outage never breaks
     # the report itself.
-    ai_tip = generate_ai_tip(city["name"], current, config)
+    ai_tip = generate_ai_tip(city["name"], current, config, activity=activity)
     tip = ai_tip if ai_tip else static_tip
 
     divider = "\u2500" * 28
@@ -374,19 +375,33 @@ def build_city_reply(city: Dict[str, Any], config: Dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def load_subscriptions(path: str) -> Dict[str, str]:
-    """Load the chat_id -> city_name subscription map from disk.
-    Returns an empty dict if the file doesn't exist yet (first run ever)."""
+def load_subscriptions(path: str) -> Dict[str, Dict[str, Any]]:
+    """
+    Load the chat_id -> {"city": ..., "activity": ...} subscription map
+    from disk. Returns an empty dict if the file doesn't exist yet.
+
+    Normalizes old-format entries (a bare city-name string, from before
+    activity tracking existed) into the new {"city", "activity"} shape,
+    so existing subscriptions keep working after this upgrade.
+    """
     if not os.path.exists(path):
         return {}
     try:
         with open(path, "r") as f:
-            return json.load(f)
+            raw = json.load(f)
     except (json.JSONDecodeError, OSError):
         return {}
 
+    normalized: Dict[str, Dict[str, Any]] = {}
+    for chat_id, value in raw.items():
+        if isinstance(value, str):
+            normalized[chat_id] = {"city": value, "activity": None}
+        elif isinstance(value, dict):
+            normalized[chat_id] = {"city": value.get("city"), "activity": value.get("activity")}
+    return normalized
 
-def save_subscriptions(path: str, subscriptions: Dict[str, str]) -> None:
+
+def save_subscriptions(path: str, subscriptions: Dict[str, Dict[str, Any]]) -> None:
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     with open(path, "w") as f:
         json.dump(subscriptions, f, indent=2)
@@ -394,12 +409,17 @@ def save_subscriptions(path: str, subscriptions: Dict[str, str]) -> None:
 
 def handle_subscriptions(all_results: List[Dict[str, Any]], config: Dict[str, Any]) -> None:
     """
-    Per-user city subscriptions:
+    Per-user city subscriptions, with Gemini-powered Q&A:
       - Texting a city name subscribes that chat to updates for that city,
         replacing any previous subscription (one active city per chat).
-      - Every run, every currently subscribed chat gets that city's forecast.
-      - This keeps happening automatically, run after run, until the user
-        texts a different (valid) city name to switch.
+      - Texting anything else, from an already-subscribed chat, is treated
+        as a question or a stated plan/activity -- Gemini answers it using
+        that chat's subscribed city's current conditions, and the message
+        is remembered as "activity" context so future recurring reports
+        tailor their tip to it too (e.g. "going for a bike ride" shapes
+        every report until they state a new activity or switch cities).
+      - Every run, every currently subscribed chat gets that city's
+        forecast automatically, run after run.
 
     The subscription map persists in a JSON file that gets committed back
     to the repo after each run (see the workflow's git-auto-commit step),
@@ -423,39 +443,61 @@ def handle_subscriptions(all_results: List[Dict[str, Any]], config: Dict[str, An
 
         if len(matches) == 1:
             city = matches[0]
-            subscriptions[chat_id] = city["name"]
+            subscriptions[chat_id] = {"city": city["name"], "activity": None}
             reply = (
                 f"Subscribed! You'll get {city['name']} weather updates every "
-                f"~5 minutes. Text another city name anytime to switch.\n\n"
+                f"~5 minutes. Text another city name anytime to switch, or just "
+                f"ask a question / tell me your plans for tailored advice.\n\n"
                 + build_daily_report(city, config)
             )
             send_telegram_message(reply, config, chat_id=chat_id)
             just_replied_to.add(chat_id)
+
         elif len(matches) > 1:
             names = ", ".join(m["name"] for m in matches)
             send_telegram_message(
                 f"That matches more than one place: {names}. Please send the exact name.",
                 config, chat_id=chat_id,
             )
+
         else:
-            shown = [c["name"] for c in all_results[:20]]
-            extra = f" (+{len(all_results) - 20} more)" if len(all_results) > 20 else ""
-            send_telegram_message(
-                "I don't recognize that place. Text the exact name of your city "
-                f"or township to subscribe. Available: {', '.join(shown)}{extra}",
-                config, chat_id=chat_id,
+            # Not a city name. If this chat already has a subscribed city,
+            # treat it as a question/activity and let Gemini respond using
+            # that city's current conditions.
+            existing = subscriptions.get(chat_id)
+            existing_city = results_by_name.get(existing["city"]) if existing else None
+
+            ai_reply = (
+                generate_ai_reply(text, existing_city["name"], existing_city.get("current", {}), config)
+                if existing_city else None
             )
 
+            if ai_reply:
+                subscriptions[chat_id]["activity"] = text  # shapes future tips too
+                send_telegram_message(ai_reply, config, chat_id=chat_id)
+                just_replied_to.add(chat_id)
+            else:
+                # No subscription to attach context to, or Gemini unavailable/
+                # disabled/failed -- fall back to the plain city-list message.
+                shown = [c["name"] for c in all_results[:20]]
+                extra = f" (+{len(all_results) - 20} more)" if len(all_results) > 20 else ""
+                send_telegram_message(
+                    "I don't recognize that place. Text the exact name of your city "
+                    f"or township to subscribe. Available: {', '.join(shown)}{extra}",
+                    config, chat_id=chat_id,
+                )
+
     # Recurring update for everyone already subscribed (skip anyone we just
-    # replied to above, since their subscribe-confirmation already included
-    # the current forecast -- no need to send it twice in the same run).
-    for chat_id, city_name in list(subscriptions.items()):
+    # replied to above, since their subscribe-confirmation or AI reply this
+    # run already covered it -- no need to send it twice in the same run).
+    for chat_id, sub in list(subscriptions.items()):
         if chat_id in just_replied_to:
             continue
-        city = results_by_name.get(city_name)
+        city = results_by_name.get(sub.get("city"))
         if not city:
             continue  # subscribed city no longer in rain_prediction.yml -- skip quietly
-        sent = send_telegram_message(build_daily_report(city, config), config, chat_id=chat_id)
+        report = build_daily_report(city, config, activity=sub.get("activity"))
+        sent = send_telegram_message(report, config, chat_id=chat_id)
         print(f"Recurring update sent to chat {chat_id} ({city_name}): {sent}")
 
     save_subscriptions(sub_path, subscriptions)
