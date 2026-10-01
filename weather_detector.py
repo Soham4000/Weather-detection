@@ -498,7 +498,7 @@ def handle_subscriptions(all_results: List[Dict[str, Any]], config: Dict[str, An
             continue  # subscribed city no longer in rain_prediction.yml -- skip quietly
         report = build_daily_report(city, config, activity=sub.get("activity"))
         sent = send_telegram_message(report, config, chat_id=chat_id)
-        print(f"Recurring update sent to chat {chat_id} ({city_name}): {sent}")
+        print(f"Recurring update sent to chat {chat_id} ({sub.get('city')}): {sent}")
 
     save_subscriptions(sub_path, subscriptions)
 
