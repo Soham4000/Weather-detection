@@ -1,4 +1,10 @@
 {
-  "8730263528": "Kharagpur",
-  "5417912500": "Durgapur"
+  "8730263528": {
+    "city": "Kharagpur",
+    "activity": null
+  },
+  "5417912500": {
+    "city": "Durgapur",
+    "activity": null
+  }
 }
