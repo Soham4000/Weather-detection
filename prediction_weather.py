@@ -532,17 +532,13 @@ def get_and_confirm_telegram_updates(config: Dict[str, Any]) -> List[Dict[str, A
 # Optional: Gemini-generated weather tips
 # --------------------------------------------------------------------------
 
-def generate_ai_tip(city_name: str, current: Dict[str, Any], config: Dict[str, Any], activity: str = None) -> str:
+def generate_ai_tip(city_name: str, current: Dict[str, Any], config: Dict[str, Any]) -> str:
     """
     Ask Gemini for a short, natural-language weather tip based on current
-    conditions. If `activity` is given (something the user previously told
-    the bot they're planning, e.g. "going for a bike ride"), the tip is
-    tailored to that specific activity instead of being generic.
-
-    Returns None (never raises) if the feature is disabled, the API key is
-    missing, or the request fails for any reason -- callers should fall
-    back to a static tip in that case, since this is a purely cosmetic
-    enhancement and must never break the actual weather report.
+    conditions. Returns None (never raises) if the feature is disabled, the
+    API key is missing, or the request fails for any reason -- callers
+    should fall back to a static tip in that case, since this is a purely
+    cosmetic enhancement and must never break the actual weather report.
     """
     gem_cfg = config.get("gemini", {})
     if not gem_cfg.get("enabled", False):
@@ -556,16 +552,9 @@ def generate_ai_tip(city_name: str, current: Dict[str, Any], config: Dict[str, A
     model = gem_cfg.get("model", "gemini-2.0-flash")
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
-    activity_clause = (
-        f" The user previously mentioned this plan: \"{activity}\". "
-        f"Tailor the tip specifically to that activity given the weather below."
-        if activity else ""
-    )
-
     prompt = (
         f"Write ONE short, friendly, practical weather tip (max 20 words, "
-        f"no greeting, no city name) for someone in {city_name} right now."
-        f"{activity_clause} "
+        f"no greeting, no city name) for someone in {city_name} right now. "
         f"Conditions: {current.get('temperature_c', 0):.1f}C, "
         f"{current.get('humidity', 0):.0f}% humidity, "
         f"{current.get('wind_speed', 0):.1f} km/h wind, "
@@ -584,53 +573,4 @@ def generate_ai_tip(city_name: str, current: Dict[str, Any], config: Dict[str, A
         return text if text else None
     except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
         print(f"Gemini tip failed, falling back to static tip: {exc}")
-        return None
-
-
-def generate_ai_reply(user_message: str, city_name: str, current: Dict[str, Any], config: Dict[str, Any]) -> str:
-    """
-    Answer a free-form message from a subscriber -- a question ("should I
-    carry an umbrella?") or a stated plan ("going for a bike ride later")
-    -- using their subscribed city's current conditions as context.
-
-    Returns None (never raises) if Gemini is disabled, unconfigured, or the
-    request fails -- callers should fall back to the standard "city not
-    recognized" message in that case.
-    """
-    gem_cfg = config.get("gemini", {})
-    if not gem_cfg.get("enabled", False):
-        return None
-
-    api_key = os.environ.get(gem_cfg.get("api_key_env", "GEMINI_API_KEY"))
-    if not api_key:
-        print("Gemini reply skipped: API key not set in environment.")
-        return None
-
-    model = gem_cfg.get("model", "gemini-2.0-flash")
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-
-    prompt = (
-        f"You are a helpful weather assistant for {city_name}. Current "
-        f"conditions: {current.get('temperature_c', 0):.1f}C, "
-        f"{current.get('humidity', 0):.0f}% humidity, "
-        f"{current.get('wind_speed', 0):.1f} km/h wind, "
-        f"{current.get('precipitation_probability', 0):.0f}% chance of rain.\n\n"
-        f"The user said: \"{user_message}\"\n\n"
-        f"If this is a question, answer it using the conditions above. If "
-        f"this describes a plan or activity, give brief, practical advice "
-        f"for it given the weather. Reply in under 60 words, friendly and "
-        f"direct, no greeting, plain text only (no markdown)."
-    )
-
-    headers = {"x-goog-api-key": api_key, "Content-Type": "application/json"}
-    payload = {"contents": [{"parts": [{"text": prompt}]}]}
-
-    try:
-        resp = requests.post(url, headers=headers, json=payload, timeout=15)
-        resp.raise_for_status()
-        data = resp.json()
-        text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
-        return text if text else None
-    except (requests.RequestException, KeyError, IndexError, ValueError) as exc:
-        print(f"Gemini reply failed: {exc}")
         return None
