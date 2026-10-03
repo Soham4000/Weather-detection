@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T00:30:57.697819",
+  "generated_at": "2026-10-03T00:35:32.300972",
   "cities": [
     {
       "name": "Durgapur",
@@ -11,26 +11,26 @@
         {
           "kind": "sunny",
           "start": "2026-10-03T00:00:00",
-          "end": "2026-10-04T12:00:00",
-          "duration_minutes": 2160,
-          "confidence_percent": 86.3,
+          "end": "2026-10-04T11:00:00",
+          "duration_minutes": 2100,
+          "confidence_percent": 86.8,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-10-04T14:00:00",
+          "start": "2026-10-04T13:00:00",
           "end": "2026-10-05T00:00:00",
-          "duration_minutes": 600,
+          "duration_minutes": 660,
           "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-10-03T06:00:00",
-        "temperature_c": 24.5,
-        "humidity": 89,
-        "wind_speed": 3.6,
-        "pressure": 1001.8,
+        "temperature_c": 24.9,
+        "humidity": 90,
+        "wind_speed": 3.8,
+        "pressure": 1001.4,
         "precipitation_probability": 0
       }
     },
@@ -44,18 +44,26 @@
         {
           "kind": "sunny",
           "start": "2026-10-03T00:00:00",
+          "end": "2026-10-04T12:00:00",
+          "duration_minutes": 2160,
+          "confidence_percent": 88.4,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-10-04T13:00:00",
           "end": "2026-10-05T00:00:00",
-          "duration_minutes": 2880,
-          "confidence_percent": 89.5,
+          "duration_minutes": 660,
+          "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-10-03T06:00:00",
-        "temperature_c": 24.2,
+        "temperature_c": 24.5,
         "humidity": 91,
-        "wind_speed": 2.2,
-        "pressure": 1000.4,
+        "wind_speed": 3.7,
+        "pressure": 1000.0,
         "precipitation_probability": 0
       }
     },
@@ -67,10 +75,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-03T10:00:00",
-          "end": "2026-10-03T16:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 47.6,
+          "start": "2026-10-03T11:00:00",
+          "end": "2026-10-03T13:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 46.0,
           "confidence_label": "low confidence"
         }
       ],
@@ -78,34 +86,26 @@
         {
           "kind": "sunny",
           "start": "2026-10-03T00:00:00",
-          "end": "2026-10-03T10:00:00",
-          "duration_minutes": 600,
-          "confidence_percent": 86.4,
+          "end": "2026-10-03T09:00:00",
+          "duration_minutes": 540,
+          "confidence_percent": 87.2,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
           "start": "2026-10-03T19:00:00",
-          "end": "2026-10-04T11:00:00",
-          "duration_minutes": 960,
-          "confidence_percent": 93.6,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-10-04T12:00:00",
           "end": "2026-10-05T00:00:00",
-          "duration_minutes": 720,
-          "confidence_percent": 90.5,
+          "duration_minutes": 1740,
+          "confidence_percent": 90.0,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-10-03T06:00:00",
-        "temperature_c": 26.9,
-        "humidity": 88,
-        "wind_speed": 5.5,
-        "pressure": 1012.9,
+        "temperature_c": 27.4,
+        "humidity": 85,
+        "wind_speed": 7.1,
+        "pressure": 1012.4,
         "precipitation_probability": 0
       }
     },
@@ -119,17 +119,25 @@
         {
           "kind": "sunny",
           "start": "2026-10-03T00:00:00",
+          "end": "2026-10-03T11:00:00",
+          "duration_minutes": 660,
+          "confidence_percent": 91.1,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-10-03T12:00:00",
           "end": "2026-10-04T01:00:00",
-          "duration_minutes": 1500,
-          "confidence_percent": 87.7,
+          "duration_minutes": 780,
+          "confidence_percent": 86.2,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
           "start": "2026-10-04T02:00:00",
-          "end": "2026-10-04T12:00:00",
-          "duration_minutes": 600,
-          "confidence_percent": 89.7,
+          "end": "2026-10-04T11:00:00",
+          "duration_minutes": 540,
+          "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         },
         {
@@ -143,10 +151,10 @@
       ],
       "current": {
         "time": "2026-10-03T06:00:00",
-        "temperature_c": 25.3,
-        "humidity": 91,
-        "wind_speed": 8.1,
-        "pressure": 1010.1,
+        "temperature_c": 25.7,
+        "humidity": 94,
+        "wind_speed": 8.3,
+        "pressure": 1009.6,
         "precipitation_probability": 0
       }
     },
@@ -160,17 +168,17 @@
         {
           "kind": "sunny",
           "start": "2026-10-03T01:00:00",
-          "end": "2026-10-03T11:00:00",
-          "duration_minutes": 600,
-          "confidence_percent": 88.8,
+          "end": "2026-10-03T10:00:00",
+          "duration_minutes": 540,
+          "confidence_percent": 94.7,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-10-03T12:00:00",
+          "start": "2026-10-03T11:00:00",
           "end": "2026-10-03T20:00:00",
-          "duration_minutes": 480,
-          "confidence_percent": 76.6,
+          "duration_minutes": 540,
+          "confidence_percent": 77.1,
           "confidence_label": "moderate confidence"
         },
         {
@@ -184,10 +192,10 @@
       ],
       "current": {
         "time": "2026-10-03T06:00:00",
-        "temperature_c": 25.8,
-        "humidity": 89,
-        "wind_speed": 8.1,
-        "pressure": 1008.3,
+        "temperature_c": 26.3,
+        "humidity": 90,
+        "wind_speed": 7.3,
+        "pressure": 1007.8,
         "precipitation_probability": 0
       }
     }
