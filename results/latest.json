@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T03:25:31.844167",
+  "generated_at": "2026-10-04T03:30:57.431212",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,10 +18,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-04T08:00:00",
-        "temperature_c": 29.8,
-        "humidity": 68,
-        "wind_speed": 2.7,
+        "time": "2026-10-04T09:00:00",
+        "temperature_c": 30.1,
+        "humidity": 67,
+        "wind_speed": 2.2,
         "pressure": 1001.7,
         "precipitation_probability": 0
       }
@@ -51,10 +51,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-04T08:00:00",
-        "temperature_c": 29.2,
-        "humidity": 72,
-        "wind_speed": 3.2,
+        "time": "2026-10-04T09:00:00",
+        "temperature_c": 29.5,
+        "humidity": 69,
+        "wind_speed": 3.3,
         "pressure": 1000.4,
         "precipitation_probability": 0
       }
@@ -100,10 +100,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-04T08:00:00",
-        "temperature_c": 30.0,
-        "humidity": 74,
-        "wind_speed": 4.7,
+        "time": "2026-10-04T09:00:00",
+        "temperature_c": 30.5,
+        "humidity": 72,
+        "wind_speed": 4.6,
         "pressure": 1012.2,
         "precipitation_probability": 0
       }
@@ -141,10 +141,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-04T08:00:00",
-        "temperature_c": 29.8,
-        "humidity": 74,
-        "wind_speed": 2.3,
+        "time": "2026-10-04T09:00:00",
+        "temperature_c": 30.3,
+        "humidity": 71,
+        "wind_speed": 2.2,
         "pressure": 1009.6,
         "precipitation_probability": 0
       }
@@ -166,10 +166,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-04T08:00:00",
-        "temperature_c": 29.7,
-        "humidity": 74,
-        "wind_speed": 5.6,
+        "time": "2026-10-04T09:00:00",
+        "temperature_c": 30.1,
+        "humidity": 72,
+        "wind_speed": 5.1,
         "pressure": 1008.1,
         "precipitation_probability": 0
       }
