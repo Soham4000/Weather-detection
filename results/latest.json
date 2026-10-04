@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T06:35:34.551107",
+  "generated_at": "2026-10-04T06:40:39.986410",
   "cities": [
     {
       "name": "Durgapur",
@@ -11,9 +11,17 @@
         {
           "kind": "sunny",
           "start": "2026-10-04T00:00:00",
+          "end": "2026-10-04T12:00:00",
+          "duration_minutes": 720,
+          "confidence_percent": 87.8,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-10-04T13:00:00",
           "end": "2026-10-06T00:00:00",
-          "duration_minutes": 2880,
-          "confidence_percent": 88.6,
+          "duration_minutes": 2100,
+          "confidence_percent": 89.9,
           "confidence_label": "high confidence"
         }
       ],
@@ -36,17 +44,17 @@
         {
           "kind": "sunny",
           "start": "2026-10-04T00:00:00",
-          "end": "2026-10-05T22:00:00",
-          "duration_minutes": 2760,
-          "confidence_percent": 87.5,
+          "end": "2026-10-05T15:00:00",
+          "duration_minutes": 2340,
+          "confidence_percent": 87.8,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-10-05T23:00:00",
+          "start": "2026-10-05T16:00:00",
           "end": "2026-10-06T00:00:00",
-          "duration_minutes": 60,
-          "confidence_percent": 95.0,
+          "duration_minutes": 480,
+          "confidence_percent": 94.1,
           "confidence_label": "high confidence"
         }
       ],
@@ -69,33 +77,25 @@
         {
           "kind": "sunny",
           "start": "2026-10-04T00:00:00",
-          "end": "2026-10-04T06:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 89.7,
+          "end": "2026-10-04T07:00:00",
+          "duration_minutes": 420,
+          "confidence_percent": 84.4,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-10-04T09:00:00",
-          "end": "2026-10-04T11:00:00",
+          "start": "2026-10-04T08:00:00",
+          "end": "2026-10-04T10:00:00",
           "duration_minutes": 120,
-          "confidence_percent": 73.0,
-          "confidence_label": "moderate confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-10-04T14:00:00",
-          "end": "2026-10-05T14:00:00",
-          "duration_minutes": 1440,
-          "confidence_percent": 86.9,
+          "confidence_percent": 91.0,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-10-05T15:00:00",
+          "start": "2026-10-04T15:00:00",
           "end": "2026-10-06T00:00:00",
-          "duration_minutes": 540,
-          "confidence_percent": 95.0,
+          "duration_minutes": 1980,
+          "confidence_percent": 90.2,
           "confidence_label": "high confidence"
         }
       ],
@@ -118,25 +118,9 @@
         {
           "kind": "sunny",
           "start": "2026-10-04T00:00:00",
-          "end": "2026-10-04T10:00:00",
-          "duration_minutes": 600,
-          "confidence_percent": 80.1,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-10-04T11:00:00",
-          "end": "2026-10-05T14:00:00",
-          "duration_minutes": 1620,
-          "confidence_percent": 91.8,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-10-05T15:00:00",
           "end": "2026-10-06T00:00:00",
-          "duration_minutes": 540,
-          "confidence_percent": 95.0,
+          "duration_minutes": 2880,
+          "confidence_percent": 88.6,
           "confidence_label": "high confidence"
         }
       ],
@@ -159,9 +143,17 @@
         {
           "kind": "sunny",
           "start": "2026-10-04T05:00:00",
+          "end": "2026-10-04T13:00:00",
+          "duration_minutes": 480,
+          "confidence_percent": 81.9,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-10-04T14:00:00",
           "end": "2026-10-06T00:00:00",
-          "duration_minutes": 2580,
-          "confidence_percent": 89.8,
+          "duration_minutes": 2040,
+          "confidence_percent": 92.6,
           "confidence_label": "high confidence"
         }
       ],
