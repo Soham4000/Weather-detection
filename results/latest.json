@@ -1,12 +1,21 @@
 {
-  "generated_at": "2026-10-05T15:55:31.694499",
+  "generated_at": "2026-10-05T16:01:16.159432",
   "cities": [
     {
       "name": "Durgapur",
       "country": "IN",
       "latitude": 23.5204,
       "longitude": 87.3119,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-06T13:00:00",
+          "end": "2026-10-06T19:00:00",
+          "duration_minutes": 360,
+          "confidence_percent": 48.9,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -35,10 +44,10 @@
       ],
       "current": {
         "time": "2026-10-05T21:00:00",
-        "temperature_c": 26.2,
-        "humidity": 75,
-        "wind_speed": 7.8,
-        "pressure": 999.3,
+        "temperature_c": 26.1,
+        "humidity": 76,
+        "wind_speed": 8.0,
+        "pressure": 999.4,
         "precipitation_probability": 0
       }
     },
@@ -47,7 +56,16 @@
       "country": "IN",
       "latitude": 23.6739,
       "longitude": 86.9524,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-06T13:00:00",
+          "end": "2026-10-06T19:00:00",
+          "duration_minutes": 360,
+          "confidence_percent": 50.2,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -61,8 +79,8 @@
       "current": {
         "time": "2026-10-05T21:00:00",
         "temperature_c": 26.5,
-        "humidity": 71,
-        "wind_speed": 6.6,
+        "humidity": 70,
+        "wind_speed": 6.3,
         "pressure": 997.9,
         "precipitation_probability": 0
       }
@@ -72,7 +90,24 @@
       "country": "IN",
       "latitude": 22.5726,
       "longitude": 88.3639,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-05T13:00:00",
+          "end": "2026-10-05T15:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 45.5,
+          "confidence_label": "low confidence"
+        },
+        {
+          "kind": "rain",
+          "start": "2026-10-06T13:00:00",
+          "end": "2026-10-06T19:00:00",
+          "duration_minutes": 360,
+          "confidence_percent": 47.8,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -109,10 +144,10 @@
       ],
       "current": {
         "time": "2026-10-05T21:00:00",
-        "temperature_c": 28.1,
-        "humidity": 78,
-        "wind_speed": 3.1,
-        "pressure": 1010.2,
+        "temperature_c": 28.0,
+        "humidity": 79,
+        "wind_speed": 3.2,
+        "pressure": 1010.3,
         "precipitation_probability": 0
       }
     },
@@ -124,10 +159,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-06T15:00:00",
-          "end": "2026-10-06T17:00:00",
-          "duration_minutes": 120,
-          "confidence_percent": 45.5,
+          "start": "2026-10-06T14:00:00",
+          "end": "2026-10-06T18:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 46.2,
           "confidence_label": "low confidence"
         }
       ],
@@ -175,9 +210,9 @@
       ],
       "current": {
         "time": "2026-10-05T21:00:00",
-        "temperature_c": 26.5,
+        "temperature_c": 26.4,
         "humidity": 74,
-        "wind_speed": 4.9,
+        "wind_speed": 5.1,
         "pressure": 1007.6,
         "precipitation_probability": 0
       }
@@ -190,10 +225,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-06T14:00:00",
+          "start": "2026-10-06T12:00:00",
           "end": "2026-10-06T19:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 48.8,
+          "duration_minutes": 420,
+          "confidence_percent": 49.2,
           "confidence_label": "low confidence"
         }
       ],
@@ -217,10 +252,10 @@
       ],
       "current": {
         "time": "2026-10-05T21:00:00",
-        "temperature_c": 26.1,
+        "temperature_c": 26.0,
         "humidity": 77,
-        "wind_speed": 5.7,
-        "pressure": 1005.7,
+        "wind_speed": 6.5,
+        "pressure": 1005.8,
         "precipitation_probability": 0
       }
     }
