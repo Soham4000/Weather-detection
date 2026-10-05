@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T03:30:59.239004",
+  "generated_at": "2026-10-05T03:35:30.490118",
   "cities": [
     {
       "name": "Durgapur",
@@ -12,7 +12,7 @@
           "start": "2026-10-06T13:00:00",
           "end": "2026-10-06T19:00:00",
           "duration_minutes": 360,
-          "confidence_percent": 50.4,
+          "confidence_percent": 48.9,
           "confidence_label": "low confidence"
         }
       ],
@@ -67,10 +67,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-06T12:00:00",
-          "end": "2026-10-06T20:00:00",
-          "duration_minutes": 480,
-          "confidence_percent": 48.1,
+          "start": "2026-10-06T13:00:00",
+          "end": "2026-10-06T19:00:00",
+          "duration_minutes": 360,
+          "confidence_percent": 50.2,
           "confidence_label": "low confidence"
         }
       ],
@@ -109,10 +109,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-06T14:00:00",
-          "end": "2026-10-06T18:00:00",
-          "duration_minutes": 240,
-          "confidence_percent": 49.3,
+          "start": "2026-10-05T13:00:00",
+          "end": "2026-10-05T15:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 45.5,
+          "confidence_label": "low confidence"
+        },
+        {
+          "kind": "rain",
+          "start": "2026-10-06T13:00:00",
+          "end": "2026-10-06T19:00:00",
+          "duration_minutes": 360,
+          "confidence_percent": 47.8,
           "confidence_label": "low confidence"
         }
       ],
@@ -164,7 +172,7 @@
         "humidity": 64,
         "wind_speed": 4.9,
         "pressure": 1011.5,
-        "precipitation_probability": 0
+        "precipitation_probability": 10
       }
     },
     {
@@ -175,10 +183,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-06T13:00:00",
-          "end": "2026-10-06T19:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 46.9,
+          "start": "2026-10-06T14:00:00",
+          "end": "2026-10-06T18:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 46.2,
           "confidence_label": "low confidence"
         }
       ],
@@ -214,7 +222,7 @@
         "humidity": 66,
         "wind_speed": 2.7,
         "pressure": 1008.9,
-        "precipitation_probability": 0
+        "precipitation_probability": 5
       }
     },
     {
@@ -228,7 +236,7 @@
           "start": "2026-10-06T12:00:00",
           "end": "2026-10-06T19:00:00",
           "duration_minutes": 420,
-          "confidence_percent": 53.0,
+          "confidence_percent": 49.2,
           "confidence_label": "low confidence"
         }
       ],
