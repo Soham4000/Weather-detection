@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T23:10:40.572215",
+  "generated_at": "2026-10-07T23:15:42.658156",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,17 +18,17 @@
         {
           "kind": "rain",
           "start": "2026-10-08T12:00:00",
-          "end": "2026-10-08T22:00:00",
-          "duration_minutes": 600,
-          "confidence_percent": 55.0,
+          "end": "2026-10-09T00:00:00",
+          "duration_minutes": 720,
+          "confidence_percent": 54.1,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
           "start": "2026-10-09T10:00:00",
-          "end": "2026-10-09T19:00:00",
-          "duration_minutes": 540,
-          "confidence_percent": 48.1,
+          "end": "2026-10-09T18:00:00",
+          "duration_minutes": 480,
+          "confidence_percent": 50.2,
           "confidence_label": "low confidence"
         }
       ],
@@ -70,9 +70,9 @@
         "time": "2026-10-08T04:00:00",
         "temperature_c": 22.0,
         "humidity": 97,
-        "wind_speed": 1.5,
-        "pressure": 1002.3,
-        "precipitation_probability": 17
+        "wind_speed": 1.8,
+        "pressure": 1002.4,
+        "precipitation_probability": 18
       }
     },
     {
@@ -86,23 +86,23 @@
           "start": "2026-10-08T00:00:00",
           "end": "2026-10-08T02:00:00",
           "duration_minutes": 120,
-          "confidence_percent": 47.5,
+          "confidence_percent": 45.0,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
           "start": "2026-10-08T11:00:00",
-          "end": "2026-10-08T22:00:00",
-          "duration_minutes": 660,
-          "confidence_percent": 50.5,
+          "end": "2026-10-08T23:00:00",
+          "duration_minutes": 720,
+          "confidence_percent": 52.3,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
           "start": "2026-10-09T10:00:00",
-          "end": "2026-10-09T19:00:00",
-          "duration_minutes": 540,
-          "confidence_percent": 50.4,
+          "end": "2026-10-09T18:00:00",
+          "duration_minutes": 480,
+          "confidence_percent": 50.3,
           "confidence_label": "low confidence"
         }
       ],
@@ -143,10 +143,10 @@
       "current": {
         "time": "2026-10-08T04:00:00",
         "temperature_c": 21.8,
-        "humidity": 98,
+        "humidity": 97,
         "wind_speed": 0.0,
-        "pressure": 1001.1,
-        "precipitation_probability": 22
+        "pressure": 1001.2,
+        "precipitation_probability": 17
       }
     },
     {
@@ -157,18 +157,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-08T12:00:00",
-          "end": "2026-10-08T23:00:00",
-          "duration_minutes": 660,
-          "confidence_percent": 52.9,
+          "start": "2026-10-08T11:00:00",
+          "end": "2026-10-08T21:00:00",
+          "duration_minutes": 600,
+          "confidence_percent": 54.1,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-09T11:00:00",
+          "start": "2026-10-09T10:00:00",
           "end": "2026-10-09T18:00:00",
-          "duration_minutes": 420,
-          "confidence_percent": 51.4,
+          "duration_minutes": 480,
+          "confidence_percent": 52.0,
           "confidence_label": "low confidence"
         }
       ],
@@ -217,10 +217,10 @@
       "current": {
         "time": "2026-10-08T04:00:00",
         "temperature_c": 24.5,
-        "humidity": 87,
-        "wind_speed": 2.5,
-        "pressure": 1013.1,
-        "precipitation_probability": 14
+        "humidity": 88,
+        "wind_speed": 2.3,
+        "pressure": 1013.2,
+        "precipitation_probability": 38
       }
     },
     {
@@ -231,18 +231,26 @@
       "rain_windows": [
         {
           "kind": "rain",
+          "start": "2026-10-08T00:00:00",
+          "end": "2026-10-08T04:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 49.4,
+          "confidence_label": "low confidence"
+        },
+        {
+          "kind": "rain",
           "start": "2026-10-08T12:00:00",
           "end": "2026-10-08T23:00:00",
           "duration_minutes": 660,
-          "confidence_percent": 54.1,
+          "confidence_percent": 54.6,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
           "start": "2026-10-09T10:00:00",
-          "end": "2026-10-09T19:00:00",
-          "duration_minutes": 540,
-          "confidence_percent": 48.9,
+          "end": "2026-10-09T17:00:00",
+          "duration_minutes": 420,
+          "confidence_percent": 51.8,
           "confidence_label": "low confidence"
         }
       ],
@@ -275,10 +283,10 @@
       "current": {
         "time": "2026-10-08T04:00:00",
         "temperature_c": 22.6,
-        "humidity": 97,
-        "wind_speed": 0.6,
-        "pressure": 1010.4,
-        "precipitation_probability": 18
+        "humidity": 98,
+        "wind_speed": 1.2,
+        "pressure": 1010.5,
+        "precipitation_probability": 25
       }
     },
     {
@@ -289,10 +297,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-08T13:00:00",
-          "end": "2026-10-08T22:00:00",
-          "duration_minutes": 540,
-          "confidence_percent": 57.8,
+          "start": "2026-10-08T12:00:00",
+          "end": "2026-10-08T20:00:00",
+          "duration_minutes": 480,
+          "confidence_percent": 53.2,
+          "confidence_label": "low confidence"
+        },
+        {
+          "kind": "rain",
+          "start": "2026-10-09T11:00:00",
+          "end": "2026-10-09T15:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 46.8,
           "confidence_label": "low confidence"
         }
       ],
@@ -334,9 +350,9 @@
         "time": "2026-10-08T04:00:00",
         "temperature_c": 22.2,
         "humidity": 97,
-        "wind_speed": 2.1,
-        "pressure": 1008.6,
-        "precipitation_probability": 13
+        "wind_speed": 1.8,
+        "pressure": 1008.7,
+        "precipitation_probability": 9
       }
     }
   ]
