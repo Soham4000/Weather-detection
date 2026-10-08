@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-08T23:35:35.060226",
+  "generated_at": "2026-10-08T23:40:40.920192",
   "cities": [
     {
       "name": "Durgapur",
@@ -12,15 +12,15 @@
           "start": "2026-10-09T11:00:00",
           "end": "2026-10-09T18:00:00",
           "duration_minutes": 420,
-          "confidence_percent": 47.9,
+          "confidence_percent": 46.9,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-10T12:00:00",
-          "end": "2026-10-10T16:00:00",
-          "duration_minutes": 240,
-          "confidence_percent": 46.8,
+          "start": "2026-10-10T11:00:00",
+          "end": "2026-10-10T17:00:00",
+          "duration_minutes": 360,
+          "confidence_percent": 47.4,
           "confidence_label": "low confidence"
         }
       ],
@@ -72,7 +72,7 @@
         "humidity": 98,
         "wind_speed": 4.5,
         "pressure": 1000.6,
-        "precipitation_probability": 14
+        "precipitation_probability": 2
       }
     },
     {
@@ -86,15 +86,15 @@
           "start": "2026-10-09T12:00:00",
           "end": "2026-10-09T17:00:00",
           "duration_minutes": 300,
-          "confidence_percent": 49.1,
+          "confidence_percent": 50.3,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-10T11:00:00",
-          "end": "2026-10-10T16:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 48.6,
+          "start": "2026-10-10T10:00:00",
+          "end": "2026-10-10T19:00:00",
+          "duration_minutes": 540,
+          "confidence_percent": 47.5,
           "confidence_label": "low confidence"
         }
       ],
@@ -138,7 +138,7 @@
         "humidity": 98,
         "wind_speed": 3.1,
         "pressure": 999.3,
-        "precipitation_probability": 14
+        "precipitation_probability": 2
       }
     },
     {
@@ -149,18 +149,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-09T12:00:00",
-          "end": "2026-10-09T19:00:00",
-          "duration_minutes": 420,
-          "confidence_percent": 47.7,
+          "start": "2026-10-09T13:00:00",
+          "end": "2026-10-09T18:00:00",
+          "duration_minutes": 300,
+          "confidence_percent": 48.4,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-10T12:00:00",
-          "end": "2026-10-10T16:00:00",
-          "duration_minutes": 240,
-          "confidence_percent": 46.9,
+          "start": "2026-10-10T13:00:00",
+          "end": "2026-10-10T15:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 48.0,
           "confidence_label": "low confidence"
         }
       ],
@@ -215,18 +215,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-09T11:00:00",
+          "start": "2026-10-09T12:00:00",
           "end": "2026-10-09T18:00:00",
-          "duration_minutes": 420,
-          "confidence_percent": 52.9,
+          "duration_minutes": 360,
+          "confidence_percent": 46.8,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-10T10:00:00",
-          "end": "2026-10-10T15:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 47.0,
+          "start": "2026-10-10T13:00:00",
+          "end": "2026-10-10T16:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 45.6,
           "confidence_label": "low confidence"
         }
       ],
@@ -270,7 +270,7 @@
         "humidity": 98,
         "wind_speed": 3.8,
         "pressure": 1008.6,
-        "precipitation_probability": 6
+        "precipitation_probability": 0
       }
     },
     {
@@ -281,9 +281,9 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-09T16:00:00",
-          "end": "2026-10-09T18:00:00",
-          "duration_minutes": 120,
+          "start": "2026-10-10T13:00:00",
+          "end": "2026-10-10T14:00:00",
+          "duration_minutes": 60,
           "confidence_percent": 45.5,
           "confidence_label": "low confidence"
         }
