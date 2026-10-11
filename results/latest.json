@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T12:25:35.603307",
+  "generated_at": "2026-10-11T12:31:00.639304",
   "cities": [
     {
       "name": "Durgapur",
@@ -59,12 +59,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-11T17:00:00",
-        "temperature_c": 27.7,
-        "humidity": 74,
-        "wind_speed": 5.4,
-        "pressure": 1000.1,
-        "precipitation_probability": 10
+        "time": "2026-10-11T18:00:00",
+        "temperature_c": 27.5,
+        "humidity": 75,
+        "wind_speed": 4.8,
+        "pressure": 1000.3,
+        "precipitation_probability": 3
       }
     },
     {
@@ -117,12 +117,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-11T17:00:00",
-        "temperature_c": 27.6,
-        "humidity": 74,
-        "wind_speed": 1.0,
-        "pressure": 998.6,
-        "precipitation_probability": 8
+        "time": "2026-10-11T18:00:00",
+        "temperature_c": 27.5,
+        "humidity": 75,
+        "wind_speed": 0.8,
+        "pressure": 998.8,
+        "precipitation_probability": 2
       }
     },
     {
@@ -167,12 +167,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-11T17:00:00",
-        "temperature_c": 29.5,
-        "humidity": 69,
-        "wind_speed": 3.4,
-        "pressure": 1010.4,
-        "precipitation_probability": 31
+        "time": "2026-10-11T18:00:00",
+        "temperature_c": 29.3,
+        "humidity": 71,
+        "wind_speed": 3.6,
+        "pressure": 1010.6,
+        "precipitation_probability": 20
       }
     },
     {
@@ -217,12 +217,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-11T17:00:00",
-        "temperature_c": 27.2,
-        "humidity": 82,
+        "time": "2026-10-11T18:00:00",
+        "temperature_c": 27.1,
+        "humidity": 83,
         "wind_speed": 4.1,
-        "pressure": 1008.1,
-        "precipitation_probability": 4
+        "pressure": 1008.3,
+        "precipitation_probability": 0
       }
     },
     {
@@ -250,12 +250,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-11T17:00:00",
-        "temperature_c": 27.7,
-        "humidity": 77,
+        "time": "2026-10-11T18:00:00",
+        "temperature_c": 27.4,
+        "humidity": 79,
         "wind_speed": 3.8,
-        "pressure": 1006.3,
-        "precipitation_probability": 25
+        "pressure": 1006.6,
+        "precipitation_probability": 19
       }
     }
   ]
