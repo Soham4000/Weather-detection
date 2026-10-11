@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T18:45:42.530383",
+  "generated_at": "2026-10-11T18:50:39.401819",
   "cities": [
     {
       "name": "Durgapur",
@@ -54,7 +54,7 @@
           "start": "2026-10-12T13:00:00",
           "end": "2026-10-13T00:00:00",
           "duration_minutes": 660,
-          "confidence_percent": 94.0,
+          "confidence_percent": 88.4,
           "confidence_label": "high confidence"
         }
       ],
@@ -104,7 +104,7 @@
           "start": "2026-10-11T14:00:00",
           "end": "2026-10-12T09:00:00",
           "duration_minutes": 1140,
-          "confidence_percent": 93.7,
+          "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         },
         {
@@ -112,7 +112,7 @@
           "start": "2026-10-12T13:00:00",
           "end": "2026-10-13T00:00:00",
           "duration_minutes": 660,
-          "confidence_percent": 90.8,
+          "confidence_percent": 87.5,
           "confidence_label": "high confidence"
         }
       ],
@@ -154,7 +154,7 @@
           "start": "2026-10-11T18:00:00",
           "end": "2026-10-12T13:00:00",
           "duration_minutes": 1140,
-          "confidence_percent": 92.9,
+          "confidence_percent": 87.0,
           "confidence_label": "high confidence"
         },
         {
@@ -162,7 +162,7 @@
           "start": "2026-10-12T14:00:00",
           "end": "2026-10-13T00:00:00",
           "duration_minutes": 600,
-          "confidence_percent": 84.7,
+          "confidence_percent": 90.7,
           "confidence_label": "high confidence"
         }
       ],
@@ -204,7 +204,7 @@
           "start": "2026-10-11T14:00:00",
           "end": "2026-10-12T09:00:00",
           "duration_minutes": 1140,
-          "confidence_percent": 89.6,
+          "confidence_percent": 90.0,
           "confidence_label": "high confidence"
         },
         {
@@ -212,7 +212,7 @@
           "start": "2026-10-12T12:00:00",
           "end": "2026-10-13T00:00:00",
           "duration_minutes": 720,
-          "confidence_percent": 91.8,
+          "confidence_percent": 89.2,
           "confidence_label": "high confidence"
         }
       ],
@@ -245,7 +245,7 @@
           "start": "2026-10-11T14:00:00",
           "end": "2026-10-13T00:00:00",
           "duration_minutes": 2040,
-          "confidence_percent": 90.6,
+          "confidence_percent": 90.5,
           "confidence_label": "high confidence"
         }
       ],
