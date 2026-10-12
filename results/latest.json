@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T06:50:45.209803",
+  "generated_at": "2026-10-12T06:55:42.318764",
   "cities": [
     {
       "name": "Durgapur",
@@ -13,7 +13,7 @@
           "start": "2026-10-12T00:00:00",
           "end": "2026-10-12T09:00:00",
           "duration_minutes": 540,
-          "confidence_percent": 91.5,
+          "confidence_percent": 90.1,
           "confidence_label": "high confidence"
         },
         {
@@ -28,7 +28,7 @@
       "current": {
         "time": "2026-10-12T12:00:00",
         "temperature_c": 30.8,
-        "humidity": 55,
+        "humidity": 58,
         "wind_speed": 3.7,
         "pressure": 1002.5,
         "precipitation_probability": 13
@@ -46,7 +46,7 @@
           "start": "2026-10-12T00:00:00",
           "end": "2026-10-12T09:00:00",
           "duration_minutes": 540,
-          "confidence_percent": 80.8,
+          "confidence_percent": 82.9,
           "confidence_label": "high confidence"
         },
         {
@@ -54,14 +54,14 @@
           "start": "2026-10-12T10:00:00",
           "end": "2026-10-14T00:00:00",
           "duration_minutes": 2280,
-          "confidence_percent": 88.7,
+          "confidence_percent": 90.3,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-10-12T12:00:00",
         "temperature_c": 30.5,
-        "humidity": 57,
+        "humidity": 58,
         "wind_speed": 3.5,
         "pressure": 1001.1,
         "precipitation_probability": 17
@@ -77,24 +77,24 @@
         {
           "kind": "sunny",
           "start": "2026-10-12T00:00:00",
-          "end": "2026-10-12T16:00:00",
-          "duration_minutes": 960,
-          "confidence_percent": 86.7,
+          "end": "2026-10-13T20:00:00",
+          "duration_minutes": 2640,
+          "confidence_percent": 88.1,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-10-12T17:00:00",
+          "start": "2026-10-13T22:00:00",
           "end": "2026-10-14T00:00:00",
-          "duration_minutes": 1860,
-          "confidence_percent": 94.1,
+          "duration_minutes": 120,
+          "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-10-12T12:00:00",
         "temperature_c": 33.1,
-        "humidity": 47,
+        "humidity": 48,
         "wind_speed": 3.5,
         "pressure": 1012.4,
         "precipitation_probability": 4
@@ -112,7 +112,7 @@
           "start": "2026-10-12T00:00:00",
           "end": "2026-10-12T09:00:00",
           "duration_minutes": 540,
-          "confidence_percent": 92.4,
+          "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         },
         {
@@ -120,14 +120,14 @@
           "start": "2026-10-12T12:00:00",
           "end": "2026-10-14T00:00:00",
           "duration_minutes": 2160,
-          "confidence_percent": 93.5,
+          "confidence_percent": 94.4,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-10-12T12:00:00",
         "temperature_c": 30.8,
-        "humidity": 60,
+        "humidity": 62,
         "wind_speed": 4.8,
         "pressure": 1010.3,
         "precipitation_probability": 18
@@ -145,7 +145,7 @@
           "start": "2026-10-12T00:00:00",
           "end": "2026-10-12T11:00:00",
           "duration_minutes": 660,
-          "confidence_percent": 87.8,
+          "confidence_percent": 85.3,
           "confidence_label": "high confidence"
         },
         {
@@ -153,14 +153,14 @@
           "start": "2026-10-12T12:00:00",
           "end": "2026-10-14T00:00:00",
           "duration_minutes": 2160,
-          "confidence_percent": 93.3,
+          "confidence_percent": 91.8,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-10-12T12:00:00",
         "temperature_c": 31.0,
-        "humidity": 57,
+        "humidity": 59,
         "wind_speed": 5.3,
         "pressure": 1008.6,
         "precipitation_probability": 19
