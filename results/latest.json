@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T15:25:31.223821",
+  "generated_at": "2026-10-13T15:31:10.016146",
   "cities": [
     {
       "name": "Durgapur",
@@ -26,11 +26,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T20:00:00",
-        "temperature_c": 27.2,
-        "humidity": 78,
-        "wind_speed": 3.1,
-        "pressure": 1003.1,
+        "time": "2026-10-13T21:00:00",
+        "temperature_c": 27.1,
+        "humidity": 79,
+        "wind_speed": 2.8,
+        "pressure": 1003.2,
         "precipitation_probability": 0
       }
     },
@@ -59,9 +59,9 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T20:00:00",
-        "temperature_c": 27.2,
-        "humidity": 74,
+        "time": "2026-10-13T21:00:00",
+        "temperature_c": 27.1,
+        "humidity": 75,
         "wind_speed": 0.4,
         "pressure": 1001.8,
         "precipitation_probability": 0
@@ -78,7 +78,7 @@
           "start": "2026-10-14T13:00:00",
           "end": "2026-10-14T19:00:00",
           "duration_minutes": 360,
-          "confidence_percent": 51.3,
+          "confidence_percent": 56.3,
           "confidence_label": "low confidence"
         }
       ],
@@ -133,10 +133,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T20:00:00",
-        "temperature_c": 29.8,
-        "humidity": 68,
-        "wind_speed": 2.4,
+        "time": "2026-10-13T21:00:00",
+        "temperature_c": 29.6,
+        "humidity": 69,
+        "wind_speed": 2.7,
         "pressure": 1013.6,
         "precipitation_probability": 0
       }
@@ -182,10 +182,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T20:00:00",
-        "temperature_c": 27.0,
-        "humidity": 83,
-        "wind_speed": 2.7,
+        "time": "2026-10-13T21:00:00",
+        "temperature_c": 26.8,
+        "humidity": 84,
+        "wind_speed": 3.1,
         "pressure": 1011.2,
         "precipitation_probability": 0
       }
@@ -198,10 +198,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-14T14:00:00",
+          "start": "2026-10-14T13:00:00",
           "end": "2026-10-14T19:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 47.4,
+          "duration_minutes": 360,
+          "confidence_percent": 53.4,
           "confidence_label": "low confidence"
         }
       ],
@@ -240,11 +240,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T20:00:00",
-        "temperature_c": 27.4,
+        "time": "2026-10-13T21:00:00",
+        "temperature_c": 27.3,
         "humidity": 81,
         "wind_speed": 2.7,
-        "pressure": 1009.4,
+        "pressure": 1009.5,
         "precipitation_probability": 0
       }
     }
