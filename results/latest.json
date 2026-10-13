@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T15:55:34.774076",
+  "generated_at": "2026-10-13T16:01:21.318744",
   "cities": [
     {
       "name": "Durgapur",
@@ -27,9 +27,9 @@
       ],
       "current": {
         "time": "2026-10-13T21:00:00",
-        "temperature_c": 27.0,
+        "temperature_c": 26.9,
         "humidity": 80,
-        "wind_speed": 2.7,
+        "wind_speed": 2.3,
         "pressure": 1003.3,
         "precipitation_probability": 0
       }
@@ -60,8 +60,8 @@
       ],
       "current": {
         "time": "2026-10-13T21:00:00",
-        "temperature_c": 27.0,
-        "humidity": 75,
+        "temperature_c": 26.8,
+        "humidity": 76,
         "wind_speed": 0.5,
         "pressure": 1001.9,
         "precipitation_probability": 0
@@ -78,7 +78,7 @@
           "start": "2026-10-14T13:00:00",
           "end": "2026-10-14T19:00:00",
           "duration_minutes": 360,
-          "confidence_percent": 56.3,
+          "confidence_percent": 51.3,
           "confidence_label": "low confidence"
         }
       ],
@@ -134,9 +134,9 @@
       ],
       "current": {
         "time": "2026-10-13T21:00:00",
-        "temperature_c": 29.4,
-        "humidity": 71,
-        "wind_speed": 3.0,
+        "temperature_c": 29.2,
+        "humidity": 72,
+        "wind_speed": 3.1,
         "pressure": 1013.6,
         "precipitation_probability": 0
       }
@@ -183,9 +183,9 @@
       ],
       "current": {
         "time": "2026-10-13T21:00:00",
-        "temperature_c": 26.7,
+        "temperature_c": 26.5,
         "humidity": 85,
-        "wind_speed": 3.2,
+        "wind_speed": 3.4,
         "pressure": 1011.3,
         "precipitation_probability": 0
       }
@@ -198,10 +198,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-14T13:00:00",
+          "start": "2026-10-14T14:00:00",
           "end": "2026-10-14T19:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 53.4,
+          "duration_minutes": 300,
+          "confidence_percent": 47.4,
           "confidence_label": "low confidence"
         }
       ],
@@ -241,9 +241,9 @@
       ],
       "current": {
         "time": "2026-10-13T21:00:00",
-        "temperature_c": 27.1,
-        "humidity": 82,
-        "wind_speed": 2.6,
+        "temperature_c": 27.0,
+        "humidity": 83,
+        "wind_speed": 2.7,
         "pressure": 1009.4,
         "precipitation_probability": 0
       }
