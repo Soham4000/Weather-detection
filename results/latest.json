@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T09:25:34.134763",
+  "generated_at": "2026-10-13T09:31:03.417631",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,11 +18,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T14:00:00",
-        "temperature_c": 32.0,
+        "time": "2026-10-13T15:00:00",
+        "temperature_c": 31.9,
         "humidity": 51,
         "wind_speed": 6.0,
-        "pressure": 1000.3,
+        "pressure": 1000.2,
         "precipitation_probability": 0
       }
     },
@@ -51,11 +51,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T14:00:00",
+        "time": "2026-10-13T15:00:00",
         "temperature_c": 31.3,
         "humidity": 54,
-        "wind_speed": 3.8,
-        "pressure": 999.1,
+        "wind_speed": 3.7,
+        "pressure": 999.0,
         "precipitation_probability": 0
       }
     },
@@ -109,12 +109,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T14:00:00",
+        "time": "2026-10-13T15:00:00",
         "temperature_c": 33.1,
         "humidity": 47,
         "wind_speed": 6.7,
-        "pressure": 1010.3,
-        "precipitation_probability": 4
+        "pressure": 1010.2,
+        "precipitation_probability": 6
       }
     },
     {
@@ -134,11 +134,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T14:00:00",
+        "time": "2026-10-13T15:00:00",
         "temperature_c": 31.7,
         "humidity": 58,
-        "wind_speed": 4.7,
-        "pressure": 1008.2,
+        "wind_speed": 4.3,
+        "pressure": 1008.1,
         "precipitation_probability": 0
       }
     },
@@ -184,12 +184,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-13T14:00:00",
-        "temperature_c": 31.9,
+        "time": "2026-10-13T15:00:00",
+        "temperature_c": 31.7,
         "humidity": 55,
-        "wind_speed": 8.6,
-        "pressure": 1006.2,
-        "precipitation_probability": 2
+        "wind_speed": 9.0,
+        "pressure": 1006.3,
+        "precipitation_probability": 3
       }
     }
   ]
