@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T17:05:40.695022",
+  "generated_at": "2026-10-13T17:10:43.502926",
   "cities": [
     {
       "name": "Durgapur",
@@ -75,10 +75,18 @@
       "rain_windows": [
         {
           "kind": "rain",
+          "start": "2026-10-13T13:00:00",
+          "end": "2026-10-13T16:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 48.0,
+          "confidence_label": "low confidence"
+        },
+        {
+          "kind": "rain",
           "start": "2026-10-14T13:00:00",
           "end": "2026-10-14T19:00:00",
           "duration_minutes": 360,
-          "confidence_percent": 56.3,
+          "confidence_percent": 54.5,
           "confidence_label": "low confidence"
         }
       ],
@@ -198,10 +206,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-14T13:00:00",
+          "start": "2026-10-14T14:00:00",
           "end": "2026-10-14T19:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 53.4,
+          "duration_minutes": 300,
+          "confidence_percent": 50.5,
           "confidence_label": "low confidence"
         }
       ],
