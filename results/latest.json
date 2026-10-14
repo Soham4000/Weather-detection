@@ -1,12 +1,21 @@
 {
-  "generated_at": "2026-10-14T02:45:41.930656",
+  "generated_at": "2026-10-14T02:50:42.417951",
   "cities": [
     {
       "name": "Durgapur",
       "country": "IN",
       "latitude": 23.5204,
       "longitude": 87.3119,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-15T14:00:00",
+          "end": "2026-10-15T18:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 46.9,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -67,18 +76,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-14T14:00:00",
+          "start": "2026-10-14T13:00:00",
           "end": "2026-10-14T19:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 48.5,
+          "duration_minutes": 360,
+          "confidence_percent": 54.5,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-15T13:00:00",
-          "end": "2026-10-15T19:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 57.4,
+          "start": "2026-10-15T12:00:00",
+          "end": "2026-10-15T20:00:00",
+          "duration_minutes": 480,
+          "confidence_percent": 52.4,
           "confidence_label": "low confidence"
         }
       ],
@@ -138,7 +147,16 @@
       "country": "IN",
       "latitude": 23.2324,
       "longitude": 87.8615,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-15T15:00:00",
+          "end": "2026-10-15T18:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 45.9,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -182,18 +200,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-14T15:00:00",
+          "start": "2026-10-14T14:00:00",
           "end": "2026-10-14T19:00:00",
-          "duration_minutes": 240,
-          "confidence_percent": 46.8,
+          "duration_minutes": 300,
+          "confidence_percent": 50.5,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-15T14:00:00",
+          "start": "2026-10-15T12:00:00",
           "end": "2026-10-15T19:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 51.8,
+          "duration_minutes": 420,
+          "confidence_percent": 50.6,
           "confidence_label": "low confidence"
         }
       ],
