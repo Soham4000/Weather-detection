@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T18:25:35.019257",
+  "generated_at": "2026-10-14T18:31:06.850203",
   "cities": [
     {
       "name": "Durgapur",
@@ -35,11 +35,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-14T23:00:00",
+        "time": "2026-10-15T00:00:00",
         "temperature_c": 25.7,
         "humidity": 91,
-        "wind_speed": 5.6,
-        "pressure": 1002.1,
+        "wind_speed": 5.5,
+        "pressure": 1002.0,
         "precipitation_probability": 0
       }
     },
@@ -85,11 +85,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-14T23:00:00",
+        "time": "2026-10-15T00:00:00",
         "temperature_c": 25.3,
-        "humidity": 87,
-        "wind_speed": 2.1,
-        "pressure": 1000.8,
+        "humidity": 88,
+        "wind_speed": 1.8,
+        "pressure": 1000.7,
         "precipitation_probability": 0
       }
     },
@@ -151,12 +151,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-14T23:00:00",
-        "temperature_c": 26.6,
-        "humidity": 90,
+        "time": "2026-10-15T00:00:00",
+        "temperature_c": 26.5,
+        "humidity": 91,
         "wind_speed": 3.2,
-        "pressure": 1012.7,
-        "precipitation_probability": 2
+        "pressure": 1012.6,
+        "precipitation_probability": 1
       }
     },
     {
@@ -201,11 +201,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-14T23:00:00",
-        "temperature_c": 24.9,
+        "time": "2026-10-15T00:00:00",
+        "temperature_c": 24.8,
         "humidity": 91,
-        "wind_speed": 5.1,
-        "pressure": 1010.2,
+        "wind_speed": 4.6,
+        "pressure": 1010.1,
         "precipitation_probability": 0
       }
     },
@@ -267,12 +267,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-14T23:00:00",
+        "time": "2026-10-15T00:00:00",
         "temperature_c": 25.5,
         "humidity": 94,
-        "wind_speed": 1.9,
-        "pressure": 1008.4,
-        "precipitation_probability": 8
+        "wind_speed": 1.5,
+        "pressure": 1008.3,
+        "precipitation_probability": 5
       }
     }
   ]
