@@ -1,12 +1,21 @@
 {
-  "generated_at": "2026-10-14T03:40:41.126235",
+  "generated_at": "2026-10-14T03:45:39.909565",
   "cities": [
     {
       "name": "Durgapur",
       "country": "IN",
       "latitude": 23.5204,
       "longitude": 87.3119,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-15T14:00:00",
+          "end": "2026-10-15T18:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 46.9,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -19,10 +28,10 @@
       ],
       "current": {
         "time": "2026-10-14T09:00:00",
-        "temperature_c": 29.3,
-        "humidity": 67,
-        "wind_speed": 9.0,
-        "pressure": 1004.2,
+        "temperature_c": 29.6,
+        "humidity": 65,
+        "wind_speed": 9.3,
+        "pressure": 1004.1,
         "precipitation_probability": 0
       }
     },
@@ -52,9 +61,9 @@
       ],
       "current": {
         "time": "2026-10-14T09:00:00",
-        "temperature_c": 29.0,
-        "humidity": 67,
-        "wind_speed": 8.3,
+        "temperature_c": 29.4,
+        "humidity": 65,
+        "wind_speed": 9.2,
         "pressure": 1002.9,
         "precipitation_probability": 0
       }
@@ -67,18 +76,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-14T14:00:00",
+          "start": "2026-10-14T13:00:00",
           "end": "2026-10-14T19:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 48.5,
+          "duration_minutes": 360,
+          "confidence_percent": 54.5,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-15T13:00:00",
-          "end": "2026-10-15T19:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 57.4,
+          "start": "2026-10-15T12:00:00",
+          "end": "2026-10-15T20:00:00",
+          "duration_minutes": 480,
+          "confidence_percent": 52.4,
           "confidence_label": "low confidence"
         }
       ],
@@ -126,9 +135,9 @@
       ],
       "current": {
         "time": "2026-10-14T09:00:00",
-        "temperature_c": 30.7,
-        "humidity": 63,
-        "wind_speed": 7.3,
+        "temperature_c": 31.1,
+        "humidity": 61,
+        "wind_speed": 7.5,
         "pressure": 1014.2,
         "precipitation_probability": 0
       }
@@ -138,7 +147,16 @@
       "country": "IN",
       "latitude": 23.2324,
       "longitude": 87.8615,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-15T15:00:00",
+          "end": "2026-10-15T18:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 45.9,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -167,10 +185,10 @@
       ],
       "current": {
         "time": "2026-10-14T09:00:00",
-        "temperature_c": 29.1,
-        "humidity": 73,
-        "wind_speed": 8.6,
-        "pressure": 1012.2,
+        "temperature_c": 29.4,
+        "humidity": 72,
+        "wind_speed": 8.8,
+        "pressure": 1012.1,
         "precipitation_probability": 0
       }
     },
@@ -182,18 +200,18 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-10-14T15:00:00",
+          "start": "2026-10-14T14:00:00",
           "end": "2026-10-14T19:00:00",
-          "duration_minutes": 240,
-          "confidence_percent": 46.8,
+          "duration_minutes": 300,
+          "confidence_percent": 50.5,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-15T14:00:00",
+          "start": "2026-10-15T12:00:00",
           "end": "2026-10-15T19:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 51.8,
+          "duration_minutes": 420,
+          "confidence_percent": 50.6,
           "confidence_label": "low confidence"
         }
       ],
@@ -233,10 +251,10 @@
       ],
       "current": {
         "time": "2026-10-14T09:00:00",
-        "temperature_c": 29.1,
-        "humidity": 70,
-        "wind_speed": 9.4,
-        "pressure": 1010.3,
+        "temperature_c": 29.5,
+        "humidity": 69,
+        "wind_speed": 9.8,
+        "pressure": 1010.2,
         "precipitation_probability": 0
       }
     }
