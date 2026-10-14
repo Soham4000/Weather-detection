@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-14T22:40:42.056717",
+  "generated_at": "2026-10-14T22:45:41.158166",
   "cities": [
     {
       "name": "Durgapur",
@@ -61,8 +61,8 @@
       "current": {
         "time": "2026-10-15T04:00:00",
         "temperature_c": 24.6,
-        "humidity": 90,
-        "wind_speed": 1.8,
+        "humidity": 91,
+        "wind_speed": 1.7,
         "pressure": 1000.4,
         "precipitation_probability": 0
       }
@@ -136,8 +136,8 @@
         "time": "2026-10-15T04:00:00",
         "temperature_c": 24.1,
         "humidity": 88,
-        "wind_speed": 3.8,
-        "pressure": 998.9,
+        "wind_speed": 3.6,
+        "pressure": 999.0,
         "precipitation_probability": 0
       }
     },
@@ -225,9 +225,9 @@
       "current": {
         "time": "2026-10-15T04:00:00",
         "temperature_c": 26.5,
-        "humidity": 87,
-        "wind_speed": 1.4,
-        "pressure": 1011.1,
+        "humidity": 86,
+        "wind_speed": 1.5,
+        "pressure": 1011.2,
         "precipitation_probability": 0
       }
     },
@@ -291,8 +291,8 @@
       "current": {
         "time": "2026-10-15T04:00:00",
         "temperature_c": 24.6,
-        "humidity": 90,
-        "wind_speed": 3.1,
+        "humidity": 89,
+        "wind_speed": 3.3,
         "pressure": 1008.4,
         "precipitation_probability": 0
       }
@@ -372,7 +372,7 @@
       ],
       "current": {
         "time": "2026-10-15T04:00:00",
-        "temperature_c": 25.1,
+        "temperature_c": 25.0,
         "humidity": 91,
         "wind_speed": 6.3,
         "pressure": 1006.7,
