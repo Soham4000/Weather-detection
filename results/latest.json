@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T03:35:37.887662",
+  "generated_at": "2026-10-15T03:40:39.313305",
   "cities": [
     {
       "name": "Durgapur",
@@ -10,17 +10,17 @@
         {
           "kind": "rain",
           "start": "2026-10-15T16:00:00",
-          "end": "2026-10-15T19:00:00",
-          "duration_minutes": 180,
-          "confidence_percent": 45.2,
+          "end": "2026-10-15T18:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 47.5,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-16T14:00:00",
+          "start": "2026-10-16T16:00:00",
           "end": "2026-10-16T19:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 49.2,
+          "duration_minutes": 180,
+          "confidence_percent": 46.7,
           "confidence_label": "low confidence"
         }
       ],
@@ -88,24 +88,7 @@
       "country": "IN",
       "latitude": 23.6739,
       "longitude": 86.9524,
-      "rain_windows": [
-        {
-          "kind": "rain",
-          "start": "2026-10-15T16:00:00",
-          "end": "2026-10-15T18:00:00",
-          "duration_minutes": 120,
-          "confidence_percent": 45.0,
-          "confidence_label": "low confidence"
-        },
-        {
-          "kind": "rain",
-          "start": "2026-10-16T15:00:00",
-          "end": "2026-10-16T18:00:00",
-          "duration_minutes": 180,
-          "confidence_percent": 46.7,
-          "confidence_label": "low confidence"
-        }
-      ],
+      "rain_windows": [],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -152,15 +135,15 @@
           "start": "2026-10-15T13:00:00",
           "end": "2026-10-15T19:00:00",
           "duration_minutes": 360,
-          "confidence_percent": 54.3,
+          "confidence_percent": 58.8,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-16T13:00:00",
+          "start": "2026-10-16T14:00:00",
           "end": "2026-10-16T19:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 54.6,
+          "duration_minutes": 300,
+          "confidence_percent": 50.3,
           "confidence_label": "low confidence"
         }
       ],
@@ -228,7 +211,7 @@
         "humidity": 64,
         "wind_speed": 3.6,
         "pressure": 1013.3,
-        "precipitation_probability": 5
+        "precipitation_probability": 8
       }
     },
     {
@@ -236,24 +219,7 @@
       "country": "IN",
       "latitude": 23.2324,
       "longitude": 87.8615,
-      "rain_windows": [
-        {
-          "kind": "rain",
-          "start": "2026-10-15T16:00:00",
-          "end": "2026-10-15T18:00:00",
-          "duration_minutes": 120,
-          "confidence_percent": 45.0,
-          "confidence_label": "low confidence"
-        },
-        {
-          "kind": "rain",
-          "start": "2026-10-16T15:00:00",
-          "end": "2026-10-16T19:00:00",
-          "duration_minutes": 240,
-          "confidence_percent": 45.4,
-          "confidence_label": "low confidence"
-        }
-      ],
+      "rain_windows": [],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -324,14 +290,14 @@
           "start": "2026-10-15T13:00:00",
           "end": "2026-10-15T19:00:00",
           "duration_minutes": 360,
-          "confidence_percent": 53.2,
+          "confidence_percent": 59.9,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-10-16T13:00:00",
+          "start": "2026-10-16T15:00:00",
           "end": "2026-10-16T19:00:00",
-          "duration_minutes": 360,
+          "duration_minutes": 240,
           "confidence_percent": 48.7,
           "confidence_label": "low confidence"
         }
@@ -384,7 +350,7 @@
         "humidity": 72,
         "wind_speed": 4.1,
         "pressure": 1009.3,
-        "precipitation_probability": 4
+        "precipitation_probability": 3
       }
     }
   ]
