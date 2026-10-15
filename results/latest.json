@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T11:55:34.530378",
+  "generated_at": "2026-10-15T12:01:31.023093",
   "cities": [
     {
       "name": "Durgapur",
@@ -60,10 +60,10 @@
       ],
       "current": {
         "time": "2026-10-15T17:00:00",
-        "temperature_c": 29.7,
-        "humidity": 63,
-        "wind_speed": 5.1,
-        "pressure": 997.9,
+        "temperature_c": 29.4,
+        "humidity": 65,
+        "wind_speed": 4.6,
+        "pressure": 998.1,
         "precipitation_probability": 29
       }
     },
@@ -101,10 +101,10 @@
       ],
       "current": {
         "time": "2026-10-15T17:00:00",
-        "temperature_c": 29.1,
-        "humidity": 73,
-        "wind_speed": 1.7,
-        "pressure": 996.6,
+        "temperature_c": 28.8,
+        "humidity": 75,
+        "wind_speed": 1.1,
+        "pressure": 996.8,
         "precipitation_probability": 12
       }
     },
@@ -175,10 +175,10 @@
       ],
       "current": {
         "time": "2026-10-15T17:00:00",
-        "temperature_c": 28.7,
-        "humidity": 72,
-        "wind_speed": 3.5,
-        "pressure": 1008.7,
+        "temperature_c": 28.5,
+        "humidity": 73,
+        "wind_speed": 3.8,
+        "pressure": 1008.8,
         "precipitation_probability": 86
       }
     },
@@ -256,10 +256,10 @@
       ],
       "current": {
         "time": "2026-10-15T17:00:00",
-        "temperature_c": 29.4,
-        "humidity": 72,
-        "wind_speed": 0.6,
-        "pressure": 1006.0,
+        "temperature_c": 29.1,
+        "humidity": 74,
+        "wind_speed": 0.7,
+        "pressure": 1006.1,
         "precipitation_probability": 31
       }
     },
@@ -322,10 +322,10 @@
       ],
       "current": {
         "time": "2026-10-15T17:00:00",
-        "temperature_c": 28.0,
-        "humidity": 79,
-        "wind_speed": 0.6,
-        "pressure": 1004.6,
+        "temperature_c": 27.7,
+        "humidity": 82,
+        "wind_speed": 2.2,
+        "pressure": 1004.8,
         "precipitation_probability": 80
       }
     }
