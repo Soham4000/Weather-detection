@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T07:25:31.497604",
+  "generated_at": "2026-10-16T07:31:03.807693",
   "cities": [
     {
       "name": "Durgapur",
@@ -59,12 +59,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-16T12:00:00",
+        "time": "2026-10-16T13:00:00",
         "temperature_c": 31.8,
         "humidity": 57,
-        "wind_speed": 3.4,
-        "pressure": 999.1,
-        "precipitation_probability": 12
+        "wind_speed": 3.7,
+        "pressure": 998.8,
+        "precipitation_probability": 22
       }
     },
     {
@@ -108,12 +108,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-16T12:00:00",
-        "temperature_c": 31.0,
+        "time": "2026-10-16T13:00:00",
+        "temperature_c": 31.1,
         "humidity": 59,
-        "wind_speed": 0.5,
-        "pressure": 997.7,
-        "precipitation_probability": 11
+        "wind_speed": 0.9,
+        "pressure": 997.5,
+        "precipitation_probability": 19
       }
     },
     {
@@ -182,12 +182,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-16T12:00:00",
-        "temperature_c": 32.3,
-        "humidity": 55,
-        "wind_speed": 2.8,
-        "pressure": 1009.1,
-        "precipitation_probability": 21
+        "time": "2026-10-16T13:00:00",
+        "temperature_c": 32.5,
+        "humidity": 54,
+        "wind_speed": 2.9,
+        "pressure": 1008.8,
+        "precipitation_probability": 26
       }
     },
     {
@@ -215,12 +215,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-16T12:00:00",
+        "time": "2026-10-16T13:00:00",
         "temperature_c": 31.6,
         "humidity": 59,
-        "wind_speed": 2.9,
-        "pressure": 1006.9,
-        "precipitation_probability": 6
+        "wind_speed": 3.1,
+        "pressure": 1006.7,
+        "precipitation_probability": 5
       }
     },
     {
@@ -289,12 +289,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-16T12:00:00",
-        "temperature_c": 30.8,
-        "humidity": 63,
-        "wind_speed": 4.6,
-        "pressure": 1005.1,
-        "precipitation_probability": 32
+        "time": "2026-10-16T13:00:00",
+        "temperature_c": 30.6,
+        "humidity": 64,
+        "wind_speed": 5.3,
+        "pressure": 1004.8,
+        "precipitation_probability": 33
       }
     }
   ]
