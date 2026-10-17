@@ -1,12 +1,21 @@
 {
-  "generated_at": "2026-10-17T03:31:00.769341",
+  "generated_at": "2026-10-17T03:35:34.636172",
   "cities": [
     {
       "name": "Durgapur",
       "country": "IN",
       "latitude": 23.5204,
       "longitude": 87.3119,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-17T14:00:00",
+          "end": "2026-10-17T18:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 46.5,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -55,7 +64,7 @@
         "humidity": 67,
         "wind_speed": 7.6,
         "pressure": 1002.6,
-        "precipitation_probability": 0
+        "precipitation_probability": 2
       }
     },
     {
@@ -128,7 +137,16 @@
       "country": "IN",
       "latitude": 22.5726,
       "longitude": 88.3639,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-17T16:00:00",
+          "end": "2026-10-17T19:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 48.2,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -177,7 +195,7 @@
         "humidity": 67,
         "wind_speed": 4.9,
         "pressure": 1012.7,
-        "precipitation_probability": 0
+        "precipitation_probability": 1
       }
     },
     {
@@ -234,7 +252,7 @@
         "humidity": 73,
         "wind_speed": 8.3,
         "pressure": 1010.6,
-        "precipitation_probability": 0
+        "precipitation_probability": 3
       }
     },
     {
@@ -242,7 +260,16 @@
       "country": "IN",
       "latitude": 22.346,
       "longitude": 87.232,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-10-17T15:00:00",
+          "end": "2026-10-17T19:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 51.2,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -299,7 +326,7 @@
         "humidity": 74,
         "wind_speed": 7.6,
         "pressure": 1008.5,
-        "precipitation_probability": 0
+        "precipitation_probability": 4
       }
     }
   ]
