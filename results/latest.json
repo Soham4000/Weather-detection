@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T20:25:33.498489",
+  "generated_at": "2026-10-18T20:31:01.069764",
   "cities": [
     {
       "name": "Durgapur",
@@ -34,10 +34,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-19T01:00:00",
-        "temperature_c": 24.3,
+        "time": "2026-10-19T02:00:00",
+        "temperature_c": 24.2,
         "humidity": 80,
-        "wind_speed": 6.5,
+        "wind_speed": 6.4,
         "pressure": 1000.6,
         "precipitation_probability": 0
       }
@@ -67,11 +67,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-19T01:00:00",
+        "time": "2026-10-19T02:00:00",
         "temperature_c": 24.0,
         "humidity": 80,
-        "wind_speed": 6.8,
-        "pressure": 999.4,
+        "wind_speed": 6.7,
+        "pressure": 999.3,
         "precipitation_probability": 0
       }
     },
@@ -124,10 +124,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-19T01:00:00",
-        "temperature_c": 25.8,
+        "time": "2026-10-19T02:00:00",
+        "temperature_c": 25.7,
         "humidity": 79,
-        "wind_speed": 4.2,
+        "wind_speed": 4.3,
         "pressure": 1011.0,
         "precipitation_probability": 0
       }
@@ -157,11 +157,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-19T01:00:00",
-        "temperature_c": 24.1,
+        "time": "2026-10-19T02:00:00",
+        "temperature_c": 24.0,
         "humidity": 86,
-        "wind_speed": 5.5,
-        "pressure": 1008.7,
+        "wind_speed": 5.4,
+        "pressure": 1008.6,
         "precipitation_probability": 0
       }
     },
@@ -222,11 +222,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-19T01:00:00",
-        "temperature_c": 24.7,
-        "humidity": 92,
-        "wind_speed": 3.4,
-        "pressure": 1006.8,
+        "time": "2026-10-19T02:00:00",
+        "temperature_c": 24.6,
+        "humidity": 93,
+        "wind_speed": 3.8,
+        "pressure": 1006.7,
         "precipitation_probability": 0
       }
     }
