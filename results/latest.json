@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T03:25:31.151542",
+  "generated_at": "2026-10-18T03:30:58.129431",
   "cities": [
     {
       "name": "Durgapur",
@@ -50,11 +50,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-18T08:00:00",
-        "temperature_c": 28.7,
-        "humidity": 67,
+        "time": "2026-10-18T09:00:00",
+        "temperature_c": 29.1,
+        "humidity": 64,
         "wind_speed": 5.4,
-        "pressure": 1003.5,
+        "pressure": 1003.6,
         "precipitation_probability": 0
       }
     },
@@ -99,9 +99,9 @@
         }
       ],
       "current": {
-        "time": "2026-10-18T08:00:00",
-        "temperature_c": 28.4,
-        "humidity": 67,
+        "time": "2026-10-18T09:00:00",
+        "temperature_c": 28.7,
+        "humidity": 64,
         "wind_speed": 5.0,
         "pressure": 1002.3,
         "precipitation_probability": 0
@@ -156,9 +156,9 @@
         }
       ],
       "current": {
-        "time": "2026-10-18T08:00:00",
-        "temperature_c": 29.0,
-        "humidity": 70,
+        "time": "2026-10-18T09:00:00",
+        "temperature_c": 29.3,
+        "humidity": 68,
         "wind_speed": 6.8,
         "pressure": 1013.7,
         "precipitation_probability": 0
@@ -229,11 +229,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-18T08:00:00",
-        "temperature_c": 28.1,
-        "humidity": 75,
-        "wind_speed": 6.8,
-        "pressure": 1011.5,
+        "time": "2026-10-18T09:00:00",
+        "temperature_c": 28.5,
+        "humidity": 73,
+        "wind_speed": 7.4,
+        "pressure": 1011.6,
         "precipitation_probability": 0
       }
     },
@@ -278,11 +278,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-18T08:00:00",
-        "temperature_c": 28.2,
-        "humidity": 74,
-        "wind_speed": 9.1,
-        "pressure": 1009.6,
+        "time": "2026-10-18T09:00:00",
+        "temperature_c": 28.6,
+        "humidity": 72,
+        "wind_speed": 9.4,
+        "pressure": 1009.7,
         "precipitation_probability": 0
       }
     }
