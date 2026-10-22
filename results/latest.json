@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T08:25:31.110343",
+  "generated_at": "2026-10-22T08:31:01.839347",
   "cities": [
     {
       "name": "Durgapur",
@@ -50,11 +50,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-22T13:00:00",
+        "time": "2026-10-22T14:00:00",
         "temperature_c": 31.1,
         "humidity": 48,
         "wind_speed": 3.6,
-        "pressure": 1000.4,
+        "pressure": 1000.3,
         "precipitation_probability": 0
       }
     },
@@ -91,11 +91,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-22T13:00:00",
+        "time": "2026-10-22T14:00:00",
         "temperature_c": 30.4,
         "humidity": 48,
         "wind_speed": 3.1,
-        "pressure": 999.2,
+        "pressure": 999.1,
         "precipitation_probability": 0
       }
     },
@@ -140,12 +140,12 @@
         }
       ],
       "current": {
-        "time": "2026-10-22T13:00:00",
-        "temperature_c": 32.4,
-        "humidity": 51,
-        "wind_speed": 7.2,
-        "pressure": 1010.4,
-        "precipitation_probability": 1
+        "time": "2026-10-22T14:00:00",
+        "temperature_c": 32.3,
+        "humidity": 52,
+        "wind_speed": 7.7,
+        "pressure": 1010.2,
+        "precipitation_probability": 0
       }
     },
     {
@@ -189,11 +189,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-22T13:00:00",
+        "time": "2026-10-22T14:00:00",
         "temperature_c": 30.5,
         "humidity": 56,
-        "wind_speed": 6.1,
-        "pressure": 1008.4,
+        "wind_speed": 5.8,
+        "pressure": 1008.3,
         "precipitation_probability": 0
       }
     },
@@ -222,11 +222,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-22T13:00:00",
+        "time": "2026-10-22T14:00:00",
         "temperature_c": 31.3,
-        "humidity": 52,
-        "wind_speed": 7.2,
-        "pressure": 1006.6,
+        "humidity": 53,
+        "wind_speed": 7.4,
+        "pressure": 1006.5,
         "precipitation_probability": 0
       }
     }
