@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T19:25:35.427774",
+  "generated_at": "2026-10-23T19:31:02.611515",
   "cities": [
     {
       "name": "Durgapur",
@@ -42,10 +42,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-24T00:00:00",
-        "temperature_c": 23.7,
-        "humidity": 76,
-        "wind_speed": 8.7,
+        "time": "2026-10-24T01:00:00",
+        "temperature_c": 23.5,
+        "humidity": 77,
+        "wind_speed": 8.8,
         "pressure": 998.1,
         "precipitation_probability": 0
       }
@@ -83,10 +83,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-24T00:00:00",
-        "temperature_c": 22.9,
-        "humidity": 75,
-        "wind_speed": 6.3,
+        "time": "2026-10-24T01:00:00",
+        "temperature_c": 22.8,
+        "humidity": 74,
+        "wind_speed": 6.1,
         "pressure": 997.0,
         "precipitation_probability": 0
       }
@@ -132,10 +132,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-24T00:00:00",
-        "temperature_c": 24.9,
+        "time": "2026-10-24T01:00:00",
+        "temperature_c": 24.8,
         "humidity": 76,
-        "wind_speed": 3.4,
+        "wind_speed": 3.3,
         "pressure": 1008.5,
         "precipitation_probability": 0
       }
@@ -189,11 +189,11 @@
         }
       ],
       "current": {
-        "time": "2026-10-24T00:00:00",
-        "temperature_c": 23.2,
+        "time": "2026-10-24T01:00:00",
+        "temperature_c": 23.1,
         "humidity": 74,
         "wind_speed": 10.3,
-        "pressure": 1005.9,
+        "pressure": 1006.0,
         "precipitation_probability": 0
       }
     },
@@ -246,10 +246,10 @@
         }
       ],
       "current": {
-        "time": "2026-10-24T00:00:00",
-        "temperature_c": 23.6,
-        "humidity": 69,
-        "wind_speed": 6.2,
+        "time": "2026-10-24T01:00:00",
+        "temperature_c": 23.5,
+        "humidity": 70,
+        "wind_speed": 6.3,
         "pressure": 1004.0,
         "precipitation_probability": 0
       }
