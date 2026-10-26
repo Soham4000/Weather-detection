@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T12:35:29.143062",
+  "generated_at": "2026-10-26T12:40:39.125733",
   "cities": [
     {
       "name": "Durgapur",
@@ -52,8 +52,8 @@
       "current": {
         "time": "2026-10-26T18:00:00",
         "temperature_c": 27.9,
-        "humidity": 62,
-        "wind_speed": 5.9,
+        "humidity": 64,
+        "wind_speed": 5.8,
         "pressure": 1000.0,
         "precipitation_probability": 0
       }
@@ -110,7 +110,7 @@
         "time": "2026-10-26T18:00:00",
         "temperature_c": 26.9,
         "humidity": 62,
-        "wind_speed": 5.8,
+        "wind_speed": 5.4,
         "pressure": 998.8,
         "precipitation_probability": 0
       }
@@ -126,7 +126,7 @@
           "start": "2026-10-27T13:00:00",
           "end": "2026-10-27T19:00:00",
           "duration_minutes": 360,
-          "confidence_percent": 54.8,
+          "confidence_percent": 49.1,
           "confidence_label": "low confidence"
         }
       ],
@@ -175,10 +175,10 @@
       "current": {
         "time": "2026-10-26T18:00:00",
         "temperature_c": 30.2,
-        "humidity": 63,
-        "wind_speed": 4.2,
+        "humidity": 62,
+        "wind_speed": 4.3,
         "pressure": 1010.3,
-        "precipitation_probability": 15
+        "precipitation_probability": 1
       }
     },
     {
@@ -186,16 +186,7 @@
       "country": "IN",
       "latitude": 23.2324,
       "longitude": 87.8615,
-      "rain_windows": [
-        {
-          "kind": "rain",
-          "start": "2026-10-27T16:00:00",
-          "end": "2026-10-27T18:00:00",
-          "duration_minutes": 120,
-          "confidence_percent": 46.0,
-          "confidence_label": "low confidence"
-        }
-      ],
+      "rain_windows": [],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -226,7 +217,7 @@
         "time": "2026-10-26T18:00:00",
         "temperature_c": 27.7,
         "humidity": 68,
-        "wind_speed": 7.4,
+        "wind_speed": 7.3,
         "pressure": 1008.0,
         "precipitation_probability": 0
       }
@@ -240,9 +231,9 @@
         {
           "kind": "rain",
           "start": "2026-10-27T13:00:00",
-          "end": "2026-10-27T20:00:00",
-          "duration_minutes": 420,
-          "confidence_percent": 49.4,
+          "end": "2026-10-27T19:00:00",
+          "duration_minutes": 360,
+          "confidence_percent": 51.8,
           "confidence_label": "low confidence"
         }
       ],
@@ -283,8 +274,8 @@
       "current": {
         "time": "2026-10-26T18:00:00",
         "temperature_c": 28.3,
-        "humidity": 62,
-        "wind_speed": 6.2,
+        "humidity": 63,
+        "wind_speed": 6.1,
         "pressure": 1006.3,
         "precipitation_probability": 0
       }
