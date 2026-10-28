@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T07:40:39.366790",
+  "generated_at": "2026-10-28T07:45:42.949242",
   "cities": [
     {
       "name": "Durgapur",
@@ -35,10 +35,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-28T13:00:00",
-        "temperature_c": 30.8,
-        "humidity": 61,
-        "wind_speed": 7.0,
-        "pressure": 999.1,
+        "temperature_c": 30.6,
+        "humidity": 62,
+        "wind_speed": 6.5,
+        "pressure": 998.9,
         "precipitation_probability": 9
       }
     },
@@ -60,10 +60,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-28T13:00:00",
-        "temperature_c": 29.7,
+        "temperature_c": 29.6,
         "humidity": 57,
-        "wind_speed": 7.5,
-        "pressure": 998.0,
+        "wind_speed": 6.9,
+        "pressure": 997.8,
         "precipitation_probability": 15
       }
     },
@@ -93,10 +93,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-28T13:00:00",
-        "temperature_c": 32.0,
+        "temperature_c": 31.9,
         "humidity": 60,
-        "wind_speed": 9.0,
-        "pressure": 1009.2,
+        "wind_speed": 8.9,
+        "pressure": 1009.0,
         "precipitation_probability": 22
       }
     },
@@ -134,10 +134,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-28T13:00:00",
-        "temperature_c": 30.7,
-        "humidity": 68,
-        "wind_speed": 7.4,
-        "pressure": 1006.9,
+        "temperature_c": 30.5,
+        "humidity": 69,
+        "wind_speed": 7.3,
+        "pressure": 1006.7,
         "precipitation_probability": 4
       }
     },
@@ -167,10 +167,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-28T13:00:00",
-        "temperature_c": 28.3,
-        "humidity": 75,
-        "wind_speed": 13.5,
-        "pressure": 1005.6,
+        "temperature_c": 26.7,
+        "humidity": 84,
+        "wind_speed": 17.2,
+        "pressure": 1005.7,
         "precipitation_probability": 57
       }
     }
