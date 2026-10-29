@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T07:45:41.145396",
+  "generated_at": "2026-10-29T07:50:38.383348",
   "cities": [
     {
       "name": "Durgapur",
@@ -24,13 +24,22 @@
           "confidence_label": "low confidence"
         }
       ],
-      "sunny_windows": [],
+      "sunny_windows": [
+        {
+          "kind": "sunny",
+          "start": "2026-10-30T22:00:00",
+          "end": "2026-10-31T00:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 80.0,
+          "confidence_label": "high confidence"
+        }
+      ],
       "current": {
         "time": "2026-10-29T13:00:00",
-        "temperature_c": 26.4,
-        "humidity": 86,
-        "wind_speed": 11.2,
-        "pressure": 1000.5,
+        "temperature_c": 26.7,
+        "humidity": 83,
+        "wind_speed": 8.8,
+        "pressure": 999.7,
         "precipitation_probability": 90
       }
     },
@@ -60,10 +69,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-29T13:00:00",
-        "temperature_c": 25.7,
-        "humidity": 86,
-        "wind_speed": 11.7,
-        "pressure": 999.1,
+        "temperature_c": 26.3,
+        "humidity": 82,
+        "wind_speed": 9.3,
+        "pressure": 998.5,
         "precipitation_probability": 95
       }
     },
@@ -93,27 +102,19 @@
       "sunny_windows": [
         {
           "kind": "sunny",
-          "start": "2026-10-30T17:00:00",
+          "start": "2026-10-30T21:00:00",
           "end": "2026-10-30T22:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 73.2,
-          "confidence_label": "moderate confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-10-30T23:00:00",
-          "end": "2026-10-31T00:00:00",
           "duration_minutes": 60,
-          "confidence_percent": 94.0,
+          "confidence_percent": 82.0,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-10-29T13:00:00",
-        "temperature_c": 27.4,
-        "humidity": 84,
-        "wind_speed": 8.9,
-        "pressure": 1011.0,
+        "temperature_c": 25.2,
+        "humidity": 93,
+        "wind_speed": 10.2,
+        "pressure": 1010.4,
         "precipitation_probability": 87
       }
     },
@@ -132,13 +133,22 @@
           "confidence_label": "low confidence"
         }
       ],
-      "sunny_windows": [],
+      "sunny_windows": [
+        {
+          "kind": "sunny",
+          "start": "2026-10-30T23:00:00",
+          "end": "2026-10-31T00:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 83.0,
+          "confidence_label": "high confidence"
+        }
+      ],
       "current": {
         "time": "2026-10-29T13:00:00",
-        "temperature_c": 26.2,
-        "humidity": 89,
-        "wind_speed": 9.2,
-        "pressure": 1008.6,
+        "temperature_c": 25.4,
+        "humidity": 92,
+        "wind_speed": 8.6,
+        "pressure": 1008.1,
         "precipitation_probability": 77
       }
     },
@@ -168,10 +178,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-29T13:00:00",
-        "temperature_c": 25.0,
-        "humidity": 93,
-        "wind_speed": 19.8,
-        "pressure": 1006.1,
+        "temperature_c": 25.4,
+        "humidity": 91,
+        "wind_speed": 14.1,
+        "pressure": 1005.1,
         "precipitation_probability": 100
       }
     }
