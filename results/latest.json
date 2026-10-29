@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T09:40:39.325918",
+  "generated_at": "2026-10-29T09:45:47.385728",
   "cities": [
     {
       "name": "Durgapur",
@@ -36,10 +36,10 @@
       ],
       "current": {
         "time": "2026-10-29T15:00:00",
-        "temperature_c": 25.8,
-        "humidity": 89,
-        "wind_speed": 11.0,
-        "pressure": 999.2,
+        "temperature_c": 25.6,
+        "humidity": 91,
+        "wind_speed": 10.3,
+        "pressure": 999.3,
         "precipitation_probability": 99
       }
     },
@@ -69,10 +69,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-29T15:00:00",
-        "temperature_c": 25.9,
-        "humidity": 85,
-        "wind_speed": 11.4,
-        "pressure": 997.7,
+        "temperature_c": 25.6,
+        "humidity": 88,
+        "wind_speed": 10.8,
+        "pressure": 997.8,
         "precipitation_probability": 99
       }
     },
@@ -111,10 +111,10 @@
       ],
       "current": {
         "time": "2026-10-29T15:00:00",
-        "temperature_c": 26.1,
-        "humidity": 90,
-        "wind_speed": 9.8,
-        "pressure": 1009.8,
+        "temperature_c": 25.9,
+        "humidity": 91,
+        "wind_speed": 10.0,
+        "pressure": 1010.0,
         "precipitation_probability": 99
       }
     },
@@ -145,10 +145,10 @@
       ],
       "current": {
         "time": "2026-10-29T15:00:00",
-        "temperature_c": 25.2,
-        "humidity": 94,
-        "wind_speed": 9.2,
-        "pressure": 1007.4,
+        "temperature_c": 25.0,
+        "humidity": 95,
+        "wind_speed": 10.1,
+        "pressure": 1007.5,
         "precipitation_probability": 94
       }
     },
@@ -178,10 +178,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-10-29T15:00:00",
-        "temperature_c": 25.2,
-        "humidity": 90,
-        "wind_speed": 7.1,
-        "pressure": 1004.9,
+        "temperature_c": 24.8,
+        "humidity": 92,
+        "wind_speed": 7.8,
+        "pressure": 1005.2,
         "precipitation_probability": 100
       }
     }
