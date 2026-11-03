@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T16:25:30.796458",
+  "generated_at": "2026-11-03T16:31:05.961127",
   "cities": [
     {
       "name": "Durgapur",
@@ -43,12 +43,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-03T21:00:00",
-        "temperature_c": 26.0,
+        "time": "2026-11-03T22:00:00",
+        "temperature_c": 25.9,
         "humidity": 90,
-        "wind_speed": 1.7,
+        "wind_speed": 1.8,
         "pressure": 1003.0,
-        "precipitation_probability": 0
+        "precipitation_probability": 1
       }
     },
     {
@@ -108,11 +108,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-03T21:00:00",
-        "temperature_c": 24.8,
+        "time": "2026-11-03T22:00:00",
+        "temperature_c": 24.7,
         "humidity": 83,
-        "wind_speed": 3.3,
-        "pressure": 1001.7,
+        "wind_speed": 4.2,
+        "pressure": 1001.8,
         "precipitation_probability": 0
       }
     },
@@ -190,7 +190,7 @@
         }
       ],
       "current": {
-        "time": "2026-11-03T21:00:00",
+        "time": "2026-11-03T22:00:00",
         "temperature_c": 26.0,
         "humidity": 89,
         "wind_speed": 5.7,
@@ -240,12 +240,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-03T21:00:00",
-        "temperature_c": 25.8,
-        "humidity": 86,
-        "wind_speed": 6.5,
+        "time": "2026-11-03T22:00:00",
+        "temperature_c": 25.6,
+        "humidity": 87,
+        "wind_speed": 6.4,
         "pressure": 1011.1,
-        "precipitation_probability": 2
+        "precipitation_probability": 3
       }
     },
     {
@@ -314,12 +314,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-03T21:00:00",
+        "time": "2026-11-03T22:00:00",
         "temperature_c": 24.4,
         "humidity": 96,
-        "wind_speed": 6.2,
-        "pressure": 1009.5,
-        "precipitation_probability": 19
+        "wind_speed": 5.8,
+        "pressure": 1009.4,
+        "precipitation_probability": 16
       }
     }
   ]
