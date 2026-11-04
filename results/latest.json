@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T02:45:43.012726",
+  "generated_at": "2026-11-04T02:50:41.436844",
   "cities": [
     {
       "name": "Durgapur",
@@ -31,7 +31,7 @@
         "humidity": 85,
         "wind_speed": 3.1,
         "pressure": 1005.5,
-        "precipitation_probability": 14
+        "precipitation_probability": 24
       }
     },
     {
@@ -80,7 +80,7 @@
         "humidity": 80,
         "wind_speed": 1.7,
         "pressure": 1004.0,
-        "precipitation_probability": 4
+        "precipitation_probability": 6
       }
     },
     {
@@ -88,16 +88,7 @@
       "country": "IN",
       "latitude": 22.5726,
       "longitude": 88.3639,
-      "rain_windows": [
-        {
-          "kind": "rain",
-          "start": "2026-11-04T05:00:00",
-          "end": "2026-11-04T06:00:00",
-          "duration_minutes": 60,
-          "confidence_percent": 46.5,
-          "confidence_label": "low confidence"
-        }
-      ],
+      "rain_windows": [],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -138,7 +129,7 @@
         "humidity": 76,
         "wind_speed": 5.7,
         "pressure": 1015.7,
-        "precipitation_probability": 8
+        "precipitation_probability": 24
       }
     },
     {
@@ -179,7 +170,7 @@
         "humidity": 78,
         "wind_speed": 4.5,
         "pressure": 1013.4,
-        "precipitation_probability": 29
+        "precipitation_probability": 27
       }
     },
     {
@@ -187,7 +178,16 @@
       "country": "IN",
       "latitude": 22.346,
       "longitude": 87.232,
-      "rain_windows": [],
+      "rain_windows": [
+        {
+          "kind": "rain",
+          "start": "2026-11-04T03:00:00",
+          "end": "2026-11-04T07:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 46.2,
+          "confidence_label": "low confidence"
+        }
+      ],
       "sunny_windows": [
         {
           "kind": "sunny",
@@ -220,7 +220,7 @@
         "humidity": 79,
         "wind_speed": 9.3,
         "pressure": 1011.6,
-        "precipitation_probability": 10
+        "precipitation_probability": 18
       }
     }
   ]
