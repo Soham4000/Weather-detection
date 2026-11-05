@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T22:45:43.544153",
+  "generated_at": "2026-11-05T22:50:42.994130",
   "cities": [
     {
       "name": "Durgapur",
@@ -98,7 +98,7 @@
         "humidity": 78,
         "wind_speed": 8.2,
         "pressure": 1010.7,
-        "precipitation_probability": 2
+        "precipitation_probability": 0
       }
     },
     {
@@ -123,7 +123,7 @@
         "humidity": 78,
         "wind_speed": 7.1,
         "pressure": 1008.8,
-        "precipitation_probability": 0
+        "precipitation_probability": 8
       }
     }
   ]
