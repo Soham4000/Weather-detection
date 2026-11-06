@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T15:25:34.912999",
+  "generated_at": "2026-11-06T15:30:59.491652",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,11 +18,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T20:00:00",
-        "temperature_c": 23.1,
+        "time": "2026-11-06T21:00:00",
+        "temperature_c": 23.0,
         "humidity": 76,
-        "wind_speed": 7.5,
-        "pressure": 1002.3,
+        "wind_speed": 7.6,
+        "pressure": 1002.4,
         "precipitation_probability": 0
       }
     },
@@ -43,10 +43,10 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T20:00:00",
-        "temperature_c": 22.8,
+        "time": "2026-11-06T21:00:00",
+        "temperature_c": 22.7,
         "humidity": 69,
-        "wind_speed": 8.2,
+        "wind_speed": 8.1,
         "pressure": 1001.1,
         "precipitation_probability": 0
       }
@@ -76,11 +76,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T20:00:00",
-        "temperature_c": 24.5,
+        "time": "2026-11-06T21:00:00",
+        "temperature_c": 24.4,
         "humidity": 77,
         "wind_speed": 4.2,
-        "pressure": 1012.8,
+        "pressure": 1012.9,
         "precipitation_probability": 0
       }
     },
@@ -101,11 +101,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T20:00:00",
-        "temperature_c": 22.9,
+        "time": "2026-11-06T21:00:00",
+        "temperature_c": 22.8,
         "humidity": 77,
         "wind_speed": 6.3,
-        "pressure": 1010.3,
+        "pressure": 1010.4,
         "precipitation_probability": 0
       }
     },
@@ -126,11 +126,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T20:00:00",
-        "temperature_c": 22.6,
-        "humidity": 77,
+        "time": "2026-11-06T21:00:00",
+        "temperature_c": 22.5,
+        "humidity": 78,
         "wind_speed": 5.8,
-        "pressure": 1008.6,
+        "pressure": 1008.7,
         "precipitation_probability": 0
       }
     }
