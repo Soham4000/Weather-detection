@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T08:25:36.273373",
+  "generated_at": "2026-11-06T08:31:08.738060",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,11 +18,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T13:00:00",
+        "time": "2026-11-06T14:00:00",
         "temperature_c": 29.1,
         "humidity": 45,
-        "wind_speed": 6.2,
-        "pressure": 1001.1,
+        "wind_speed": 6.1,
+        "pressure": 1000.9,
         "precipitation_probability": 0
       }
     },
@@ -43,11 +43,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T13:00:00",
+        "time": "2026-11-06T14:00:00",
         "temperature_c": 28.7,
-        "humidity": 46,
-        "wind_speed": 8.2,
-        "pressure": 999.9,
+        "humidity": 45,
+        "wind_speed": 8.1,
+        "pressure": 999.7,
         "precipitation_probability": 0
       }
     },
@@ -76,11 +76,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T13:00:00",
+        "time": "2026-11-06T14:00:00",
         "temperature_c": 29.6,
         "humidity": 55,
-        "wind_speed": 8.6,
-        "pressure": 1011.4,
+        "wind_speed": 8.5,
+        "pressure": 1011.3,
         "precipitation_probability": 0
       }
     },
@@ -101,11 +101,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T13:00:00",
+        "time": "2026-11-06T14:00:00",
         "temperature_c": 29.1,
         "humidity": 52,
-        "wind_speed": 8.4,
-        "pressure": 1009.1,
+        "wind_speed": 8.2,
+        "pressure": 1009.0,
         "precipitation_probability": 0
       }
     },
@@ -126,11 +126,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-06T13:00:00",
-        "temperature_c": 29.5,
+        "time": "2026-11-06T14:00:00",
+        "temperature_c": 29.4,
         "humidity": 51,
-        "wind_speed": 10.8,
-        "pressure": 1007.4,
+        "wind_speed": 10.7,
+        "pressure": 1007.3,
         "precipitation_probability": 0
       }
     }
