@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T23:25:29.050591",
+  "generated_at": "2026-11-06T23:31:00.321679",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,11 +18,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-07T04:00:00",
-        "temperature_c": 19.9,
+        "time": "2026-11-07T05:00:00",
+        "temperature_c": 19.8,
         "humidity": 82,
-        "wind_speed": 7.1,
-        "pressure": 1001.6,
+        "wind_speed": 6.9,
+        "pressure": 1001.8,
         "precipitation_probability": 0
       }
     },
@@ -43,11 +43,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-07T04:00:00",
-        "temperature_c": 19.2,
+        "time": "2026-11-07T05:00:00",
+        "temperature_c": 19.1,
         "humidity": 87,
         "wind_speed": 6.5,
-        "pressure": 1000.4,
+        "pressure": 1000.6,
         "precipitation_probability": 0
       }
     },
@@ -68,11 +68,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-07T04:00:00",
-        "temperature_c": 21.3,
+        "time": "2026-11-07T05:00:00",
+        "temperature_c": 21.2,
         "humidity": 79,
-        "wind_speed": 5.9,
-        "pressure": 1012.3,
+        "wind_speed": 5.7,
+        "pressure": 1012.5,
         "precipitation_probability": 0
       }
     },
@@ -93,11 +93,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-07T04:00:00",
-        "temperature_c": 19.9,
+        "time": "2026-11-07T05:00:00",
+        "temperature_c": 19.8,
         "humidity": 82,
-        "wind_speed": 8.0,
-        "pressure": 1009.9,
+        "wind_speed": 7.7,
+        "pressure": 1010.1,
         "precipitation_probability": 0
       }
     },
@@ -118,11 +118,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-07T04:00:00",
+        "time": "2026-11-07T05:00:00",
         "temperature_c": 20.3,
         "humidity": 78,
         "wind_speed": 8.0,
-        "pressure": 1008.1,
+        "pressure": 1008.3,
         "precipitation_probability": 0
       }
     }
