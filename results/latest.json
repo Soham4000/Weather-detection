@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T03:25:32.495116",
+  "generated_at": "2026-11-09T03:30:59.887097",
   "cities": [
     {
       "name": "Durgapur",
@@ -50,11 +50,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-09T08:00:00",
-        "temperature_c": 25.5,
-        "humidity": 70,
-        "wind_speed": 6.5,
-        "pressure": 1005.4,
+        "time": "2026-11-09T09:00:00",
+        "temperature_c": 26.0,
+        "humidity": 69,
+        "wind_speed": 6.6,
+        "pressure": 1005.5,
         "precipitation_probability": 0
       }
     },
@@ -107,10 +107,10 @@
         }
       ],
       "current": {
-        "time": "2026-11-09T08:00:00",
-        "temperature_c": 25.0,
-        "humidity": 69,
-        "wind_speed": 6.9,
+        "time": "2026-11-09T09:00:00",
+        "temperature_c": 25.5,
+        "humidity": 68,
+        "wind_speed": 7.1,
         "pressure": 1004.2,
         "precipitation_probability": 0
       }
@@ -189,11 +189,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-09T08:00:00",
-        "temperature_c": 26.2,
-        "humidity": 73,
-        "wind_speed": 3.7,
-        "pressure": 1015.9,
+        "time": "2026-11-09T09:00:00",
+        "temperature_c": 26.6,
+        "humidity": 72,
+        "wind_speed": 3.4,
+        "pressure": 1016.1,
         "precipitation_probability": 0
       }
     },
@@ -262,11 +262,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-09T08:00:00",
-        "temperature_c": 25.8,
-        "humidity": 71,
-        "wind_speed": 9.1,
-        "pressure": 1013.4,
+        "time": "2026-11-09T09:00:00",
+        "temperature_c": 26.3,
+        "humidity": 70,
+        "wind_speed": 9.2,
+        "pressure": 1013.5,
         "precipitation_probability": 0
       }
     },
@@ -320,10 +320,10 @@
         }
       ],
       "current": {
-        "time": "2026-11-09T08:00:00",
-        "temperature_c": 25.5,
-        "humidity": 69,
-        "wind_speed": 8.7,
+        "time": "2026-11-09T09:00:00",
+        "temperature_c": 26.0,
+        "humidity": 68,
+        "wind_speed": 8.6,
         "pressure": 1011.9,
         "precipitation_probability": 0
       }
