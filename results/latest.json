@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T10:31:03.701061",
+  "generated_at": "2026-11-11T10:35:29.530089",
   "cities": [
     {
       "name": "Durgapur",
@@ -31,7 +31,7 @@
         "humidity": 57,
         "wind_speed": 3.6,
         "pressure": 999.5,
-        "precipitation_probability": 24
+        "precipitation_probability": 5
       }
     },
     {
@@ -72,7 +72,7 @@
         "humidity": 50,
         "wind_speed": 0.8,
         "pressure": 998.1,
-        "precipitation_probability": 20
+        "precipitation_probability": 3
       }
     },
     {
@@ -86,15 +86,23 @@
           "start": "2026-11-11T01:00:00",
           "end": "2026-11-11T04:00:00",
           "duration_minutes": 180,
-          "confidence_percent": 48.9,
+          "confidence_percent": 48.4,
           "confidence_label": "low confidence"
         },
         {
           "kind": "rain",
-          "start": "2026-11-11T15:00:00",
-          "end": "2026-11-11T21:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 49.1,
+          "start": "2026-11-11T06:00:00",
+          "end": "2026-11-11T11:00:00",
+          "duration_minutes": 300,
+          "confidence_percent": 50.5,
+          "confidence_label": "low confidence"
+        },
+        {
+          "kind": "rain",
+          "start": "2026-11-11T17:00:00",
+          "end": "2026-11-11T19:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 45.5,
           "confidence_label": "low confidence"
         }
       ],
@@ -138,7 +146,7 @@
         "humidity": 58,
         "wind_speed": 3.9,
         "pressure": 1010.2,
-        "precipitation_probability": 67
+        "precipitation_probability": 39
       }
     },
     {
@@ -187,7 +195,7 @@
         "humidity": 64,
         "wind_speed": 5.6,
         "pressure": 1007.9,
-        "precipitation_probability": 33
+        "precipitation_probability": 18
       }
     },
     {
@@ -198,10 +206,10 @@
       "rain_windows": [
         {
           "kind": "rain",
-          "start": "2026-11-11T14:00:00",
-          "end": "2026-11-11T19:00:00",
-          "duration_minutes": 300,
-          "confidence_percent": 47.0,
+          "start": "2026-11-11T17:00:00",
+          "end": "2026-11-11T18:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 45.5,
           "confidence_label": "low confidence"
         }
       ],
@@ -261,7 +269,7 @@
         "humidity": 71,
         "wind_speed": 5.4,
         "pressure": 1005.7,
-        "precipitation_probability": 53
+        "precipitation_probability": 39
       }
     }
   ]
