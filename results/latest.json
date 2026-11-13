@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T10:40:44.539454",
+  "generated_at": "2026-11-13T10:45:39.658188",
   "cities": [
     {
       "name": "Durgapur",
@@ -51,9 +51,9 @@
       ],
       "current": {
         "time": "2026-11-13T16:00:00",
-        "temperature_c": 27.2,
-        "humidity": 60,
-        "wind_speed": 5.4,
+        "temperature_c": 26.9,
+        "humidity": 62,
+        "wind_speed": 5.1,
         "pressure": 1002.2,
         "precipitation_probability": 0
       }
@@ -108,10 +108,10 @@
       ],
       "current": {
         "time": "2026-11-13T16:00:00",
-        "temperature_c": 26.7,
-        "humidity": 58,
-        "wind_speed": 6.5,
-        "pressure": 1000.8,
+        "temperature_c": 26.3,
+        "humidity": 61,
+        "wind_speed": 5.3,
+        "pressure": 1000.9,
         "precipitation_probability": 0
       }
     },
@@ -133,10 +133,10 @@
       ],
       "current": {
         "time": "2026-11-13T16:00:00",
-        "temperature_c": 27.8,
-        "humidity": 60,
-        "wind_speed": 5.2,
-        "pressure": 1012.5,
+        "temperature_c": 27.4,
+        "humidity": 63,
+        "wind_speed": 4.5,
+        "pressure": 1012.7,
         "precipitation_probability": 0
       }
     },
@@ -166,11 +166,11 @@
       ],
       "current": {
         "time": "2026-11-13T16:00:00",
-        "temperature_c": 27.3,
-        "humidity": 58,
-        "wind_speed": 6.6,
-        "pressure": 1010.3,
-        "precipitation_probability": 1
+        "temperature_c": 26.9,
+        "humidity": 62,
+        "wind_speed": 5.6,
+        "pressure": 1010.4,
+        "precipitation_probability": 0
       }
     },
     {
@@ -199,10 +199,10 @@
       ],
       "current": {
         "time": "2026-11-13T16:00:00",
-        "temperature_c": 27.6,
-        "humidity": 59,
-        "wind_speed": 6.3,
-        "pressure": 1008.3,
+        "temperature_c": 27.2,
+        "humidity": 63,
+        "wind_speed": 5.2,
+        "pressure": 1008.5,
         "precipitation_probability": 0
       }
     }
