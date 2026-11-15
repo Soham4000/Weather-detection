@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T00:10:53.165606",
+  "generated_at": "2026-11-15T00:20:42.445976",
   "cities": [
     {
       "name": "Durgapur",
@@ -11,33 +11,41 @@
         {
           "kind": "sunny",
           "start": "2026-11-15T00:00:00",
-          "end": "2026-11-16T03:00:00",
-          "duration_minutes": 1620,
-          "confidence_percent": 92.6,
+          "end": "2026-11-15T12:00:00",
+          "duration_minutes": 720,
+          "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-11-16T06:00:00",
-          "end": "2026-11-16T10:00:00",
-          "duration_minutes": 240,
-          "confidence_percent": 85.4,
+          "start": "2026-11-15T14:00:00",
+          "end": "2026-11-16T06:00:00",
+          "duration_minutes": 960,
+          "confidence_percent": 87.8,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
           "start": "2026-11-16T14:00:00",
+          "end": "2026-11-16T16:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 70.0,
+          "confidence_label": "moderate confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-16T17:00:00",
           "end": "2026-11-17T00:00:00",
-          "duration_minutes": 600,
-          "confidence_percent": 89.9,
+          "duration_minutes": 420,
+          "confidence_percent": 83.7,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-11-15T05:00:00",
-        "temperature_c": 19.6,
+        "temperature_c": 19.7,
         "humidity": 90,
-        "wind_speed": 3.5,
+        "wind_speed": 4.7,
         "pressure": 1001.2,
         "precipitation_probability": 0
       }
@@ -52,17 +60,9 @@
         {
           "kind": "sunny",
           "start": "2026-11-15T00:00:00",
-          "end": "2026-11-16T08:00:00",
-          "duration_minutes": 1920,
-          "confidence_percent": 92.9,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-11-16T12:00:00",
-          "end": "2026-11-16T13:00:00",
-          "duration_minutes": 60,
-          "confidence_percent": 81.0,
+          "end": "2026-11-16T05:00:00",
+          "duration_minutes": 1740,
+          "confidence_percent": 94.1,
           "confidence_label": "high confidence"
         },
         {
@@ -70,15 +70,15 @@
           "start": "2026-11-16T14:00:00",
           "end": "2026-11-17T00:00:00",
           "duration_minutes": 600,
-          "confidence_percent": 95.0,
+          "confidence_percent": 86.7,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-11-15T05:00:00",
-        "temperature_c": 19.0,
-        "humidity": 90,
-        "wind_speed": 4.8,
+        "temperature_c": 19.1,
+        "humidity": 91,
+        "wind_speed": 5.3,
         "pressure": 999.8,
         "precipitation_probability": 0
       }
@@ -95,7 +95,7 @@
           "start": "2026-11-15T00:00:00",
           "end": "2026-11-15T09:00:00",
           "duration_minutes": 540,
-          "confidence_percent": 95.0,
+          "confidence_percent": 88.5,
           "confidence_label": "high confidence"
         },
         {
@@ -103,39 +103,47 @@
           "start": "2026-11-15T12:00:00",
           "end": "2026-11-15T13:00:00",
           "duration_minutes": 60,
+          "confidence_percent": 77.0,
+          "confidence_label": "moderate confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-15T20:00:00",
+          "end": "2026-11-16T00:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 85.3,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-16T05:00:00",
+          "end": "2026-11-16T07:00:00",
+          "duration_minutes": 120,
           "confidence_percent": 70.0,
           "confidence_label": "moderate confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-11-15T15:00:00",
-          "end": "2026-11-15T16:00:00",
-          "duration_minutes": 60,
-          "confidence_percent": 82.0,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-11-15T18:00:00",
-          "end": "2026-11-16T03:00:00",
-          "duration_minutes": 540,
-          "confidence_percent": 83.3,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
           "start": "2026-11-16T13:00:00",
+          "end": "2026-11-16T14:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 88.0,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-16T16:00:00",
           "end": "2026-11-17T00:00:00",
-          "duration_minutes": 660,
-          "confidence_percent": 82.7,
+          "duration_minutes": 480,
+          "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-11-15T05:00:00",
-        "temperature_c": 22.3,
-        "humidity": 80,
-        "wind_speed": 0.4,
+        "temperature_c": 22.9,
+        "humidity": 79,
+        "wind_speed": 0.3,
         "pressure": 1012.0,
         "precipitation_probability": 0
       }
@@ -150,49 +158,49 @@
         {
           "kind": "sunny",
           "start": "2026-11-15T00:00:00",
-          "end": "2026-11-15T13:00:00",
-          "duration_minutes": 780,
-          "confidence_percent": 95.0,
+          "end": "2026-11-15T11:00:00",
+          "duration_minutes": 660,
+          "confidence_percent": 86.3,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-11-15T16:00:00",
-          "end": "2026-11-15T18:00:00",
-          "duration_minutes": 120,
-          "confidence_percent": 80.0,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-11-15T19:00:00",
+          "start": "2026-11-15T15:00:00",
           "end": "2026-11-16T03:00:00",
-          "duration_minutes": 480,
-          "confidence_percent": 94.5,
+          "duration_minutes": 720,
+          "confidence_percent": 88.4,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-11-16T05:00:00",
-          "end": "2026-11-16T06:00:00",
-          "duration_minutes": 60,
-          "confidence_percent": 78.0,
+          "start": "2026-11-16T04:00:00",
+          "end": "2026-11-16T08:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 75.4,
           "confidence_label": "moderate confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-11-16T08:00:00",
+          "start": "2026-11-16T11:00:00",
+          "end": "2026-11-16T12:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 77.0,
+          "confidence_label": "moderate confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-16T13:00:00",
           "end": "2026-11-17T00:00:00",
-          "duration_minutes": 960,
-          "confidence_percent": 86.1,
+          "duration_minutes": 660,
+          "confidence_percent": 85.9,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-11-15T05:00:00",
-        "temperature_c": 19.6,
-        "humidity": 87,
-        "wind_speed": 4.2,
+        "temperature_c": 19.8,
+        "humidity": 88,
+        "wind_speed": 3.8,
         "pressure": 1009.5,
         "precipitation_probability": 0
       }
@@ -207,41 +215,49 @@
         {
           "kind": "sunny",
           "start": "2026-11-15T00:00:00",
-          "end": "2026-11-15T09:00:00",
+          "end": "2026-11-15T08:00:00",
+          "duration_minutes": 480,
+          "confidence_percent": 95.0,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-15T15:00:00",
+          "end": "2026-11-15T16:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 81.0,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-15T19:00:00",
+          "end": "2026-11-15T23:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 85.1,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-16T01:00:00",
+          "end": "2026-11-16T03:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 81.0,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-16T14:00:00",
+          "end": "2026-11-16T23:00:00",
           "duration_minutes": 540,
-          "confidence_percent": 90.1,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-11-15T18:00:00",
-          "end": "2026-11-16T00:00:00",
-          "duration_minutes": 360,
-          "confidence_percent": 86.2,
-          "confidence_label": "high confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-11-16T07:00:00",
-          "end": "2026-11-16T10:00:00",
-          "duration_minutes": 180,
-          "confidence_percent": 75.3,
-          "confidence_label": "moderate confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-11-16T11:00:00",
-          "end": "2026-11-16T22:00:00",
-          "duration_minutes": 660,
-          "confidence_percent": 84.0,
+          "confidence_percent": 91.9,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-11-15T05:00:00",
-        "temperature_c": 19.7,
-        "humidity": 84,
-        "wind_speed": 5.4,
+        "temperature_c": 19.8,
+        "humidity": 86,
+        "wind_speed": 5.1,
         "pressure": 1007.7,
         "precipitation_probability": 0
       }
