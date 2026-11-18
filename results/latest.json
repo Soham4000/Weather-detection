@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T18:25:33.916001",
+  "generated_at": "2026-11-18T18:31:03.234336",
   "cities": [
     {
       "name": "Durgapur",
@@ -27,11 +27,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-18T23:00:00",
-        "temperature_c": 20.4,
-        "humidity": 78,
-        "wind_speed": 6.9,
-        "pressure": 1004.8,
+        "time": "2026-11-19T00:00:00",
+        "temperature_c": 20.1,
+        "humidity": 79,
+        "wind_speed": 7.2,
+        "pressure": 1004.7,
         "precipitation_probability": 0
       }
     },
@@ -69,11 +69,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-18T23:00:00",
-        "temperature_c": 20.7,
-        "humidity": 73,
+        "time": "2026-11-19T00:00:00",
+        "temperature_c": 20.6,
+        "humidity": 74,
         "wind_speed": 8.2,
-        "pressure": 1003.6,
+        "pressure": 1003.5,
         "precipitation_probability": 0
       }
     },
@@ -94,12 +94,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-18T23:00:00",
-        "temperature_c": 22.4,
-        "humidity": 79,
-        "wind_speed": 4.5,
-        "pressure": 1015.1,
-        "precipitation_probability": 18
+        "time": "2026-11-19T00:00:00",
+        "temperature_c": 22.3,
+        "humidity": 80,
+        "wind_speed": 4.9,
+        "pressure": 1015.0,
+        "precipitation_probability": 24
       }
     },
     {
@@ -119,12 +119,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-18T23:00:00",
+        "time": "2026-11-19T00:00:00",
         "temperature_c": 22.0,
-        "humidity": 70,
-        "wind_speed": 9.4,
+        "humidity": 69,
+        "wind_speed": 9.2,
         "pressure": 1012.5,
-        "precipitation_probability": 0
+        "precipitation_probability": 1
       }
     },
     {
@@ -144,12 +144,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-18T23:00:00",
-        "temperature_c": 22.5,
+        "time": "2026-11-19T00:00:00",
+        "temperature_c": 22.4,
         "humidity": 65,
         "wind_speed": 10.6,
         "pressure": 1010.5,
-        "precipitation_probability": 8
+        "precipitation_probability": 12
       }
     }
   ]
