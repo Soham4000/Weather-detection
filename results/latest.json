@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T01:05:33.149794",
+  "generated_at": "2026-11-18T01:15:41.565968",
   "cities": [
     {
       "name": "Durgapur",
@@ -19,10 +19,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-11-18T06:00:00",
-        "temperature_c": 17.3,
-        "humidity": 84,
-        "wind_speed": 5.7,
-        "pressure": 1004.8,
+        "temperature_c": 17.7,
+        "humidity": 83,
+        "wind_speed": 5.6,
+        "pressure": 1005.1,
         "precipitation_probability": 0
       }
     },
@@ -52,10 +52,10 @@
       ],
       "current": {
         "time": "2026-11-18T06:00:00",
-        "temperature_c": 16.7,
-        "humidity": 77,
-        "wind_speed": 6.6,
-        "pressure": 1003.5,
+        "temperature_c": 17.0,
+        "humidity": 76,
+        "wind_speed": 6.7,
+        "pressure": 1003.8,
         "precipitation_probability": 0
       }
     },
@@ -77,10 +77,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-11-18T06:00:00",
-        "temperature_c": 20.0,
-        "humidity": 81,
-        "wind_speed": 7.4,
-        "pressure": 1015.3,
+        "temperature_c": 20.2,
+        "humidity": 80,
+        "wind_speed": 7.3,
+        "pressure": 1015.5,
         "precipitation_probability": 0
       }
     },
@@ -111,10 +111,10 @@
       ],
       "current": {
         "time": "2026-11-18T06:00:00",
-        "temperature_c": 17.7,
-        "humidity": 85,
-        "wind_speed": 8.5,
-        "pressure": 1013.1,
+        "temperature_c": 18.1,
+        "humidity": 84,
+        "wind_speed": 8.8,
+        "pressure": 1013.3,
         "precipitation_probability": 0
       }
     },
@@ -136,10 +136,10 @@
       "sunny_windows": [],
       "current": {
         "time": "2026-11-18T06:00:00",
-        "temperature_c": 18.7,
+        "temperature_c": 18.9,
         "humidity": 76,
-        "wind_speed": 9.7,
-        "pressure": 1011.1,
+        "wind_speed": 9.5,
+        "pressure": 1011.5,
         "precipitation_probability": 0
       }
     }
