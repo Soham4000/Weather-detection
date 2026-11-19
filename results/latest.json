@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T13:25:44.942521",
+  "generated_at": "2026-11-19T13:31:03.793260",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,12 +18,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-19T18:00:00",
-        "temperature_c": 23.4,
-        "humidity": 83,
-        "wind_speed": 7.5,
-        "pressure": 1004.9,
-        "precipitation_probability": 56
+        "time": "2026-11-19T19:00:00",
+        "temperature_c": 23.3,
+        "humidity": 85,
+        "wind_speed": 7.6,
+        "pressure": 1005.1,
+        "precipitation_probability": 70
       }
     },
     {
@@ -43,12 +43,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-19T18:00:00",
-        "temperature_c": 23.9,
-        "humidity": 78,
-        "wind_speed": 5.5,
-        "pressure": 1003.4,
-        "precipitation_probability": 28
+        "time": "2026-11-19T19:00:00",
+        "temperature_c": 23.8,
+        "humidity": 79,
+        "wind_speed": 5.9,
+        "pressure": 1003.6,
+        "precipitation_probability": 35
       }
     },
     {
@@ -68,12 +68,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-19T18:00:00",
+        "time": "2026-11-19T19:00:00",
         "temperature_c": 22.7,
         "humidity": 97,
-        "wind_speed": 5.3,
-        "pressure": 1015.8,
-        "precipitation_probability": 94
+        "wind_speed": 5.9,
+        "pressure": 1015.9,
+        "precipitation_probability": 88
       }
     },
     {
@@ -93,12 +93,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-19T18:00:00",
+        "time": "2026-11-19T19:00:00",
         "temperature_c": 22.8,
         "humidity": 94,
-        "wind_speed": 4.4,
-        "pressure": 1013.3,
-        "precipitation_probability": 84
+        "wind_speed": 3.9,
+        "pressure": 1013.4,
+        "precipitation_probability": 89
       }
     },
     {
@@ -118,12 +118,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-19T18:00:00",
+        "time": "2026-11-19T19:00:00",
         "temperature_c": 21.7,
         "humidity": 94,
-        "wind_speed": 9.9,
-        "pressure": 1010.9,
-        "precipitation_probability": 91
+        "wind_speed": 10.5,
+        "pressure": 1011.0,
+        "precipitation_probability": 83
       }
     }
   ]
