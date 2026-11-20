@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T00:15:44.503624",
+  "generated_at": "2026-11-20T00:20:56.372492",
   "cities": [
     {
       "name": "Durgapur",
@@ -79,9 +79,9 @@
         {
           "kind": "sunny",
           "start": "2026-11-21T16:00:00",
-          "end": "2026-11-22T00:00:00",
-          "duration_minutes": 480,
-          "confidence_percent": 89.2,
+          "end": "2026-11-21T23:00:00",
+          "duration_minutes": 420,
+          "confidence_percent": 82.2,
           "confidence_label": "high confidence"
         }
       ],
@@ -113,10 +113,18 @@
         {
           "kind": "sunny",
           "start": "2026-11-21T14:00:00",
-          "end": "2026-11-21T21:00:00",
-          "duration_minutes": 420,
-          "confidence_percent": 81.1,
+          "end": "2026-11-21T16:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 86.0,
           "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-21T17:00:00",
+          "end": "2026-11-21T19:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 77.0,
+          "confidence_label": "moderate confidence"
         }
       ],
       "current": {
@@ -146,11 +154,11 @@
       "sunny_windows": [
         {
           "kind": "sunny",
-          "start": "2026-11-21T12:00:00",
+          "start": "2026-11-21T11:00:00",
           "end": "2026-11-22T00:00:00",
-          "duration_minutes": 720,
-          "confidence_percent": 90.7,
-          "confidence_label": "high confidence"
+          "duration_minutes": 780,
+          "confidence_percent": 74.0,
+          "confidence_label": "moderate confidence"
         }
       ],
       "current": {
