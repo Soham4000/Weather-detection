@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T16:25:34.497374",
+  "generated_at": "2026-11-20T16:31:06.474899",
   "cities": [
     {
       "name": "Durgapur",
@@ -27,11 +27,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-20T21:00:00",
+        "time": "2026-11-20T22:00:00",
         "temperature_c": 21.3,
         "humidity": 97,
-        "wind_speed": 12.2,
-        "pressure": 1004.7,
+        "wind_speed": 12.5,
+        "pressure": 1004.5,
         "precipitation_probability": 96
       }
     },
@@ -69,11 +69,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-20T21:00:00",
+        "time": "2026-11-20T22:00:00",
         "temperature_c": 21.3,
         "humidity": 96,
         "wind_speed": 12.1,
-        "pressure": 1003.1,
+        "pressure": 1003.0,
         "precipitation_probability": 96
       }
     },
@@ -119,12 +119,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-20T21:00:00",
+        "time": "2026-11-20T22:00:00",
         "temperature_c": 22.3,
-        "humidity": 98,
-        "wind_speed": 9.0,
+        "humidity": 99,
+        "wind_speed": 8.4,
         "pressure": 1015.0,
-        "precipitation_probability": 99
+        "precipitation_probability": 96
       }
     },
     {
@@ -161,12 +161,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-20T21:00:00",
+        "time": "2026-11-20T22:00:00",
         "temperature_c": 21.8,
-        "humidity": 97,
-        "wind_speed": 13.2,
-        "pressure": 1012.9,
-        "precipitation_probability": 98
+        "humidity": 96,
+        "wind_speed": 12.7,
+        "pressure": 1012.8,
+        "precipitation_probability": 99
       }
     },
     {
@@ -203,10 +203,10 @@
         }
       ],
       "current": {
-        "time": "2026-11-20T21:00:00",
+        "time": "2026-11-20T22:00:00",
         "temperature_c": 21.8,
         "humidity": 98,
-        "wind_speed": 14.9,
+        "wind_speed": 14.3,
         "pressure": 1009.8,
         "precipitation_probability": 99
       }
