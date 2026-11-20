@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T00:25:43.723495",
+  "generated_at": "2026-11-20T00:31:00.678253",
   "cities": [
     {
       "name": "Durgapur",
@@ -19,19 +19,19 @@
       "sunny_windows": [
         {
           "kind": "sunny",
-          "start": "2026-11-21T16:00:00",
-          "end": "2026-11-21T17:00:00",
+          "start": "2026-11-21T19:00:00",
+          "end": "2026-11-21T20:00:00",
           "duration_minutes": 60,
-          "confidence_percent": 82.0,
+          "confidence_percent": 88.0,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
-        "time": "2026-11-20T05:00:00",
-        "temperature_c": 21.4,
+        "time": "2026-11-20T06:00:00",
+        "temperature_c": 21.3,
         "humidity": 96,
-        "wind_speed": 8.9,
-        "pressure": 1004.1,
+        "wind_speed": 8.7,
+        "pressure": 1004.4,
         "precipitation_probability": 92
       }
     },
@@ -52,12 +52,12 @@
       ],
       "sunny_windows": [],
       "current": {
-        "time": "2026-11-20T05:00:00",
+        "time": "2026-11-20T06:00:00",
         "temperature_c": 21.4,
         "humidity": 95,
-        "wind_speed": 8.5,
-        "pressure": 1002.7,
-        "precipitation_probability": 78
+        "wind_speed": 9.1,
+        "pressure": 1002.9,
+        "precipitation_probability": 80
       }
     },
     {
@@ -78,18 +78,26 @@
       "sunny_windows": [
         {
           "kind": "sunny",
-          "start": "2026-11-21T16:00:00",
+          "start": "2026-11-21T13:00:00",
+          "end": "2026-11-21T14:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 74.0,
+          "confidence_label": "moderate confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-21T17:00:00",
           "end": "2026-11-21T23:00:00",
-          "duration_minutes": 420,
-          "confidence_percent": 82.2,
+          "duration_minutes": 360,
+          "confidence_percent": 85.8,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
-        "time": "2026-11-20T05:00:00",
+        "time": "2026-11-20T06:00:00",
         "temperature_c": 22.0,
         "humidity": 97,
-        "wind_speed": 11.2,
+        "wind_speed": 11.3,
         "pressure": 1014.8,
         "precipitation_probability": 100
       }
@@ -112,9 +120,9 @@
       "sunny_windows": [
         {
           "kind": "sunny",
-          "start": "2026-11-21T14:00:00",
+          "start": "2026-11-21T15:00:00",
           "end": "2026-11-21T16:00:00",
-          "duration_minutes": 120,
+          "duration_minutes": 60,
           "confidence_percent": 86.0,
           "confidence_label": "high confidence"
         },
@@ -128,11 +136,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-20T05:00:00",
+        "time": "2026-11-20T06:00:00",
         "temperature_c": 21.2,
         "humidity": 96,
-        "wind_speed": 10.5,
-        "pressure": 1012.4,
+        "wind_speed": 10.4,
+        "pressure": 1012.5,
         "precipitation_probability": 100
       }
     },
@@ -154,20 +162,20 @@
       "sunny_windows": [
         {
           "kind": "sunny",
-          "start": "2026-11-21T11:00:00",
+          "start": "2026-11-21T15:00:00",
           "end": "2026-11-22T00:00:00",
-          "duration_minutes": 780,
-          "confidence_percent": 74.0,
-          "confidence_label": "moderate confidence"
+          "duration_minutes": 540,
+          "confidence_percent": 81.6,
+          "confidence_label": "high confidence"
         }
       ],
       "current": {
-        "time": "2026-11-20T05:00:00",
-        "temperature_c": 20.2,
+        "time": "2026-11-20T06:00:00",
+        "temperature_c": 20.3,
         "humidity": 95,
-        "wind_speed": 19.2,
-        "pressure": 1010.0,
-        "precipitation_probability": 100
+        "wind_speed": 18.6,
+        "pressure": 1009.8,
+        "precipitation_probability": 99
       }
     }
   ]
