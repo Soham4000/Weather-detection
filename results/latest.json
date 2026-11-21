@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T01:25:34.108015",
+  "generated_at": "2026-11-21T01:31:02.711981",
   "cities": [
     {
       "name": "Durgapur",
@@ -51,12 +51,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-21T06:00:00",
-        "temperature_c": 20.9,
+        "time": "2026-11-21T07:00:00",
+        "temperature_c": 21.0,
         "humidity": 98,
         "wind_speed": 9.3,
-        "pressure": 1004.5,
-        "precipitation_probability": 80
+        "pressure": 1004.8,
+        "precipitation_probability": 65
       }
     },
     {
@@ -125,12 +125,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-21T06:00:00",
-        "temperature_c": 20.7,
-        "humidity": 96,
-        "wind_speed": 13.6,
-        "pressure": 1002.9,
-        "precipitation_probability": 80
+        "time": "2026-11-21T07:00:00",
+        "temperature_c": 20.9,
+        "humidity": 95,
+        "wind_speed": 13.8,
+        "pressure": 1003.2,
+        "precipitation_probability": 66
       }
     },
     {
@@ -175,12 +175,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-21T06:00:00",
-        "temperature_c": 22.1,
+        "time": "2026-11-21T07:00:00",
+        "temperature_c": 22.3,
         "humidity": 96,
-        "wind_speed": 12.4,
-        "pressure": 1014.9,
-        "precipitation_probability": 92
+        "wind_speed": 12.6,
+        "pressure": 1015.1,
+        "precipitation_probability": 94
       }
     },
     {
@@ -233,12 +233,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-21T06:00:00",
-        "temperature_c": 21.7,
-        "humidity": 91,
-        "wind_speed": 12.7,
-        "pressure": 1012.6,
-        "precipitation_probability": 90
+        "time": "2026-11-21T07:00:00",
+        "temperature_c": 21.9,
+        "humidity": 89,
+        "wind_speed": 12.4,
+        "pressure": 1012.9,
+        "precipitation_probability": 81
       }
     },
     {
@@ -283,12 +283,12 @@
         }
       ],
       "current": {
-        "time": "2026-11-21T06:00:00",
-        "temperature_c": 22.2,
-        "humidity": 99,
-        "wind_speed": 8.6,
-        "pressure": 1010.2,
-        "precipitation_probability": 75
+        "time": "2026-11-21T07:00:00",
+        "temperature_c": 22.3,
+        "humidity": 98,
+        "wind_speed": 8.3,
+        "pressure": 1010.5,
+        "precipitation_probability": 66
       }
     }
   ]
