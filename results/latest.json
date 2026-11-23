@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T15:31:04.481312",
+  "generated_at": "2026-11-23T15:40:49.703026",
   "cities": [
     {
       "name": "Durgapur",
@@ -10,9 +10,9 @@
         {
           "kind": "rain",
           "start": "2026-11-23T13:00:00",
-          "end": "2026-11-23T14:00:00",
-          "duration_minutes": 60,
-          "confidence_percent": 45.0,
+          "end": "2026-11-23T15:00:00",
+          "duration_minutes": 120,
+          "confidence_percent": 45.5,
           "confidence_label": "low confidence"
         }
       ],
@@ -267,7 +267,7 @@
         "humidity": 89,
         "wind_speed": 4.6,
         "pressure": 1014.2,
-        "precipitation_probability": 1
+        "precipitation_probability": 0
       }
     },
     {
