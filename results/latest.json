@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T07:01:14.083950",
+  "generated_at": "2026-11-24T07:15:42.625079",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,10 +18,10 @@
         },
         {
           "kind": "sunny",
-          "start": "2026-11-24T10:00:00",
+          "start": "2026-11-24T08:00:00",
           "end": "2026-11-24T12:00:00",
-          "duration_minutes": 120,
-          "confidence_percent": 82.0,
+          "duration_minutes": 240,
+          "confidence_percent": 80.5,
           "confidence_label": "high confidence"
         },
         {
@@ -36,9 +36,9 @@
       "current": {
         "time": "2026-11-24T12:00:00",
         "temperature_c": 27.2,
-        "humidity": 53,
-        "wind_speed": 8.5,
-        "pressure": 1005.3,
+        "humidity": 51,
+        "wind_speed": 10.1,
+        "pressure": 1004.7,
         "precipitation_probability": 0
       }
     },
@@ -59,43 +59,10 @@
         },
         {
           "kind": "sunny",
-          "start": "2026-11-24T09:00:00",
-          "end": "2026-11-24T12:00:00",
-          "duration_minutes": 180,
-          "confidence_percent": 76.7,
-          "confidence_label": "moderate confidence"
-        },
-        {
-          "kind": "sunny",
-          "start": "2026-11-24T15:00:00",
-          "end": "2026-11-26T00:00:00",
-          "duration_minutes": 1980,
-          "confidence_percent": 95.0,
-          "confidence_label": "high confidence"
-        }
-      ],
-      "current": {
-        "time": "2026-11-24T12:00:00",
-        "temperature_c": 27.1,
-        "humidity": 51,
-        "wind_speed": 10.5,
-        "pressure": 1003.9,
-        "precipitation_probability": 0
-      }
-    },
-    {
-      "name": "Kolkata",
-      "country": "IN",
-      "latitude": 22.5726,
-      "longitude": 88.3639,
-      "rain_windows": [],
-      "sunny_windows": [
-        {
-          "kind": "sunny",
-          "start": "2026-11-24T05:00:00",
-          "end": "2026-11-24T12:00:00",
-          "duration_minutes": 420,
-          "confidence_percent": 85.5,
+          "start": "2026-11-24T07:00:00",
+          "end": "2026-11-24T11:00:00",
+          "duration_minutes": 240,
+          "confidence_percent": 88.8,
           "confidence_label": "high confidence"
         },
         {
@@ -109,10 +76,35 @@
       ],
       "current": {
         "time": "2026-11-24T12:00:00",
-        "temperature_c": 27.2,
-        "humidity": 59,
-        "wind_speed": 8.1,
-        "pressure": 1015.7,
+        "temperature_c": 27.0,
+        "humidity": 51,
+        "wind_speed": 11.1,
+        "pressure": 1003.4,
+        "precipitation_probability": 0
+      }
+    },
+    {
+      "name": "Kolkata",
+      "country": "IN",
+      "latitude": 22.5726,
+      "longitude": 88.3639,
+      "rain_windows": [],
+      "sunny_windows": [
+        {
+          "kind": "sunny",
+          "start": "2026-11-24T06:00:00",
+          "end": "2026-11-26T00:00:00",
+          "duration_minutes": 2520,
+          "confidence_percent": 89.5,
+          "confidence_label": "high confidence"
+        }
+      ],
+      "current": {
+        "time": "2026-11-24T12:00:00",
+        "temperature_c": 27.3,
+        "humidity": 61,
+        "wind_speed": 7.3,
+        "pressure": 1015.2,
         "precipitation_probability": 0
       }
     },
@@ -133,10 +125,18 @@
         },
         {
           "kind": "sunny",
+          "start": "2026-11-24T05:00:00",
+          "end": "2026-11-24T06:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 95.0,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
           "start": "2026-11-24T09:00:00",
-          "end": "2026-11-24T13:00:00",
-          "duration_minutes": 240,
-          "confidence_percent": 77.1,
+          "end": "2026-11-24T12:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 75.0,
           "confidence_label": "moderate confidence"
         },
         {
@@ -144,16 +144,16 @@
           "start": "2026-11-24T14:00:00",
           "end": "2026-11-26T00:00:00",
           "duration_minutes": 2040,
-          "confidence_percent": 94.4,
+          "confidence_percent": 95.0,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-11-24T12:00:00",
-        "temperature_c": 27.1,
-        "humidity": 54,
-        "wind_speed": 8.6,
-        "pressure": 1013.5,
+        "temperature_c": 27.6,
+        "humidity": 53,
+        "wind_speed": 10.0,
+        "pressure": 1012.9,
         "precipitation_probability": 0
       }
     },
@@ -174,27 +174,43 @@
         },
         {
           "kind": "sunny",
-          "start": "2026-11-24T10:00:00",
-          "end": "2026-11-24T11:00:00",
+          "start": "2026-11-24T05:00:00",
+          "end": "2026-11-24T06:00:00",
           "duration_minutes": 60,
-          "confidence_percent": 80.0,
-          "confidence_label": "high confidence"
+          "confidence_percent": 72.0,
+          "confidence_label": "moderate confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-11-24T13:00:00",
+          "start": "2026-11-24T07:00:00",
+          "end": "2026-11-24T10:00:00",
+          "duration_minutes": 180,
+          "confidence_percent": 69.3,
+          "confidence_label": "moderate confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-24T12:00:00",
+          "end": "2026-11-24T13:00:00",
+          "duration_minutes": 60,
+          "confidence_percent": 77.0,
+          "confidence_label": "moderate confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-24T14:00:00",
           "end": "2026-11-26T00:00:00",
-          "duration_minutes": 2100,
-          "confidence_percent": 95.0,
+          "duration_minutes": 2040,
+          "confidence_percent": 90.2,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
         "time": "2026-11-24T12:00:00",
-        "temperature_c": 27.6,
-        "humidity": 59,
-        "wind_speed": 10.5,
-        "pressure": 1011.5,
+        "temperature_c": 27.8,
+        "humidity": 58,
+        "wind_speed": 9.3,
+        "pressure": 1011.0,
         "precipitation_probability": 7
       }
     }
