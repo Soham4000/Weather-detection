@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T12:25:33.988920",
+  "generated_at": "2026-11-25T12:35:40.551102",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,11 +18,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-25T17:00:00",
-        "temperature_c": 21.5,
-        "humidity": 66,
-        "wind_speed": 6.7,
-        "pressure": 1002.8,
+        "time": "2026-11-25T18:00:00",
+        "temperature_c": 21.1,
+        "humidity": 65,
+        "wind_speed": 6.8,
+        "pressure": 1002.9,
         "precipitation_probability": 0
       }
     },
@@ -43,10 +43,10 @@
         }
       ],
       "current": {
-        "time": "2026-11-25T17:00:00",
-        "temperature_c": 20.9,
-        "humidity": 63,
-        "wind_speed": 6.7,
+        "time": "2026-11-25T18:00:00",
+        "temperature_c": 21.0,
+        "humidity": 59,
+        "wind_speed": 8.1,
         "pressure": 1001.5,
         "precipitation_probability": 0
       }
@@ -61,18 +61,26 @@
         {
           "kind": "sunny",
           "start": "2026-11-25T00:00:00",
+          "end": "2026-11-25T14:00:00",
+          "duration_minutes": 840,
+          "confidence_percent": 92.8,
+          "confidence_label": "high confidence"
+        },
+        {
+          "kind": "sunny",
+          "start": "2026-11-25T15:00:00",
           "end": "2026-11-27T00:00:00",
-          "duration_minutes": 2880,
-          "confidence_percent": 95.0,
+          "duration_minutes": 1980,
+          "confidence_percent": 93.3,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
-        "time": "2026-11-25T17:00:00",
+        "time": "2026-11-25T18:00:00",
         "temperature_c": 22.4,
-        "humidity": 70,
-        "wind_speed": 5.1,
-        "pressure": 1013.9,
+        "humidity": 69,
+        "wind_speed": 5.2,
+        "pressure": 1013.7,
         "precipitation_probability": 0
       }
     },
@@ -93,11 +101,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-25T17:00:00",
+        "time": "2026-11-25T18:00:00",
         "temperature_c": 21.3,
-        "humidity": 66,
-        "wind_speed": 6.8,
-        "pressure": 1011.2,
+        "humidity": 63,
+        "wind_speed": 8.7,
+        "pressure": 1011.1,
         "precipitation_probability": 0
       }
     },
@@ -111,25 +119,25 @@
         {
           "kind": "sunny",
           "start": "2026-11-25T00:00:00",
-          "end": "2026-11-25T16:00:00",
-          "duration_minutes": 960,
-          "confidence_percent": 82.7,
+          "end": "2026-11-25T13:00:00",
+          "duration_minutes": 780,
+          "confidence_percent": 83.7,
           "confidence_label": "high confidence"
         },
         {
           "kind": "sunny",
-          "start": "2026-11-25T18:00:00",
+          "start": "2026-11-25T14:00:00",
           "end": "2026-11-27T00:00:00",
-          "duration_minutes": 1800,
-          "confidence_percent": 95.0,
+          "duration_minutes": 2040,
+          "confidence_percent": 91.3,
           "confidence_label": "high confidence"
         }
       ],
       "current": {
-        "time": "2026-11-25T17:00:00",
-        "temperature_c": 22.1,
-        "humidity": 72,
-        "wind_speed": 5.6,
+        "time": "2026-11-25T18:00:00",
+        "temperature_c": 22.0,
+        "humidity": 73,
+        "wind_speed": 4.3,
         "pressure": 1009.3,
         "precipitation_probability": 0
       }
