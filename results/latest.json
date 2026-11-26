@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T09:25:38.393732",
+  "generated_at": "2026-11-26T09:35:31.979489",
   "cities": [
     {
       "name": "Durgapur",
@@ -18,11 +18,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-26T14:00:00",
-        "temperature_c": 25.4,
+        "time": "2026-11-26T15:00:00",
+        "temperature_c": 25.3,
         "humidity": 51,
-        "wind_speed": 5.6,
-        "pressure": 1001.7,
+        "wind_speed": 5.3,
+        "pressure": 1001.6,
         "precipitation_probability": 0
       }
     },
@@ -43,10 +43,10 @@
         }
       ],
       "current": {
-        "time": "2026-11-26T14:00:00",
-        "temperature_c": 25.2,
-        "humidity": 47,
-        "wind_speed": 6.6,
+        "time": "2026-11-26T15:00:00",
+        "temperature_c": 25.1,
+        "humidity": 48,
+        "wind_speed": 6.7,
         "pressure": 1000.5,
         "precipitation_probability": 0
       }
@@ -68,11 +68,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-26T14:00:00",
+        "time": "2026-11-26T15:00:00",
         "temperature_c": 25.6,
         "humidity": 57,
         "wind_speed": 3.6,
-        "pressure": 1012.3,
+        "pressure": 1012.2,
         "precipitation_probability": 0
       }
     },
@@ -93,11 +93,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-26T14:00:00",
-        "temperature_c": 25.8,
+        "time": "2026-11-26T15:00:00",
+        "temperature_c": 25.7,
         "humidity": 53,
-        "wind_speed": 6.5,
-        "pressure": 1009.8,
+        "wind_speed": 6.6,
+        "pressure": 1009.7,
         "precipitation_probability": 0
       }
     },
@@ -118,11 +118,11 @@
         }
       ],
       "current": {
-        "time": "2026-11-26T14:00:00",
-        "temperature_c": 25.6,
-        "humidity": 44,
+        "time": "2026-11-26T15:00:00",
+        "temperature_c": 25.5,
+        "humidity": 45,
         "wind_speed": 9.6,
-        "pressure": 1008.2,
+        "pressure": 1008.1,
         "precipitation_probability": 0
       }
     }
